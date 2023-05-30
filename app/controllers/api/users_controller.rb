@@ -2,6 +2,18 @@ class Api::UsersController < ApplicationController
     before_action :require_logged_out, only: [:create]
     before_action :require_logged_in, only: [:update, :destroy]
 
+    wrap_parameters include: User.attribute_names + ['password']
+
+    def index
+        @user = User.find_by(email: params[:email])
+
+        if @user
+            render json: { user_found: true }
+          else
+            render json: { user_found: false }
+          end
+    end
+
     def create
         @user = User.new(user_params)
 
