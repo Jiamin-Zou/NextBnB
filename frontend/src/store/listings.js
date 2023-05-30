@@ -31,6 +31,31 @@ export const fetchListings = () => async (dispatch) => {
   return res;
 };
 
-export const fetchListing = (ListingId) => async dispatch => {
-    const res = await csrfFetch(`/api/listings/${listingId}`)
-}
+export const fetchListing = (listingId) => async (dispatch) => {
+  const res = await csrfFetch(`/api/listings/${listingId}`);
+  if (res.ok) {
+    const data = await res.json();
+    dispatch(addListing(data.listing));
+  } else {
+    throw res;
+  }
+  return res;
+};
+
+// Listings Reducer
+const listingsReducer = (state = {}, action) => {
+  Object.freeze(state);
+  const newState = { ...state };
+
+  switch (action.type) {
+    case SET_LISTINGS:
+      return { ...newState, ...action.listings };
+    case ADD_LISTING:
+      newState[action.listing.id] = action.listing;
+      return newState;
+    default:
+      return state;
+  }
+};
+
+export default listingsReducer
