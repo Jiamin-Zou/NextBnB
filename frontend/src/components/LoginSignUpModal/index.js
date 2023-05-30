@@ -14,8 +14,12 @@ const LoginSignUpModal = ({ setToggleModal }) => {
   const [emailTag, setEmailTag] = useState(false);
   const [toggleForm, setToggleForm] = useState(false);
   const [emailError, setEmailError] = useState("");
+  const [user, setUser] = useState(null)
 
-  if (currentUser) return <Redirect to="/" />;
+  if (currentUser) {
+    setToggleModal(false);
+    return <Redirect to="/" />;
+  } 
 
   const handleContinue = async (e) => {
     e.preventDefault();
@@ -24,9 +28,11 @@ const LoginSignUpModal = ({ setToggleModal }) => {
     setEmailError("");
     if (verifyEmailFormat(email)) {
       try {
-        const userExists = await accountExist(email);
+        const data = await accountExist(email);
+        const userExists = data.user_found
         if (userExists) {
           setFormType("Log In");
+          setUser(data.user)
         } else {
           setFormType("Sign Up");
         }
@@ -78,7 +84,7 @@ const LoginSignUpModal = ({ setToggleModal }) => {
                   required
                 />
               </div>
-              {emailError && <li className="email error">{emailError}</li>}
+              {emailError && <li className="email error"><i className="fa-solid fa-circle-info"></i> {emailError}</li>}
             </div>
             <button id="continue-btn" onClick={handleContinue}>
               Continue
@@ -93,10 +99,11 @@ const LoginSignUpModal = ({ setToggleModal }) => {
       {toggleForm && (
         <LoginSignUpForm
           formType={formType}
-          setToggleModal={setToggleModal}
           setToggleForm={setToggleForm}
           email={email}
           setEmail={setEmail}
+          handleDemoLogin={handleDemoLogin}
+          user={user}
         />
       )}
     </div>

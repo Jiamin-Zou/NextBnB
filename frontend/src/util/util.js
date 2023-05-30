@@ -10,7 +10,7 @@ export const accountExist = async (email) => {
     const res = await csrfFetch(`/api/users?email=${email}`);
     if (res.ok) {
       const data = await res.json();
-      return data.user_found;
+      return data;
     } else {
       throw new Error("Error checking user existence");
     }

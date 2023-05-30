@@ -8,7 +8,7 @@ class Api::UsersController < ApplicationController
         @user = User.find_by(email: params[:email])
 
         if @user
-            render json: { user_found: true }
+            render json: { user_found: true, user: {first_name: @user.first_name, last_name: @user.last_name}}
           else
             render json: { user_found: false }
           end
