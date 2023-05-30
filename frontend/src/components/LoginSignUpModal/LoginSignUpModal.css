@@ -1,3 +1,15 @@
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
 .modal-bg {
   left: 0;
   top: 0;
@@ -15,8 +27,11 @@
 
 .modal-content,
 .modal-content-form {
+  animation-name: fade-in;
+  animation-duration: 300ms;
+  animation-timing-function: ease-in;
   width: 50%;
-  height: 50%;
+  height: 60%;
   background-color: white;
   border-radius: 15px;
   padding: 25px;
@@ -26,7 +41,7 @@
 }
 
 .modal-content-form {
-  height: 70%;
+  height: 80%;
 }
 
 .modal-header {
@@ -62,19 +77,20 @@
 .fname-form {
   border-bottom-left-radius: 0px;
   border-bottom-right-radius: 0px;
+  border-bottom: 1px solid black;
 }
 
 .lname-form {
   border-top-left-radius: 0px;
   border-top-right-radius: 0px;
-  border-top: none;
+  border-top: 1px solid black;
 }
 
 .email-tag,
 .fname-tag,
 .lname-tag,
 .password-tag {
-  font-size: 13px;
+  font-size: 12px;
 }
 
 .email-input,
@@ -92,34 +108,43 @@
 .lname-input:focus-visible,
 .password-input,
 .password-input:focus-visible {
-  font-size: 22px;
+  font-size: 20px;
   outline: none;
   border: none;
-
   align-self: flex-start;
+  width: 100%;
 }
 
 #continue-btn,
 #demo-login-btn,
 #sign-log-btn {
-  font-weight: bold;
+  border: none;
   font-size: 20px;
   color: white;
   height: 35px;
   border-radius: 10px;
-  background-image: radial-gradient(
-    rgba(255, 0, 0, 0.788),
-    rgba(255, 0, 0, 0.562),
-    rgba(255, 0, 0, 0.288)
-  );
+  background-color: #e61e4d;
+  /* background-image: radial-gradient( circle at center,#FF385C 0%,#e61e4d 27.5%,#e31c5f 40%,#d70466 57.5%,#bd1e59 75%,#bd1e59 100% ) */
 }
 
-#close-btn {
-  background: none;
+#close-btn,
+#back-btn {
+  text-align: center;
+  font-size: 14px;
+  width: 20px;
+  height: 20px;
+  padding: 2px;
+  border-radius: 5px;
   border: none;
+  background: none;
 }
 
-.modal-content button {
+#close-btn:hover,
+#back-btn:hover {
+  box-shadow: 0px 0px 5px lightgray;
+}
+
+.modal-bg button {
   cursor: pointer;
 }
 
@@ -127,4 +152,30 @@
   color: red;
   border-color: red;
   list-style: none;
+}
+
+.first-form, .second-form {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.not-you {
+  color: gray;
+  font-size: 14px;
+}
+
+.switch-acc {
+  cursor: pointer;
+  color: black;
+  text-decoration: underline;
+}
+
+.form-header {
+  height: 60%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }

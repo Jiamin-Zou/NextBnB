@@ -46,6 +46,12 @@ const LoginSignUpForm = ({
   if (currentUser) return <Redirect to="/" />;
   const func = signUp ? sessionActions.signup : sessionActions.login;
 
+  const handleSwitch = (e) => {
+    e.preventDefault()
+    setToggleForm(false)
+    setEmail("")
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -104,6 +110,12 @@ const LoginSignUpForm = ({
         setLNameError("Last Name cannot be blank");
         lnameInput.classList.add("error");
       }
+
+      if (!emailCheck && signUp) {
+        setEmailError("Invalid Email Format");
+        emailInput.classList.add("error");
+      }
+
       if (!passwordCheck) {
         setPasswordError("Password cannot be less than 6 characters");
         passwordInput.classList.add("error");
@@ -118,7 +130,7 @@ const LoginSignUpForm = ({
           onClick={() => {
             setToggleForm(false);
           }}
-          id="close-btn"
+          id="back-btn"
         >
           &lt;
         </button>
@@ -128,117 +140,119 @@ const LoginSignUpForm = ({
 
       <div className="modal-body">
         {!signUp && (
-          <div>
+          <div className="form-header">
             <i class="fa-solid fa-circle-user fa-2xl"></i>
-            <h2>Welcome back {userName}</h2>
+            <h2>Welcome back, {userName}!</h2>
+            <p>{user.email}</p>
           </div>
         )}
-        {signUp && (
-          <div className="name-form">
-            <div className="fname-container">
-              <div className="fname-form">
-                {fNameTag && <div className="fname-tag">First Name</div>}
+        <form onSubmit={handleSubmit} className="second-form">
+          {signUp && (
+            <div className="name-form">
+              <div className="fname-container">
+                <div className="fname-form">
+                  {fNameTag && <div className="fname-tag">First Name</div>}
+                  <input
+                    className="fname-input"
+                    type="text"
+                    value={fName}
+                    placeholder="First Name"
+                    onChange={(e) => setFName(e.target.value)}
+                    onFocus={(e) => setFNameTag(true)}
+                    onBlur={(e) => setFNameTag(false)}
+                  />
+                </div>
+              </div>
+
+              <div className="lname-container">
+                <div className="lname-form">
+                  {lNameTag && <div className="lname-tag">Last Name</div>}
+                  <input
+                    className="lname-input"
+                    type="text"
+                    value={lName}
+                    placeholder="Last Name"
+                    onChange={(e) => setLName(e.target.value)}
+                    onFocus={(e) => setLNameTag(true)}
+                    onBlur={(e) => setLNameTag(false)}
+                  />
+                </div>
+              </div>
+
+              {fNameError && (
+                <li className="fname error">
+                  <i className="fa-solid fa-circle-info"></i> {fNameError}
+                </li>
+              )}
+              {lNameError && (
+                <li className="lname error">
+                  <i className="fa-solid fa-circle-info"></i> {lNameError}
+                </li>
+              )}
+            </div>
+          )}
+
+          {signUp && (
+            <div className="email-container">
+              <div className="email-form">
+                {emailTag && <div className="email-tag">Email</div>}
                 <input
-                  className="fname-input"
+                  className="email-input"
                   type="text"
-                  value={fName}
-                  placeholder="First Name"
-                  onChange={(e) => setFName(e.target.value)}
-                  onFocus={(e) => setFNameTag(true)}
-                  onBlur={(e) => setFNameTag(false)}
-                  required
+                  value={email}
+                  placeholder="Email"
+                  onChange={(e) => setEmail(e.target.value)}
+                  onFocus={(e) => setEmailTag(true)}
+                  onBlur={(e) => setEmailTag(false)}
                 />
               </div>
+              {emailError && (
+                <li className="email error">
+                  <i className="fa-solid fa-circle-info"></i> {emailError}
+                </li>
+              )}
             </div>
+          )}
 
-            <div className="lname-container">
-              <div className="lname-form">
-                {lNameTag && <div className="lname-tag">Last Name</div>}
-                <input
-                  className="lname-input"
-                  type="text"
-                  value={lName}
-                  placeholder="Last Name"
-                  onChange={(e) => setLName(e.target.value)}
-                  onFocus={(e) => setLNameTag(true)}
-                  onBlur={(e) => setLNameTag(false)}
-                  required
-                />
-              </div>
-            </div>
-
-            {fNameError && (
-              <li className="fname error">
-                <i className="fa-solid fa-circle-info"></i> {fNameError}
-              </li>
-            )}
-            {lNameError && (
-              <li className="lname error">
-                <i className="fa-solid fa-circle-info"></i> {lNameError}
-              </li>
-            )}
-          </div>
-        )}
-
-        {signUp && (
-          <div className="email-container">
-            <div className="email-form">
-              {emailTag && <div className="email-tag">Email</div>}
+          <div className="password-container">
+            <div className="password-form">
+              {passwordTag && <div className="password-tag">Password</div>}
               <input
-                className="email-input"
-                type="text"
-                value={email}
-                placeholder="Email"
-                onChange={(e) => setEmail(e.target.value)}
-                onFocus={(e) => setEmailTag(true)}
-                onBlur={(e) => setEmailTag(false)}
-                required
+                className="password-input"
+                type="password"
+                value={password}
+                placeholder="Password"
+                onChange={(e) => setPassword(e.target.value)}
+                onFocus={(e) => setPasswordTag(true)}
+                onBlur={(e) => setPasswordTag(false)}
               />
             </div>
-            {emailError && (
-              <li className="email error">
-                <i className="fa-solid fa-circle-info"></i> {emailError}
+            {passwordError && (
+              <li className="password error">
+                <i className="fa-solid fa-circle-info"></i> {passwordError}
               </li>
             )}
           </div>
-        )}
 
-        <div className="password-container">
-          <div className="password-form">
-            {passwordTag && <div className="password-tag">Password</div>}
-            <input
-              className="password-input"
-              type="password"
-              value={password}
-              placeholder="Password"
-              onChange={(e) => setPassword(e.target.value)}
-              onFocus={(e) => setPasswordTag(true)}
-              onBlur={(e) => setPasswordTag(false)}
-              required
-            />
-          </div>
-          {passwordError && (
-            <li className="password error">
-              <i className="fa-solid fa-circle-info"></i> {passwordError}
-            </li>
-          )}
-        </div>
+          <ul>
+            {backendErrors.map((error) => (
+              <li key={error} className="error">
+                <i className="fa-solid fa-circle-info"></i> {error}
+              </li>
+            ))}
+          </ul>
+          <button id="sign-log-btn" type="submit">
+            {buttonTxt}
+          </button>
 
-        <ul>
-          {backendErrors.map((error) => (
-            <li key={error} className="error">
-              <i className="fa-solid fa-circle-info"></i> {error}
-            </li>
-          ))}
-        </ul>
-        <button id="sign-log-btn" onClick={handleSubmit}>
-          {buttonTxt}
-        </button>
+          <button id="demo-login-btn" onClick={handleDemoLogin}>
+            Demo Login
+          </button>
+        </form>
 
-        <button id="demo-login-btn" onClick={handleDemoLogin}>
-          Demo Login
-        </button>
       </div>
+        {!signUp && <div className="not-you">Not You? <span className="switch-acc" onClick={handleSwitch}>Use another account</span></div>}
+        {signUp && <div className="not-you">Alread have an account? <span className="switch-acc" onClick={handleSwitch}>Login</span></div>}
     </div>
   );
 };
