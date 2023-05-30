@@ -32,7 +32,7 @@ const [dropdown, setDropdown] = useState(false);
             <i className="fa-solid fa-bars"></i>
             <i className="fa-solid fa-circle-user"></i>
           </div>
-          {dropdown && <ProfileButton setToggleModal={setToggleModal}/>}
+          {dropdown && <ProfileButton setDropdown={setDropdown} setToggleModal={setToggleModal}/>}
         </div>
       </div>
     </div>

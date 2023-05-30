@@ -1,14 +1,16 @@
 import { useDispatch, useSelector } from "react-redux";
 import * as sessionActions from "../../store/session";
-const ProfileButton = ({ setToggleModal }) => {
+const ProfileButton = ({ setToggleModal, setDropdown }) => {
   const dispatch = useDispatch();
   const currentUser = useSelector((state) => state.session.currentUser);
 
   const handleClick = () => {
     setToggleModal(true);
+    setDropdown(false)
   };
 
   const handleLogout = () => {
+    setDropdown(false)
     dispatch(sessionActions.logout());
   };
 
