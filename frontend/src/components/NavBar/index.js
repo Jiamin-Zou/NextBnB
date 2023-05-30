@@ -1,28 +1,40 @@
-import { useDispatch, useSelector } from "react-redux";
-import * as sessionActions from '../../store/session';
+import "./NavBar.css";
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import ProfileButton from "./ProfileButton";
 
-const NavBar = ({setToggleModal }) => {
-  const dispatch = useDispatch();
-  const currentUser = useSelector((state) => state.session.currentUser);
-  
-
-  const handleClick = () => {
-    setToggleModal(true)
-  };
-
-  const handleLogout = () => {
-    dispatch(sessionActions.logout())
-  };
+const NavBar = ({ setToggleModal }) => {
+const [dropdown, setDropdown] = useState(false);
 
   return (
-    <div>
-      <h1>LOGO IMG</h1>
-      {!currentUser && (
-        <button onClick={handleClick} className="login-sign">
-          Login or Sign Up
-        </button>
-      )}
-      {currentUser && <button onClick={handleLogout}>Logout</button>}
+    <div className="nav-bar">
+      <h2 className="logo">LOGO IMG</h2>
+      <div className="header-links">
+        <div className="personal-links">
+          <Link
+            to={{ pathname: "https://www.linkedin.com/in/jiaminzou95/" }}
+            target="_blank"
+          >
+            <i className="fa-brands fa-linkedin"></i>
+          </Link>
+          <Link
+            to={{ pathname: "https://github.com/Jiamin-Zou/NextBnB" }}
+            target="_blank"
+          >
+            <i className="fa-brands fa-square-github"></i>
+          </Link>
+        </div>
+        <div className="dropdown">
+          <div
+            className="profile-dropdown"
+            onClick={() => setDropdown((prevState) => !prevState)}
+          >
+            <i className="fa-solid fa-bars"></i>
+            <i className="fa-solid fa-circle-user"></i>
+          </div>
+          {dropdown && <ProfileButton setToggleModal={setToggleModal}/>}
+        </div>
+      </div>
     </div>
   );
 };

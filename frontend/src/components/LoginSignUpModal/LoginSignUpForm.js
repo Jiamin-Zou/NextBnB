@@ -127,7 +127,12 @@ const LoginSignUpForm = ({
       </div>
 
       <div className="modal-body">
-        {!signUp && <h2>Welcome back {userName}</h2>}
+        {!signUp && (
+          <div>
+            <i class="fa-solid fa-circle-user fa-2xl"></i>
+            <h2>Welcome back {userName}</h2>
+          </div>
+        )}
         {signUp && (
           <div className="name-form">
             <div className="fname-container">

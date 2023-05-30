@@ -6,7 +6,6 @@ function App() {
   const [toggleModal, setToggleModal] = useState(false);
   return (
     <div className="app">
-      <h1>Hello from App</h1>
       <NavBar setToggleModal={setToggleModal} />
       {toggleModal && <LoginSignUpModal setToggleModal={setToggleModal} />}
     </div>
