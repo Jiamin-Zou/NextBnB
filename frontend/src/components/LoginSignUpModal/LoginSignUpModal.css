@@ -1,0 +1,130 @@
+.modal-bg {
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  overflow: auto;
+  display: flex;
+  position: fixed;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.47);
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content,
+.modal-content-form {
+  width: 50%;
+  height: 50%;
+  background-color: white;
+  border-radius: 15px;
+  padding: 25px;
+  box-shadow: rgba(0, 0, 0, 0.6) 0px 0px 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-content-form {
+  height: 70%;
+}
+
+.modal-header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-bottom: 5px;
+  border-bottom: 1px solid gray;
+}
+
+.modal-body {
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.email-form,
+.fname-form,
+.lname-form,
+.password-form {
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  border: 2px solid black;
+  color: grey;
+  height: 40px;
+  padding: 5px 10px;
+}
+
+.fname-form {
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+}
+
+.lname-form {
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+  border-top: none;
+}
+
+.email-tag,
+.fname-tag,
+.lname-tag,
+.password-tag {
+  font-size: 13px;
+}
+
+.email-input,
+.fname-input,
+.lname-input,
+.password-input {
+  height: 100%;
+}
+
+.email-input,
+.email-input:focus-visible,
+.fname-input,
+.fname-input:focus-visible,
+.lname-input,
+.lname-input:focus-visible,
+.password-input,
+.password-input:focus-visible {
+  font-size: 22px;
+  outline: none;
+  border: none;
+
+  align-self: flex-start;
+}
+
+#continue-btn,
+#demo-login-btn,
+#sign-log-btn {
+  font-weight: bold;
+  font-size: 20px;
+  color: white;
+  height: 35px;
+  border-radius: 10px;
+  background-image: radial-gradient(
+    rgba(255, 0, 0, 0.788),
+    rgba(255, 0, 0, 0.562),
+    rgba(255, 0, 0, 0.288)
+  );
+}
+
+#close-btn {
+  background: none;
+  border: none;
+}
+
+.modal-content button {
+  cursor: pointer;
+}
+
+.error {
+  color: red;
+  border-color: red;
+  list-style: none;
+}
