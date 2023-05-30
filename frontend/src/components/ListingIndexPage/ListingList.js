@@ -1,4 +1,5 @@
 import ListingListItem from "./ListingListItem"
+import "./ListingList.css"
 
 const ListingList = ({listings}) => {
     const listingList = listings.map((listing) => {
@@ -9,7 +10,7 @@ const ListingList = ({listings}) => {
 
     return (
         <div className="listing-list-container">
-            <ul>
+            <ul className="listing-index-list">
                 {listingList}
             </ul>
         </div>

@@ -1,0 +1,25 @@
+.listing-list-item {
+  padding: 5px;
+  cursor: pointer;
+}
+
+.listing-list-item:hover {
+    border-radius: 20px;
+    box-shadow: 0px 0px 10px lightgray;
+}
+
+.listing-item-pic {
+  width: 300px;
+  height: 300px;
+  border-radius: 20px;
+  object-fit: cover;
+}
+
+.listing-item-city, .listing-item-price {
+  padding: 5px;
+  padding-bottom: 0px;
+}
+
+.listing-item-price span {
+    font-weight: bold;
+}

@@ -1,0 +1,11 @@
+.listing-list-container {
+    display: flex;
+}
+
+.listing-index-list {
+    padding: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 40px;
+}

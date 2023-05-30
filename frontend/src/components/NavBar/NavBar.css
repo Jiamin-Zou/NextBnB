@@ -1,4 +1,5 @@
 .nav-bar {
+  min-height: 60px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -11,6 +12,20 @@
   margin-bottom: 5px;
   border-bottom: 1px solid lightgray;
   background-color: white;
+}
+
+.logo {
+  cursor: pointer;
+  /* height: 60px; */
+  width: 120px;
+  height: auto;
+  border-radius: 20px;
+}
+
+.home-link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .header-links {
@@ -27,9 +42,9 @@
 }
 
 .dropdown {
-    width: 25%;
-    display: flex;
-    justify-content: space-evenly;
+  width: 25%;
+  display: flex;
+  justify-content: space-evenly;
 }
 .profile-dropdown {
   width: 90%;
@@ -42,8 +57,8 @@
   display: flex;
   justify-content: space-between;
 }
-.profile-dropdown:hover{
-    box-shadow: 0px 2px 5px gray;
+.profile-dropdown:hover {
+  box-shadow: 0px 2px 5px gray;
 }
 
 .header-links a,
@@ -52,39 +67,39 @@
 }
 
 .dropdown-content {
-    font-size: 12px;
-    position: absolute;
-    width: 100px;
-    top: 90%;
-    margin-top: 8px;
-    border-radius: 15px;
-    box-shadow: 0px 2px 5px gray;
-    right: 0px;
-    border: 1px solid lightgray;
-    background-color: white;
-    display: flex;
-    flex-direction: column;
-    padding: 20px;
+  font-size: 12px;
+  position: absolute;
+  width: 100px;
+  top: 90%;
+  margin-top: 8px;
+  border-radius: 15px;
+  box-shadow: 0px 2px 5px gray;
+  right: 0px;
+  border: 1px solid lightgray;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
 }
 
 .user-drop-down button {
-    text-align: center;
-    width: 100%;
-    font-weight: bold;
-    border: none;
-    background: none;
+  text-align: center;
+  width: 100%;
+  font-weight: bold;
+  border: none;
+  background: none;
 }
 
 .user-drop-down button:hover {
-    background-color: rgba(128, 128, 128, 0.281);
-    border-radius: 5px;
-    box-shadow: 0px 2px 5px lightgray;
+  background-color: rgba(128, 128, 128, 0.281);
+  border-radius: 5px;
+  box-shadow: 0px 2px 5px lightgray;
 }
 .user-drop-down h2 {
-    border-bottom: 1px solid gray;
-    padding-bottom: 2px;
+  border-bottom: 1px solid gray;
+  padding-bottom: 2px;
 }
 
 .user-name {
-    font-weight: bold;
+  font-weight: bold;
 }
