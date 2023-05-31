@@ -1,11 +1,13 @@
 .nav-bar {
-  min-height: 60px;
+  min-height: 80px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   position: sticky;
   top: 0;
-  padding: 20px;
+  /* padding: 20px; */
+  padding-left: 40px;
+  padding-right: 40px;
   margin-top: 0px;
   padding-top: 0px;
   padding-bottom: 5px;
@@ -16,10 +18,10 @@
 
 .logo {
   cursor: pointer;
-  /* height: 60px; */
-  width: 120px;
-  height: auto;
-  border-radius: 20px;
+  height: 60px;
+  width: 100px;
+  height: 50px;
+  border-radius: 15px;
 }
 
 .home-link {
@@ -36,18 +38,20 @@
 }
 
 .personal-links {
-  width: 30%;
+  width: 70px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 .dropdown {
-  width: 25%;
+  width: 80px;
   display: flex;
-  justify-content: space-evenly;
+  /* justify-content: space-evenly; */
 }
 .profile-dropdown {
-  width: 90%;
+  color: #717171;
+  width: 80px;
   font-size: 26px;
   border-radius: 30px;
   border: 1px solid lightgray;
@@ -56,6 +60,7 @@
   padding-right: 10px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 .profile-dropdown:hover {
   box-shadow: 0px 2px 5px gray;
@@ -102,4 +107,16 @@
 
 .user-name {
   font-weight: bold;
+}
+
+.fa-linkedin {
+  color:#0A66C2;
+}
+
+.fa-bars {
+  font-size: 16px;
+}
+
+.fa-circle-user {
+  font-size: 30px;
 }
