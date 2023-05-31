@@ -1,7 +1,9 @@
 import { useDispatch, useSelector } from "react-redux";
 import * as sessionActions from "../../store/session";
 import { useHistory } from "react-router-dom";
-const ProfileButton = ({ setToggleModal, setDropdown }) => {
+import { useModal } from "../../context/ModalContext";
+const ProfileButton = ({ setDropdown }) => {
+  const {setToggleModal} = useModal()
   const dispatch = useDispatch();
   const currentUser = useSelector((state) => state.session.currentUser);
   const history = useHistory()

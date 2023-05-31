@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import ProfileButton from "./ProfileButton";
 import Logo from "../../assets/images/nextbnb_logo.png"
 
-const NavBar = ({ setToggleModal }) => {
+const NavBar = () => {
 const [dropdown, setDropdown] = useState(false);
 
   return (
@@ -35,7 +35,7 @@ const [dropdown, setDropdown] = useState(false);
             <i className="fa-solid fa-bars"></i>
             <i className="fa-solid fa-circle-user"></i>
           </div>
-          {dropdown && <ProfileButton setDropdown={setDropdown} setToggleModal={setToggleModal}/>}
+          {dropdown && <ProfileButton setDropdown={setDropdown} />}
         </div>
       </div>
     </div>

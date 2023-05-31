@@ -5,19 +5,20 @@ import NavBar from "./components/NavBar";
 import ListingIndexPage from "./components/ListingIndexPage/Index";
 import ListingShowPage from "./components/ListingShowPage";
 import Footer from "./components/Footer";
+import { useModal } from "./context/ModalContext";
 
 function App() {
-  const [toggleModal, setToggleModal] = useState(false);
+  const {toggleModal} = useModal();
   return (
     <div className="app">
-        <NavBar setToggleModal={setToggleModal} />
-        {toggleModal && <LoginSignUpModal setToggleModal={setToggleModal} />}
+        <NavBar />
+        {toggleModal && <LoginSignUpModal />}
         <Switch>
           <Route path="/" exact>
             <ListingIndexPage />
           </Route>
           <Route path="/listings/:listingId">
-            <ListingShowPage setToggleModal={setToggleModal}/>
+            <ListingShowPage/>
           </Route>
         </Switch>
       <Footer />

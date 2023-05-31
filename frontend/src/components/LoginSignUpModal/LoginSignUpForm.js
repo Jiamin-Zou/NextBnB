@@ -2,15 +2,16 @@ import { useState } from "react";
 import { verifyEmailFormat } from "../../util/util.js";
 import { useDispatch, useSelector } from "react-redux";
 import * as sessionActions from "../../store/session";
+import { useModal } from "../../context/ModalContext.js";
 
 const LoginSignUpForm = ({
   formType,
-  setToggleForm,
   email,
   setEmail,
   handleDemoLogin,
   user,
 }) => {
+  const {setToggleForm} = useModal();
   const dispatch = useDispatch();
   const currentUser = useSelector((state) => state.session.currentUser);
 

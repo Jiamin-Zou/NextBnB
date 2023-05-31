@@ -6,8 +6,10 @@ import "./ListingShow.css";
 import LoadingPage from "../../util/LoadingPage";
 import PageNotFound from "../../util/PageNotFound";
 import sampleHouse from "../../assets/images/sample_house.jpg";
+import { useModal } from "../../context/ModalContext";
 
-const ListingShowPage = ({setToggleModal}) => {
+const ListingShowPage = () => {
+  const {setToggleModal} = useModal();
   const dispatch = useDispatch();
   const { listingId } = useParams();
   const listing = useSelector((state) => state.listings[listingId]);

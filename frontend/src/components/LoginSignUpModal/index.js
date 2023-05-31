@@ -4,14 +4,15 @@ import LoginSignUpForm from "./LoginSignUpForm";
 import { accountExist, demoUser, verifyEmailFormat } from "../../util/util.js";
 import { useDispatch, useSelector } from "react-redux";
 import * as sessionActions from "../../store/session";
+import { useModal } from "../../context/ModalContext";
 
-const LoginSignUpModal = ({ setToggleModal }) => {
+const LoginSignUpModal = () => {
+  const {setToggleModal, toggleForm, setToggleForm} = useModal();
   const dispatch = useDispatch();
   const currentUser = useSelector((state) => state.session.currentUser);
   const [email, setEmail] = useState("");
   const [formType, setFormType] = useState("");
   const [emailTag, setEmailTag] = useState(false);
-  const [toggleForm, setToggleForm] = useState(false);
   const [emailError, setEmailError] = useState("");
   const [user, setUser] = useState(null);
 
@@ -133,7 +134,6 @@ const LoginSignUpModal = ({ setToggleModal }) => {
       {toggleForm && (
         <LoginSignUpForm
           formType={formType}
-          setToggleForm={setToggleForm}
           email={email}
           setEmail={setEmail}
           handleDemoLogin={handleDemoLogin}
