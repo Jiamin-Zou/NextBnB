@@ -49,6 +49,31 @@
   display: flex;
   /* justify-content: space-evenly; */
 }
+
+.dropdown-content {
+  position: absolute;
+  width: 240px;
+  height: 201px;
+  top: 70px;
+  /* top: 92%; */
+  right: 40px;
+  display: flex;
+}
+
+.user-drop-down {
+  font-size: 16px;
+  width: 100%;
+  height:100%;
+  border-radius: 15px;
+  box-shadow: 0px 2px 5px gray;
+  border: 1px solid lightgray;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .profile-dropdown {
   color: #717171;
   width: 80px;
@@ -71,38 +96,44 @@
   color: inherit;
 }
 
-.dropdown-content {
-  font-size: 12px;
-  position: absolute;
-  width: 100px;
-  top: 90%;
-  margin-top: 8px;
-  border-radius: 15px;
-  box-shadow: 0px 2px 5px gray;
-  right: 0px;
-  border: 1px solid lightgray;
-  background-color: white;
-  display: flex;
-  flex-direction: column;
-  padding: 20px;
+.line {
+  margin-top:10px;
+  margin-bottom: 10px;
+  width: 100%;
+  border-bottom: 1px solid lightgray;
+}
+.user-drop-down.user-info{
+display: flex;
+flex-direction: column;
+}
+.user-name, .user-email {
+padding-top: 10px;
+}
+
+.user-drop-down h2{
+  padding-top: 10px;
+  padding-bottom: 10px;
+
 }
 
 .user-drop-down button {
+  margin-top: 10px;
+  margin-bottom: 5px;
+  padding-top: 10px;
+  padding-bottom: 10px;
   text-align: center;
   width: 100%;
-  font-weight: bold;
   border: none;
   background: none;
 }
 
 .user-drop-down button:hover {
-  background-color: rgba(128, 128, 128, 0.281);
-  border-radius: 5px;
+  background-color: rgba(240, 223, 223, 0.184);
   box-shadow: 0px 2px 5px lightgray;
 }
-.user-drop-down h2 {
-  border-bottom: 1px solid gray;
-  padding-bottom: 2px;
+
+.log-btn {
+  font-weight: bold;
 }
 
 .user-name {
@@ -110,7 +141,7 @@
 }
 
 .fa-linkedin {
-  color:#0A66C2;
+  color: #0a66c2;
 }
 
 .fa-bars {
@@ -121,6 +152,7 @@
   font-size: 30px;
 }
 
-.fa-linkedin:hover, .fa-square-github:hover {
-scale: 1.1;
+.fa-linkedin:hover,
+.fa-square-github:hover {
+  scale: 1.1;
 }

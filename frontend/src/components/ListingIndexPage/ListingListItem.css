@@ -1,5 +1,7 @@
 .listing-list-item {
   padding: 5px;
+  padding-top: 10px;
+  padding-bottom: 15px;
   cursor: pointer;
 }
 

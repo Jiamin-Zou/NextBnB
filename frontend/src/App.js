@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Route, Switch } from "react-router-dom";
 import LoginSignUpModal from "./components/LoginSignUpModal";
 import NavBar from "./components/NavBar";
