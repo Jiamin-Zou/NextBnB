@@ -10,7 +10,7 @@ class Api::ListingsController < ApplicationController
         if @listing
             render :show
         else
-            render json: { errors: ["Listing does not exist"] }, status: 404
+            render json: { errors: ["Oops... That listing doesn't exist!"] }, status: 404
         end
 
     end

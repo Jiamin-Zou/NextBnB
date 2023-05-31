@@ -9,7 +9,7 @@ const ListingListItem = ({ listing }) => {
   };
 
   return (
-    <div className="listing-list-item">
+    <div className="listing-list-item" onClick={handleClick}>
       <div><img src={sampleHouse} className="listing-item-pic" alt="listing-item-pic" /></div>
         <h3 className="listing-item-city">{listing.city}, {listing.state}</h3>
         <div className="listing-item-price">

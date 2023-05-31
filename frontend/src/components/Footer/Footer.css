@@ -3,6 +3,7 @@ footer {
   font-size: 14px;
   background-color: white;
   border-top: 1px solid lightgray;
+  width: 100%;
   position: sticky;
   bottom: 0;
   margin-bottom: 0;
@@ -16,7 +17,6 @@ footer {
   gap: 10px;
   display: flex;
   align-items: center;
-  
 }
 
 .social-links {
@@ -28,8 +28,8 @@ footer {
   align-items: center;
 }
 .separator {
-font-size: 10px;
-line-height: 16px;
+  font-size: 10px;
+  line-height: 16px;
 }
 
 .social-links a,

@@ -5,7 +5,6 @@
   justify-content: space-between;
   position: sticky;
   top: 0;
-  /* padding: 20px; */
   padding-left: 40px;
   padding-right: 40px;
   margin-top: 0px;
@@ -14,6 +13,7 @@
   margin-bottom: 5px;
   border-bottom: 1px solid lightgray;
   background-color: white;
+  z-index: 1;
 }
 
 .logo {

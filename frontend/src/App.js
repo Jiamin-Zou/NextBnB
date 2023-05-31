@@ -3,6 +3,7 @@ import { Route, Switch } from "react-router-dom";
 import LoginSignUpModal from "./components/LoginSignUpModal";
 import NavBar from "./components/NavBar";
 import ListingIndexPage from "./components/ListingIndexPage/Index";
+import ListingShowPage from "./components/ListingShowPage";
 import Footer from "./components/Footer";
 
 function App() {
@@ -14,6 +15,9 @@ function App() {
       <Switch>
         <Route path="/" exact>
           <ListingIndexPage />
+        </Route>
+        <Route path="/listings/:listingId">
+          <ListingShowPage />
         </Route>
       </Switch>
       <Footer />

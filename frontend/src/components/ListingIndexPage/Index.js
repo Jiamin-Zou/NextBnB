@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchListings } from "../../store/listings";
 import ListingList from "./ListingList";
 import LoadingPage from "../../util/LoadingPage";
+import "./ListingIndex.css"
 
 const ListingIndexPage = () => {
   const dispatch = useDispatch();

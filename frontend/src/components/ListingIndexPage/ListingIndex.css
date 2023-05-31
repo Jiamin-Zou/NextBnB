@@ -1,0 +1,31 @@
+@keyframes fade-in-index {
+  0% {
+    top: 0;
+    left: 0;
+    opacity: 0;
+  }
+  30% {
+    top: 30%;
+    left: 30%;
+    opacity: 0.3;
+  }
+  50% {
+    top: 50%;
+    left: 50%;
+    opacity: 0.5;
+  }
+  80% {
+    top: 80%;
+    left: 80%;
+    opacity: 0.8;
+  }
+  100% {
+    top: 100%;
+    left: 100%;
+    opacity: 1;
+  }
+}
+
+.listing-index {
+  animation: fade-in-index 0.5s forwards;
+}
