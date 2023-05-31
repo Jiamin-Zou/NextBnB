@@ -1,8 +1,10 @@
 import { useDispatch, useSelector } from "react-redux";
 import * as sessionActions from "../../store/session";
+import { useHistory } from "react-router-dom";
 const ProfileButton = ({ setToggleModal, setDropdown }) => {
   const dispatch = useDispatch();
   const currentUser = useSelector((state) => state.session.currentUser);
+  const history = useHistory()
 
   const handleClick = () => {
     setToggleModal(true);
@@ -12,6 +14,7 @@ const ProfileButton = ({ setToggleModal, setDropdown }) => {
   const handleLogout = () => {
     setDropdown(false)
     dispatch(sessionActions.logout());
+    history.push("/")
   };
 
   let sessionLinks;

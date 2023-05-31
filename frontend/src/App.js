@@ -10,16 +10,16 @@ function App() {
   const [toggleModal, setToggleModal] = useState(false);
   return (
     <div className="app">
-      <NavBar setToggleModal={setToggleModal} />
-      {toggleModal && <LoginSignUpModal setToggleModal={setToggleModal} />}
-      <Switch>
-        <Route path="/" exact>
-          <ListingIndexPage />
-        </Route>
-        <Route path="/listings/:listingId">
-          <ListingShowPage />
-        </Route>
-      </Switch>
+        <NavBar setToggleModal={setToggleModal} />
+        {toggleModal && <LoginSignUpModal setToggleModal={setToggleModal} />}
+        <Switch>
+          <Route path="/" exact>
+            <ListingIndexPage />
+          </Route>
+          <Route path="/listings/:listingId">
+            <ListingShowPage setToggleModal={setToggleModal}/>
+          </Route>
+        </Switch>
       <Footer />
     </div>
   );

@@ -1,6 +1,6 @@
 import { useHistory } from "react-router-dom";
 import sampleHouse from '../../assets/images/sample_house.jpg'
-import "./ListingItem.css"
+import "./ListingListItem.css"
 
 const ListingListItem = ({ listing }) => {
   const history = useHistory();
@@ -11,7 +11,7 @@ const ListingListItem = ({ listing }) => {
   return (
     <div className="listing-list-item" onClick={handleClick}>
       <div><img src={sampleHouse} className="listing-item-pic" alt="listing-item-pic" /></div>
-        <h3 className="listing-item-city">{listing.city}, {listing.state}</h3>
+        <div className="listing-item-city">{listing.city}, {listing.state}</div>
         <div className="listing-item-price">
             <span>${listing.nightPrice}</span> night
         </div>

@@ -3,7 +3,6 @@ import "./LoginSignUpModal.css";
 import LoginSignUpForm from "./LoginSignUpForm";
 import { accountExist, demoUser, verifyEmailFormat } from "../../util/util.js";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect } from "react-router-dom";
 import * as sessionActions from "../../store/session";
 
 const LoginSignUpModal = ({ setToggleModal }) => {
@@ -16,9 +15,25 @@ const LoginSignUpModal = ({ setToggleModal }) => {
   const [emailError, setEmailError] = useState("");
   const [user, setUser] = useState(null);
 
+  const [mousePositions, setMousePositions] = useState({
+    continue: { x: 0, y: 0 },
+    demo: { x: 0, y: 0 },
+  });
+
+  const handleMouseMove = (event, element) => {
+    const rect = event.target.getBoundingClientRect();
+    const mouseX = ((event.clientX - rect.left) / rect.width) * 100;
+    const mouseY = ((event.clientY - rect.top) / rect.height) * 100;
+
+    setMousePositions((prevMousePositions) => ({
+      ...prevMousePositions,
+      [element]: { x: mouseX, y: mouseY },
+    }));
+  };
+
   if (currentUser) {
     setToggleModal(false);
-    return <Redirect to="/" />;
+    // return <Redirect to="/" />;
   }
 
   const handleContinue = async (e) => {
@@ -42,6 +57,7 @@ const LoginSignUpModal = ({ setToggleModal }) => {
         setToggleForm(true);
       }
     } else {
+      setEmailTag(true)
       setEmailError("Invalid Email Format");
       emailInput.classList.add("error");
     }
@@ -52,7 +68,7 @@ const LoginSignUpModal = ({ setToggleModal }) => {
   };
 
   const handleDemoLogin = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     dispatch(sessionActions.login(demoUser));
   };
 
@@ -86,14 +102,28 @@ const LoginSignUpModal = ({ setToggleModal }) => {
                 />
               </div>
               {emailError && (
-                <li className="email error">
+                <li className="email error err-msg">
                   <i className="fa-solid fa-circle-info"></i> {emailError}
                 </li>
               )}
-              <button id="continue-btn" type="submit">
+              <button
+                id="continue-btn"
+                type="submit"
+                style={{
+                  backgroundPosition: `calc((100 - ${mousePositions.continue.x}) * 1%) calc((100 - ${mousePositions.continue.y}) * 1%)`,
+                }}
+                onMouseMove={(e) => handleMouseMove(e, "continue")}
+              >
                 Continue
               </button>
-              <button id="demo-login-btn" onClick={handleDemoLogin}>
+              <button
+                id="demo-login-btn"
+                onClick={handleDemoLogin}
+                style={{
+                  backgroundPosition: `calc((100 - ${mousePositions.demo.x}) * 1%) calc((100 - ${mousePositions.demo.y}) * 1%)`,
+                }}
+                onMouseMove={(e) => handleMouseMove(e, "demo")}
+              >
                 Demo Login
               </button>
             </form>

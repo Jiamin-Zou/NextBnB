@@ -30,18 +30,19 @@
   animation-name: fade-in;
   animation-duration: 300ms;
   animation-timing-function: ease-in;
-  width: 50%;
-  height: 60%;
+  width: 543px;
+  height: 596px;
   background-color: white;
   border-radius: 15px;
   padding: 25px;
   box-shadow: rgba(0, 0, 0, 0.6) 0px 0px 15px;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
 }
 
-.modal-content-form {
-  height: 80%;
+.modal-content {
+  height: 500px;
 }
 
 .modal-header {
@@ -51,14 +52,15 @@
   padding-top: 10px;
   padding-bottom: 10px;
   margin-bottom: 5px;
-  border-bottom: 1px solid gray;
+  border-bottom: 1px solid lightgray;
 }
 
 .modal-body {
   height: 80%;
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  /* justify-content: space-evenly; */
+  /* justify-content: space-between; */
 }
 
 .email-form,
@@ -68,7 +70,7 @@
   display: flex;
   flex-direction: column;
   border-radius: 10px;
-  border: 2px solid black;
+  border: 1px solid black;
   color: grey;
   height: 40px;
   padding: 5px 10px;
@@ -77,13 +79,12 @@
 .fname-form {
   border-bottom-left-radius: 0px;
   border-bottom-right-radius: 0px;
-  border-bottom: 1px solid black;
 }
 
 .lname-form {
   border-top-left-radius: 0px;
   border-top-right-radius: 0px;
-  border-top: 1px solid black;
+  border-top: none;
 }
 
 .email-tag,
@@ -121,10 +122,19 @@
   border: none;
   font-size: 20px;
   color: white;
-  height: 35px;
+  height: 48px;
   border-radius: 10px;
-  background-color: #e61e4d;
-  /* background-image: radial-gradient( circle at center,#FF385C 0%,#e61e4d 27.5%,#e31c5f 40%,#d70466 57.5%,#bd1e59 75%,#bd1e59 100% ) */
+  /* background-color: #e61e4d; */
+  background-image: radial-gradient(
+    circle at center,
+    #ff385c 0%,
+    #e61e4d 27.5%,
+    #e31c5f 40%,
+    #d70466 57.5%,
+    #bd1e59 75%,
+    #bd1e59 100%
+  );
+  background-size: 200% 200%;
 }
 
 #close-btn,
@@ -142,6 +152,7 @@
 #close-btn:hover,
 #back-btn:hover {
   box-shadow: 0px 0px 5px lightgray;
+  scale: 1.1;
 }
 
 .modal-bg button {
@@ -150,11 +161,26 @@
 
 .error {
   color: red;
-  border-color: red;
+  /* border-color: red; */
   list-style: none;
+  font-weight: bold;
+  border: 3px solid red;
+}
+.lname-form.error {
+  border-top: none;
 }
 
-.first-form, .second-form {
+.err-msg {
+  font-weight: normal;
+  /* margin-top: 5px;
+  margin-bottom: 5px; */
+  padding-top: 10px;
+  padding-bottom: 5px;
+  border: none;
+}
+
+.first-form,
+.second-form {
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -173,9 +199,13 @@
 }
 
 .form-header {
-  height: 60%;
+  height: 30%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-evenly;
+}
+
+.fa-solid.fa-circle-user.fa-2xl {
+  font-size: 50px;
 }

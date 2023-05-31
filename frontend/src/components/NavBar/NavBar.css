@@ -120,3 +120,7 @@
 .fa-circle-user {
   font-size: 30px;
 }
+
+.fa-linkedin:hover, .fa-square-github:hover {
+scale: 1.1;
+}

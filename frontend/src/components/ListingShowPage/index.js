@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchListing } from "../../store/listings";
 import "./ListingShow.css";
@@ -7,11 +7,12 @@ import LoadingPage from "../../util/LoadingPage";
 import PageNotFound from "../../util/PageNotFound";
 import sampleHouse from "../../assets/images/sample_house.jpg";
 
-const ListingShowPage = () => {
+const ListingShowPage = ({setToggleModal}) => {
   const dispatch = useDispatch();
   const { listingId } = useParams();
   const listing = useSelector((state) => state.listings[listingId]);
   const [errors, setErrors] = useState([]);
+  const currentUser = useSelector((state) => state.session.currentUser);
 
   useEffect(() => {
     dispatch(fetchListing(listingId)).catch(async (res) => {
@@ -25,7 +26,7 @@ const ListingShowPage = () => {
       else if (data) setErrors([data]);
       else setErrors([res.statusText]);
     });
-  }, [listingId]);
+  }, [listingId, dispatch]);
 
   if (!listing && errors) {
     return <PageNotFound errors={errors} />;
@@ -63,7 +64,16 @@ const ListingShowPage = () => {
             </div>
             <div className="listing-description">{listing.description}</div>
           </div>
-          <div className="reserve-form">Reservation Component</div>
+          <div className="reserve-form">
+            <div>Status: {currentUser ? "Logged in": "Not Logged in"}</div>
+            {!currentUser && (
+              <div>
+                <div>Please Login to make a reservation</div>
+                <button onClick={()=>setToggleModal(true)}>Login/Signup</button>
+              </div>
+            )}
+            {currentUser && <div> Reservation Component</div>}
+          </div>
         </div>
         <div className="reviews-section">Reviews Component</div>
         <div className="map-section">Map component</div>
