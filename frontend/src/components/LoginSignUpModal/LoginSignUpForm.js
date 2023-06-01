@@ -83,7 +83,7 @@ const LoginSignUpForm = ({
     const fnameCheck = fName.length > 0;
     const lnameCheck = lName.length > 0;
     const emailCheck = verifyEmailFormat(email);
-    const passwordCheck = password.length >= 6;
+    const passwordCheck = password.length >= 8;
     submitCheck = emailCheck && passwordCheck;
 
     const user = { email, password };
@@ -127,25 +127,33 @@ const LoginSignUpForm = ({
     } else {
       if (!fnameCheck && signUp) {
         setFNameTag(true);
-        setFNameError("First Name cannot be blank");
+        setFNameError("First name is required.");
         fnameInput.classList.add("error");
       }
 
       if (!lnameCheck && signUp) {
         setLNameTag(true);
-        setLNameError("Last Name cannot be blank");
+        setLNameError("Last name is required.");
         lnameInput.classList.add("error");
       }
-
-      if (!emailCheck && signUp) {
+      
+      if (email === "") {
         setEmailTag(true);
-        setEmailError("Invalid Email Format");
+        setEmailError("Email is required.");
+        emailInput.classList.add("error");
+      } else if (!emailCheck && signUp) {
+        setEmailTag(true);
+        setEmailError("Enter a valid email.");
         emailInput.classList.add("error");
       }
-
-      if (!passwordCheck) {
+      
+      if (password === "") {
         setPasswordTag(true);
-        setPasswordError("Password cannot be less than 6 characters");
+        setPasswordError("Password is required.");
+        passwordInput.classList.add("error");
+      } else if (!passwordCheck) {
+        setPasswordTag(true);
+        setPasswordError("Your password must be at lease 8 characters. Please try again.");
         passwordInput.classList.add("error");
       }
     }

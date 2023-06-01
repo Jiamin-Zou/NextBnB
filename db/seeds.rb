@@ -33,7 +33,7 @@ ApplicationRecord.transaction do
       first_name: f_name,
       last_name: l_name,
       email: Faker::Internet.unique.email(name: email_name, domain: domain),
-      password: Faker::Internet.password(min_length: 6, max_length: 20),
+      password: Faker::Internet.password(min_length: 8, max_length: 20),
     })
   end
 

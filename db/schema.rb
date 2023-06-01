@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_30_164107) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_01_154806) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -33,6 +33,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_30_164107) do
     t.float "longitude", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "category", null: false
+    t.boolean "has_wifi", default: false, null: false
+    t.boolean "has_pets", default: false, null: false
+    t.boolean "has_kitchen", default: false, null: false
+    t.boolean "has_ac", default: false, null: false
+    t.boolean "has_heat", default: false, null: false
+    t.boolean "has_tv", default: false, null: false
+    t.boolean "has_parking", default: false, null: false
+    t.boolean "has_fireplace", default: false, null: false
     t.index ["address", "apt_num", "city"], name: "index_listings_on_address_and_apt_num_and_city", unique: true
     t.index ["country"], name: "index_listings_on_country"
     t.index ["host_id"], name: "index_listings_on_host_id"

@@ -46,6 +46,7 @@
 }
 
 .modal-header {
+  font-family: Cereal-bd;
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -94,6 +95,13 @@
   font-size: 12px;
 }
 
+.error .email-tag,
+.error .fname-tag,
+.error .lname-tag,
+.error .password-tag {
+  font-family: Cereal-bd;
+}
+
 .email-input,
 .fname-input,
 .lname-input,
@@ -109,7 +117,7 @@
 .lname-input:focus-visible,
 .password-input,
 .password-input:focus-visible {
-  font-size: 20px;
+  font-size: 16px;
   outline: none;
   border: none;
   align-self: flex-start;
@@ -119,8 +127,10 @@
 #continue-btn,
 #demo-login-btn,
 #sign-log-btn {
+  font-family: Cereal-bd;
   border: none;
-  font-size: 20px;
+  font-size: 16px;
+  /* font-weight: bold; */
   color: white;
   height: 48px;
   border-radius: 10px;
@@ -176,8 +186,9 @@
 }
 
 .err-msg {
+  display: flex;
   font-weight: normal;
-  font-size: 14px;
+  font-size: 12px;
   padding-top: 10px;
   padding-bottom: 5px;
   border: none;
@@ -221,4 +232,9 @@
   justify-content: center;
   align-content: center;
   text-align: center;
+}
+
+.fa-circle-info {
+  font-size: 16px;
+  margin-right: 8px;
 }

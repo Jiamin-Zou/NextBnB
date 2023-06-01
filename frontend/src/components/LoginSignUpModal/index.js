@@ -42,7 +42,11 @@ const LoginSignUpModal = () => {
     const emailInput = document.querySelector(".email-form");
     emailInput.classList.remove("error");
     setEmailError("");
-    if (verifyEmailFormat(email)) {
+    if (email === "") {
+      setEmailTag(true);
+      setEmailError("Email is required.");
+      emailInput.classList.add("error");
+    } else if (verifyEmailFormat(email)) {
       try {
         const data = await accountExist(email);
         const userExists = data.user_found;
@@ -59,7 +63,7 @@ const LoginSignUpModal = () => {
       }
     } else {
       setEmailTag(true);
-      setEmailError("Invalid Email Format");
+      setEmailError("Enter a valid email.");
       emailInput.classList.add("error");
     }
   };
@@ -90,6 +94,7 @@ const LoginSignUpModal = () => {
               <h3>Welcome to NextBnB</h3>
             </div>
             <form onSubmit={handleContinue} className="first-form">
+            <div className="email-container">
               <div className="email-form">
                 {emailTag && <div className="email-tag">Email</div>}
                 <input
@@ -102,11 +107,14 @@ const LoginSignUpModal = () => {
                   onBlur={(e) => setEmailTag(false)}
                 />
               </div>
-              {emailError && (
-                <li className="email error err-msg">
-                  <i className="fa-solid fa-circle-info"></i> {emailError}
-                </li>
-              )}
+              <div className="err-msg-container">
+                {emailError && (
+                  <li className="email error err-msg">
+                    <i className="fa-solid fa-circle-info"></i> {emailError}
+                  </li>
+                )}
+              </div>
+            </div>
               <button
                 id="continue-btn"
                 type="submit"
