@@ -140,17 +140,22 @@
 #close-btn,
 #back-btn {
   text-align: center;
-  font-size: 14px;
-  width: 20px;
-  height: 20px;
-  padding: 2px;
+  font-size: 16px;
+  width: 22px;
+  height: 22px;
+  padding: 5px;
   border-radius: 5px;
   border: none;
   background: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 #close-btn:hover,
 #back-btn:hover {
+  border-radius: 50%;
+  background-color: rgba(224, 215, 215, 0.318);
   box-shadow: 0px 0px 5px lightgray;
   scale: 1.1;
 }
@@ -172,8 +177,7 @@
 
 .err-msg {
   font-weight: normal;
-  /* margin-top: 5px;
-  margin-bottom: 5px; */
+  font-size: 14px;
   padding-top: 10px;
   padding-bottom: 5px;
   border: none;
@@ -208,4 +212,13 @@
 
 .fa-solid.fa-circle-user.fa-2xl {
   font-size: 50px;
+}
+
+.welcome-msg {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  text-align: center;
 }

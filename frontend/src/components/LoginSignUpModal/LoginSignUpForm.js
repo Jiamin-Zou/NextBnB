@@ -11,7 +11,7 @@ const LoginSignUpForm = ({
   handleDemoLogin,
   user,
 }) => {
-  const {setToggleForm} = useModal();
+  const { setToggleForm } = useModal();
   const dispatch = useDispatch();
   const currentUser = useSelector((state) => state.session.currentUser);
 
@@ -158,7 +158,7 @@ const LoginSignUpForm = ({
           }}
           id="back-btn"
         >
-          &lt;
+          <div>&lt;</div>
         </button>
         <div>{header}</div>
         <div></div>

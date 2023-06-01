@@ -7,7 +7,7 @@ import * as sessionActions from "../../store/session";
 import { useModal } from "../../context/ModalContext";
 
 const LoginSignUpModal = () => {
-  const {setToggleModal, toggleForm, setToggleForm} = useModal();
+  const { setToggleModal, toggleForm, setToggleForm } = useModal();
   const dispatch = useDispatch();
   const currentUser = useSelector((state) => state.session.currentUser);
   const [email, setEmail] = useState("");
@@ -58,7 +58,7 @@ const LoginSignUpModal = () => {
         setToggleForm(true);
       }
     } else {
-      setEmailTag(true)
+      setEmailTag(true);
       setEmailError("Invalid Email Format");
       emailInput.classList.add("error");
     }
@@ -79,7 +79,7 @@ const LoginSignUpModal = () => {
         <div className="modal-content">
           <div className="modal-header">
             <button onClick={closeModal} id="close-btn">
-              X
+              <div>X</div>
             </button>
             <div>Log in or sign Up</div>
             <div></div>
