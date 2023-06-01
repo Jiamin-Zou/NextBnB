@@ -1,5 +1,9 @@
 class Api::ListingsController < ApplicationController
 
+    def categories
+        render json: Listing::CATEGORIES
+    end
+
     def index
         @listings = Listing.all
         render :index

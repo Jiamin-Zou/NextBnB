@@ -21,11 +21,23 @@
 #  longitude     :float            not null
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
+#  category      :string           not null
+#  has_wifi      :boolean          default(FALSE), not null
+#  has_pets      :boolean          default(FALSE), not null
+#  has_kitchen   :boolean          default(FALSE), not null
+#  has_ac        :boolean          default(FALSE), not null
+#  has_heat      :boolean          default(FALSE), not null
+#  has_tv        :boolean          default(FALSE), not null
+#  has_parking   :boolean          default(FALSE), not null
+#  has_fireplace :boolean          default(FALSE), not null
 #
 class Listing < ApplicationRecord
-  PROPERTY_TYPES = ["House", "Apartment", "Studio"]
+  CATEGORIES = ["beachfront", "countryside", "cabin", "mansion", "lakefront", "amazing views", "tiny home", "modern", "barn", "omg"]
+  PROPERTY_TYPES = ["House", "Apartment", "Studio", "Cabin", "Private Room"]
   validates :host_id, :address, :city, :state, :country, :title, :description, :longitude, :latitude, presence: true
-  validates :property_type, presence: true, inclusion: { in: PROPERTY_TYPES }
+  validates :property_type, inclusion: { in: PROPERTY_TYPES }
+  validates :category, inclusion: { in: CATEGORIES }
+  validates :has_wifi, :has_pets, :has_kitchen, :has_ac, :has_heat, :has_tv, :has_parking, :has_fireplace, inclusion: [true, false]
   validates :num_beds, :num_bedrooms, :num_bathrooms, presence: true, numericality: { only_integer: true, greater_than: 0 }
   validates :night_price, presence: true, numericality: { greater_than: 0 }
   validates :cleaning_fee, presence: true, numericality: { greater_than_or_equal_to: 0 }
