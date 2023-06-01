@@ -62,11 +62,19 @@ const ListingShowPage = () => {
                 <span>{listing.numBathrooms} baths</span>
               </div>
             </div>
-            <div className="listing-description">{listing.description}</div>
+            <div className="listing-description">
+              <h2>About this place</h2>
+              <div>{listing.description}</div>
+            </div>
           </div>
-          <div className="reserve-form">
-            <Reservation />
+          <div className="reserve-form-container">
+            <div className="reserve-form">
+              <Reservation />
+            </div>
           </div>
+        </div>
+        <div className="amentities">
+          <h2>What this place offers</h2>
         </div>
         <div className="reviews-section">Reviews Component</div>
         <div className="map-section">Map component</div>

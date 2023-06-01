@@ -9,6 +9,7 @@ footer {
   margin-bottom: 0;
   display: flex;
   align-items: center;
+  z-index: 2;
 }
 
 .footer-container {

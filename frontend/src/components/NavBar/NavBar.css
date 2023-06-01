@@ -1,4 +1,5 @@
 .nav-bar {
+  box-sizing: border-box;
   min-height: 80px;
   display: flex;
   align-items: center;
@@ -13,7 +14,7 @@
   margin-bottom: 5px;
   border-bottom: 1px solid lightgray;
   background-color: white;
-  z-index: 1;
+  z-index: 2;
 }
 
 .logo {
