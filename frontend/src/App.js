@@ -5,9 +5,18 @@ import ListingIndexPage from "./components/ListingIndexPage/Index";
 import ListingShowPage from "./components/ListingShowPage";
 import Footer from "./components/Footer";
 import { useModal } from "./context/ModalContext";
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 
 function App() {
   const {toggleModal} = useModal();
+
+  const location = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location]);
+
   return (
     <div className="app">
         <NavBar />

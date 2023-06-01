@@ -99,6 +99,7 @@ const LoginSignUpForm = ({
       setEmailError("");
       setFNameError("");
       setLNameError("");
+      setBEErrors([])
 
       user.first_name = fName;
       user.last_name = lName;
@@ -116,9 +117,10 @@ const LoginSignUpForm = ({
           data = await res.text();
         }
         if (data?.errors) {
-          setBEErrors(data.errors);
-          setPasswordTag(true);
-          passwordInput.classList.add("error");
+          // debugger
+          setEmailTag(true);
+          setEmailError(data.errors[0])
+          emailInput.classList.add("error");
         } else if (data) setBEErrors([data]);
         else setBEErrors([res.statusText]);
       });
@@ -269,7 +271,7 @@ const LoginSignUpForm = ({
           {backendErrors.length > 0 && (
             <ul className="err-msg-container">
               {backendErrors.map((error) => (
-                <li key={error} className="error">
+                <li key={error} className="error err-msg">
                   <i className="fa-solid fa-circle-info"></i> {error}
                 </li>
               ))}

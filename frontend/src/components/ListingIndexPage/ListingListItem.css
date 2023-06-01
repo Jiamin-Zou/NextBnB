@@ -3,12 +3,13 @@
   padding-top: 10px;
   padding-bottom: 15px;
   cursor: pointer;
+  transition: 0.5s;
 }
 
 .listing-list-item:hover {
     border-radius: 20px;
     box-shadow: 0px 0px 10px lightgray;
-    scale: 1.1;
+    scale: 1.01;
 }
 
 .listing-item-pic {

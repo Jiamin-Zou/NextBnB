@@ -6,15 +6,13 @@ import "./ListingShow.css";
 import LoadingPage from "../../util/LoadingPage";
 import PageNotFound from "../../util/PageNotFound";
 import sampleHouse from "../../assets/images/sample_house.jpg";
-import { useModal } from "../../context/ModalContext";
+import Reservation from "../ReservationForm";
 
 const ListingShowPage = () => {
-  const {setToggleModal} = useModal();
   const dispatch = useDispatch();
   const { listingId } = useParams();
   const listing = useSelector((state) => state.listings[listingId]);
   const [errors, setErrors] = useState([]);
-  const currentUser = useSelector((state) => state.session.currentUser);
 
   useEffect(() => {
     dispatch(fetchListing(listingId)).catch(async (res) => {
@@ -30,7 +28,7 @@ const ListingShowPage = () => {
     });
   }, [listingId, dispatch]);
 
-  if (!listing && errors) {
+  if (!listing && errors.length > 0) {
     return <PageNotFound errors={errors} />;
   } else if (!listing) {
     return <LoadingPage />;
@@ -67,14 +65,7 @@ const ListingShowPage = () => {
             <div className="listing-description">{listing.description}</div>
           </div>
           <div className="reserve-form">
-            <div>Status: {currentUser ? "Logged in": "Not Logged in"}</div>
-            {!currentUser && (
-              <div>
-                <div>Please Login to make a reservation</div>
-                <button onClick={()=>setToggleModal(true)}>Login/Signup</button>
-              </div>
-            )}
-            {currentUser && <div> Reservation Component</div>}
+            <Reservation />
           </div>
         </div>
         <div className="reviews-section">Reviews Component</div>

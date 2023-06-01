@@ -2,6 +2,7 @@ import notFound from "../assets/images/404_Airbnb.gif";
 import "./PageNotFound.css";
 
 const PageNotFound = ({ errors }) => {
+  debugger
   return (
     <div className="error-page">
       <main className="error-container">
