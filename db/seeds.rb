@@ -1,3 +1,5 @@
+require 'open-uri'
+
 ApplicationRecord.transaction do
   puts "Destroying tables..."
   User.destroy_all

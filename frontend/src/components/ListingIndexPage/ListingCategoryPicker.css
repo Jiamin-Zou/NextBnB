@@ -51,7 +51,7 @@
   gap: 10px;
   padding: 4px 0 4px;
   margin: 12px 0 10px;
-  color: rgb(113, 113, 113);
+  color: rgb(100, 100, 100);
 }
 
 .categories > div:hover {
@@ -63,8 +63,8 @@
   content: "";
   position: absolute;
   bottom: 0;
-  left: 0;
-  width: 100%;
+  left: 5%;
+  width: 90%;
   height: 4px;
   background-color: rgb(221, 221, 221);
   border-radius: 2px;
@@ -73,6 +73,15 @@
 }
 .categories > div:hover::after {
   opacity: 1;
+}
+
+.categories > div.active {
+  color:black
+}
+
+.categories > div.active::after {
+  opacity: 1;
+  background-color: rgba(80, 80, 80);
 }
 
 img.category-img {

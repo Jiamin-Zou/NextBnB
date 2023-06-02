@@ -4,6 +4,9 @@
   padding-bottom: 15px;
   cursor: pointer;
   transition: 0.5s;
+  display: flex;
+  flex-direction: column;
+  margin-right: auto;
 }
 
 .listing-list-item:hover {

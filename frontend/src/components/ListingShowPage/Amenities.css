@@ -20,3 +20,15 @@
     /* justify-content: center; */
     /* align-items: center; */
 }
+
+.amenity-item{
+    display: flex;
+    align-items: center;
+}
+
+.amenity-item-show img {
+    margin-left: 0;
+    margin-right: 16px;
+    width: 24px;
+    height: 24px;
+}

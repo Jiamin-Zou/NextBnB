@@ -1,6 +1,7 @@
 import csrfFetch from "./csrf";
 import { receiveHost } from "./hosts";
 
+// Action verbs
 const SET_LISTINGS = "listings/setListings";
 const SET_LISTING = "listings/setListing";
 
@@ -37,7 +38,7 @@ export const fetchListing = (listingId) => async (dispatch) => {
   if (res.ok) {
     const data = await res.json();
     dispatch(setListing(data.listing));
-    dispatch(receiveHost(data.host))
+    dispatch(receiveHost(data.host));
   } else {
     throw res;
   }
@@ -60,4 +61,4 @@ const listingsReducer = (state = {}, action) => {
   }
 };
 
-export default listingsReducer
+export default listingsReducer;

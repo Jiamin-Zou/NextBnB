@@ -33,7 +33,9 @@
 #
 class Listing < ApplicationRecord
   CATEGORIES = ["beachfront", "countryside", "cabin", "mansion", "lakefront", "amazing views", "tiny home", "modern", "barn", "omg"]
+
   PROPERTY_TYPES = ["House", "Apartment", "Studio", "Cabin", "Private Room"]
+  
   validates :host_id, :address, :city, :state, :country, :title, :description, :longitude, :latitude, presence: true
   validates :property_type, inclusion: { in: PROPERTY_TYPES }
   validates :category, inclusion: { in: CATEGORIES }
@@ -46,6 +48,8 @@ class Listing < ApplicationRecord
   validate :valid_location
   
   before_validation :geocode_address
+
+  has_many_attached :photos
 
   belongs_to :host,
              class_name: :User,

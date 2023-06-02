@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import ProfileButton from "./ProfileButton";
 import Logo from "../../assets/images/nextbnb_logo.png"
 
-const NavBar = () => {
+const NavBar = (props) => {
 const [dropdown, setDropdown] = useState(false);
 
   return (

@@ -109,7 +109,7 @@ div.map-section {
   text-decoration: underline;
 }
 
-.listing-headers, .listing-description, .amentities, .booking-calender {
+.listing-headers, .listing-description, .amenities, .booking-calender {
   border-bottom: 1px solid lightgray;
   padding: 15px 0 15px;
   display: flex;

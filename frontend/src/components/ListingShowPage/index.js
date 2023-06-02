@@ -78,9 +78,9 @@ const ListingShowPage = () => {
               <h2>About this place</h2>
               <div>{listing.description}</div>
             </div>
-            <div className="amentities">
+            <div className="amenities">
               <h2>What this place offers</h2>
-              <div className="amentities-comp">
+              <div className="amenities-comp">
                 <Amenities listing={listing} />
               </div>
             </div>
