@@ -15,6 +15,17 @@ const ListingShowPage = () => {
   const listing = useSelector((state) => state.listings[listingId]);
   const [errors, setErrors] = useState([]);
 
+  const hostSelector = (state) => {
+    if (listing) {
+      const id = listing.hostId;
+      const listingHost = state.hosts[id];
+      console.log(listingHost);
+      return listingHost;
+    }
+  };
+
+  const host = useSelector(hostSelector)
+
   useEffect(() => {
     dispatch(fetchListing(listingId)).catch(async (res) => {
       let data;
@@ -31,7 +42,7 @@ const ListingShowPage = () => {
 
   if (!listing && errors.length > 0) {
     return <PageNotFound />;
-  } else if (!listing) {
+  } else if (!listing || !host) {
     return <LoadingPage />;
   }
 
@@ -53,7 +64,7 @@ const ListingShowPage = () => {
           <div className="listing-info">
             <div className="listing-headers">
               <h2>
-                {listing.propertyType} hosted by {listing.hostId}
+                {listing.propertyType} hosted by {host.firstName}
               </h2>
               <div className="listing-details">
                 <span>{listing.numBedrooms} bedrooms</span>
@@ -70,12 +81,10 @@ const ListingShowPage = () => {
             <div className="amentities">
               <h2>What this place offers</h2>
               <div className="amentities-comp">
-                <Amenities listing={listing}/>
+                <Amenities listing={listing} />
               </div>
             </div>
-            <div className="booking-calender">
-              Full Calender
-            </div>
+            <div className="booking-calender">Full Calender</div>
           </div>
           <div className="reserve-form-container">
             <div className="reserve-form">

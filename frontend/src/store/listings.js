@@ -1,7 +1,8 @@
 import csrfFetch from "./csrf";
+import { receiveHost } from "./hosts";
 
 const SET_LISTINGS = "listings/setListings";
-const ADD_LISTING = "listings/addListing";
+const SET_LISTING = "listings/setListing";
 
 // POJO Action creators
 export const setListings = (listings) => {
@@ -11,9 +12,9 @@ export const setListings = (listings) => {
   };
 };
 
-export const addListing = (listing) => {
+export const setListing = (listing) => {
   return {
-    type: ADD_LISTING,
+    type: SET_LISTING,
     listing,
   };
 };
@@ -35,7 +36,8 @@ export const fetchListing = (listingId) => async (dispatch) => {
   const res = await csrfFetch(`/api/listings/${listingId}`);
   if (res.ok) {
     const data = await res.json();
-    dispatch(addListing(data.listing));
+    dispatch(setListing(data.listing));
+    dispatch(receiveHost(data.host))
   } else {
     throw res;
   }
@@ -50,7 +52,7 @@ const listingsReducer = (state = {}, action) => {
   switch (action.type) {
     case SET_LISTINGS:
       return { ...newState, ...action.listings };
-    case ADD_LISTING:
+    case SET_LISTING:
       newState[action.listing.id] = action.listing;
       return newState;
     default:
