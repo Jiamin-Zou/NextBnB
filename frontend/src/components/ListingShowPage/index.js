@@ -7,6 +7,7 @@ import LoadingPage from "../../util/LoadingPage";
 import PageNotFound from "../../util/PageNotFound";
 import sampleHouse from "../../assets/images/sample_house.jpg";
 import Reservation from "../ReservationForm";
+import Amenities from "./Amenities";
 
 const ListingShowPage = () => {
   const dispatch = useDispatch();
@@ -29,7 +30,7 @@ const ListingShowPage = () => {
   }, [listingId, dispatch]);
 
   if (!listing && errors.length > 0) {
-    return <PageNotFound errors={errors} />;
+    return <PageNotFound />;
   } else if (!listing) {
     return <LoadingPage />;
   }
@@ -66,6 +67,15 @@ const ListingShowPage = () => {
               <h2>About this place</h2>
               <div>{listing.description}</div>
             </div>
+            <div className="amentities">
+              <h2>What this place offers</h2>
+              <div className="amentities-comp">
+                <Amenities listing={listing}/>
+              </div>
+            </div>
+            <div className="booking-calender">
+              Full Calender
+            </div>
           </div>
           <div className="reserve-form-container">
             <div className="reserve-form">
@@ -73,9 +83,7 @@ const ListingShowPage = () => {
             </div>
           </div>
         </div>
-        <div className="amentities">
-          <h2>What this place offers</h2>
-        </div>
+
         <div className="reviews-section">Reviews Component</div>
         <div className="map-section">Map component</div>
       </main>

@@ -7,9 +7,10 @@ import Footer from "./components/Footer";
 import { useModal } from "./context/ModalContext";
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import PageNotFound from "./util/PageNotFound";
 
 function App() {
-  const {toggleModal} = useModal();
+  const { toggleModal } = useModal();
 
   const location = useLocation();
 
@@ -19,16 +20,19 @@ function App() {
 
   return (
     <div className="app">
-        <NavBar />
-        {toggleModal && <LoginSignUpModal />}
-        <Switch>
-          <Route path="/" exact>
-            <ListingIndexPage />
-          </Route>
-          <Route path="/listings/:listingId">
-            <ListingShowPage/>
-          </Route>
-        </Switch>
+      <NavBar />
+      {toggleModal && <LoginSignUpModal />}
+      <Switch>
+        <Route path="/" exact>
+          <ListingIndexPage />
+        </Route>
+        <Route path="/listings/:listingId">
+          <ListingShowPage />
+        </Route>
+        <Route>
+          <PageNotFound />
+        </Route>
+      </Switch>
       <Footer />
     </div>
   );

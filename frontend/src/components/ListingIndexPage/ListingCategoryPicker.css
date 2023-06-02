@@ -1,0 +1,108 @@
+.category-picker-container {
+  contain: strict;
+  box-sizing: border-box;
+  height: 98px;
+  position: sticky;
+  top: calc(80px - 16px);
+  padding-block-start: 20px;
+  z-index: 2;
+  background-color: white;
+  overflow-x: auto;
+  box-shadow: 0px 3px 5px rgba(221, 221, 221, 0.4);
+  display: flex;
+  justify-content: center;
+}
+
+@media (max-width: 1100px) {
+  .category-picker-container {
+    justify-content: initial;
+  }
+}
+
+.category-picker-container::-webkit-scrollbar {
+  display: none;
+}
+
+.filter-bar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  gap: 32px;
+  overflow-y: hidden;
+}
+
+.categories {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  column-gap: 32px;
+}
+
+.categories > div {
+  position: relative;
+  min-width: 56px;
+  height: 48px;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding: 4px 0 4px;
+  margin: 12px 0 10px;
+  color: rgb(113, 113, 113);
+}
+
+.categories > div:hover {
+  color: black;
+  cursor: pointer;
+}
+
+.categories > div::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background-color: rgb(221, 221, 221);
+  border-radius: 2px;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+.categories > div:hover::after {
+  opacity: 1;
+}
+
+img.category-img {
+  width: 24px;
+  height: 24px;
+}
+
+.category-name {
+  font-family: Cereal-bd;
+  font-size: 12px;
+}
+
+.filter-btn {
+  width: 90px;
+  height: 48px;
+  padding: 7px 0px;
+  border-radius: 12px;
+  background-color: transparent;
+  border: 1px solid rgb(221, 221, 221);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.filter-btn-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+
+.filter-btn:hover {
+  cursor: pointer;
+}

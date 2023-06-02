@@ -27,7 +27,7 @@
 
 .listing-show{
   animation: fade-in-show 200ms;
-  height: 2000px;
+  /* height: 2000px; */
 }
 
 .show-main-container {
@@ -52,19 +52,30 @@ div.show-header, div.show-images {
   border: none;
 }
 
+div.show-header h1 {
+  margin-bottom: 10px;
+}
+
 div.map-section {
   border-bottom: none;
 }
 
 .show-container {
   display: flex;
-  height: 500px;
+  /* height: 800px; */
 }
 
 .listing-info {
   width: 58.333333333333336%;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
   margin-left: 0%;
   margin-right: 0%;
+}
+
+.listing-info h2 {
+  padding-bottom: 24px;
 }
 
 .reserve-form-container {
@@ -72,14 +83,14 @@ div.map-section {
   width: 33.33333333333333%;
   margin-left: 8.333333333333332%;
   margin-right: 0%;
-  height: 70vh;
+  height: 100vh;
 }
 .reserve-form {
   border: 1px solid rgb(221, 221, 221);
   border-radius: 12px;
   padding: 24px;
   box-shadow: rgba(0, 0, 0, 0.12) 0px 6px 16px;
-  top: 80px !important;
+  top: 80px;
   position: sticky;
   z-index: 1;
 }
@@ -98,16 +109,18 @@ div.map-section {
   text-decoration: underline;
 }
 
-.listing-headers {
+.listing-headers, .listing-description, .amentities, .booking-calender {
   border-bottom: 1px solid lightgray;
-  padding-bottom: 15px;
+  padding: 15px 0 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+.booking-calender {
+  border-bottom: none;
 }
 
 .listing-details {
   display: flex;
   gap: 5px;
-}
-
-.listing-description {
-  padding-top: 15px;
 }

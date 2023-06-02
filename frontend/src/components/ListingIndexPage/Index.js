@@ -4,6 +4,7 @@ import { fetchListings } from "../../store/listings";
 import ListingList from "./ListingList";
 import LoadingPage from "../../util/LoadingPage";
 import "./ListingIndex.css"
+import ListingCategoryPicker from "./LisingCategoryPicker";
 
 const ListingIndexPage = () => {
   const dispatch = useDispatch();
@@ -17,6 +18,7 @@ const ListingIndexPage = () => {
 
   return (
     <div className="listing-index">
+      <ListingCategoryPicker />
       <ListingList listings={listings} />
     </div>
   );
