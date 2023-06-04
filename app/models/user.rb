@@ -23,8 +23,6 @@ class User < ApplicationRecord
   validates :password, length: { in: 8..255 }, allow_nil: true
 
   before_validation :ensure_session_token
-
-  has_one_attached :photo
   
   has_many :listings,
            class_name: :Listing,

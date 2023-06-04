@@ -96,12 +96,48 @@ div.map-section {
 }
 
 
-.listing-img {
+.listing-img-group-container {
   width: 100%;
   height: 370px;
-  object-fit: cover;
   border-radius: 20px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 1%;
+  overflow: hidden;
 }
+
+.img-group-left{
+  display: flex;
+  width: 49.5%;
+  height: 370px;
+}
+
+.img-group-right{
+  display: flex;
+  flex-wrap: wrap;
+  width: 49.5%;
+  height: 370px;
+  gap: 2%;
+}
+
+.img-wrapper {
+  width: 100%;
+  height: 100%;
+}
+
+.img-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.img-group-right .img-wrapper{
+  width: 49%;
+  height: 49%;
+}
+
+
 
 .listing-location {
   font-size: 14px;

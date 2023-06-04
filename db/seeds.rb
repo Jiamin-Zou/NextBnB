@@ -1,4 +1,6 @@
-require 'open-uri'
+require "open-uri"
+
+listings = []
 
 ApplicationRecord.transaction do
   puts "Destroying tables..."
@@ -53,7 +55,8 @@ ApplicationRecord.transaction do
 
   puts "Creating listings..."
 
-  Listing.create!(
+  # 1
+  listing1 = Listing.create!(
     host_id: generate_random_user_id(users),
     property_type: "House",
     address: "1600 Amphitheatre Parkway",
@@ -75,10 +78,13 @@ ApplicationRecord.transaction do
     has_heat: false,
     has_tv: true,
     has_parking: false,
-    has_fireplace: true
+    has_fireplace: true,
   )
 
-  Listing.create!(
+  listings << listing1
+
+  # 2
+  listing2 = Listing.create!(
     host_id: generate_random_user_id(users),
     property_type: "Apartment",
     address: "221B Baker Street",
@@ -101,10 +107,13 @@ ApplicationRecord.transaction do
     has_heat: true,
     has_tv: true,
     has_parking: true,
-    has_fireplace: false
+    has_fireplace: false,
   )
 
-  Listing.create!(
+  listings << listing2
+
+  # 3
+  listing3 = Listing.create!(
     host_id: generate_random_user_id(users),
     property_type: "House",
     address: "120 Bd de Grenelle",
@@ -126,10 +135,13 @@ ApplicationRecord.transaction do
     has_heat: false,
     has_tv: true,
     has_parking: false,
-    has_fireplace: false
+    has_fireplace: false,
   )
 
-  Listing.create!(
+  listings << listing3
+
+  # 4
+  listing4 = Listing.create!(
     host_id: generate_random_user_id(users),
     property_type: "Apartment",
     address: "32 Broadway",
@@ -150,12 +162,15 @@ ApplicationRecord.transaction do
     has_kitchen: true,
     has_ac: false,
     has_heat: true,
-    has_tv: false,
+    has_tv: true,
     has_parking: false,
-    has_fireplace: false
+    has_fireplace: false,
   )
 
-  Listing.create!(
+  listings << listing4
+
+  # 5
+  listing5 = Listing.create!(
     host_id: generate_random_user_id(users),
     property_type: "House",
     address: "456 Park Avenue",
@@ -177,10 +192,13 @@ ApplicationRecord.transaction do
     has_heat: true,
     has_tv: true,
     has_parking: false,
-    has_fireplace: true
+    has_fireplace: true,
   )
 
-  Listing.create!(
+  listings << listing5
+
+  # 6
+  listing6 = Listing.create!(
     host_id: generate_random_user_id(users),
     property_type: "Cabin",
     address: "198 Prospect Ave",
@@ -202,10 +220,13 @@ ApplicationRecord.transaction do
     has_heat: false,
     has_tv: true,
     has_parking: true,
-    has_fireplace: true
+    has_fireplace: true,
   )
 
-  Listing.create!(
+  listings << listing6
+
+  # 7
+  listing7 = Listing.create!(
     host_id: generate_random_user_id(users),
     property_type: "Private Room",
     address: "456 Carrer de Mallorca",
@@ -228,10 +249,13 @@ ApplicationRecord.transaction do
     has_heat: true,
     has_tv: true,
     has_parking: false,
-    has_fireplace: true
+    has_fireplace: true,
   )
 
-  Listing.create!(
+  listings << listing7
+
+  # 8
+  listing8 = Listing.create!(
     host_id: generate_random_user_id(users),
     property_type: "House",
     address: "6638 3rd St",
@@ -253,10 +277,13 @@ ApplicationRecord.transaction do
     has_heat: false,
     has_tv: false,
     has_parking: true,
-    has_fireplace: true
+    has_fireplace: true,
   )
 
-  Listing.create!(
+  listings << listing8
+
+  # 9
+  listing9 = Listing.create!(
     host_id: generate_random_user_id(users),
     property_type: "Apartment",
     address: "3 Chome-17-6 Shinjuku",
@@ -279,10 +306,13 @@ ApplicationRecord.transaction do
     has_heat: true,
     has_tv: true,
     has_parking: false,
-    has_fireplace: false
+    has_fireplace: false,
   )
 
-  Listing.create!(
+  listings << listing9
+
+  # 10
+  listing10 = Listing.create!(
     host_id: generate_random_user_id(users),
     property_type: "Studio",
     address: "712 Great Hwy",
@@ -305,10 +335,12 @@ ApplicationRecord.transaction do
     has_heat: false,
     has_tv: true,
     has_parking: false,
-    has_fireplace: false
+    has_fireplace: false,
   )
 
-  Listing.create!(
+  listings << listing10
+
+  listing11 = Listing.create!(
     host_id: generate_random_user_id(users),
     property_type: "House",
     address: "13 Stone St",
@@ -317,7 +349,7 @@ ApplicationRecord.transaction do
     country: "United States",
     title: "Cozy Retreat in Cold Spring",
     description: "Experience a cozy retreat in the heart of Cold Spring with this charming tiny home. Perfect for a romantic getaway or solo escape, this 1-bedroom, 1-bathroom house offers a peaceful atmosphere. Enjoy the warmth of the fireplace, relax in the tranquil surroundings, and bring your furry friend along. WiFi, TV, parking, and pet-friendly amenities are available for your convenience.",
-    num_beds: 2,
+    num_beds: 1,
     num_bedrooms: 1,
     num_bathrooms: 1,
     night_price: 218.0,
@@ -325,15 +357,18 @@ ApplicationRecord.transaction do
     category: "tiny home",
     has_wifi: true,
     has_pets: true,
-    has_kitchen: false,
+    has_kitchen: true,
     has_ac: false,
     has_heat: true,
     has_tv: true,
     has_parking: true,
-    has_fireplace: true
+    has_fireplace: true,
   )
 
-  Listing.create!(
+  listings << listing11
+
+  # 12
+  listing12 = Listing.create!(
     host_id: generate_random_user_id(users),
     property_type: "House",
     address: "39 E 72nd St",
@@ -355,10 +390,13 @@ ApplicationRecord.transaction do
     has_heat: true,
     has_tv: true,
     has_parking: true,
-    has_fireplace: true
+    has_fireplace: true,
   )
 
-  Listing.create!(
+  listings << listing12
+
+  # 13
+  listing13 = Listing.create!(
     host_id: generate_random_user_id(users),
     property_type: "Cabin",
     address: "616 Long Hill Rd",
@@ -380,10 +418,13 @@ ApplicationRecord.transaction do
     has_heat: false,
     has_tv: true,
     has_parking: true,
-    has_fireplace: true
+    has_fireplace: true,
   )
 
-  Listing.create!(
+  listings << listing13
+
+  # 14
+  listing14 = Listing.create!(
     host_id: generate_random_user_id(users),
     property_type: "Apartment",
     address: "Jalan Perai Jaya 6",
@@ -406,10 +447,13 @@ ApplicationRecord.transaction do
     has_heat: true,
     has_tv: true,
     has_parking: true,
-    has_fireplace: false
+    has_fireplace: false,
   )
 
-  Listing.create!(
+  listings << listing14
+
+  # 15
+  listing15 = Listing.create!(
     host_id: generate_random_user_id(users),
     property_type: "House",
     address: "888 Brannan St",
@@ -431,10 +475,13 @@ ApplicationRecord.transaction do
     has_heat: true,
     has_tv: true,
     has_parking: true,
-    has_fireplace: true
+    has_fireplace: true,
   )
 
-  Listing.create!(
+  listings << listing15
+
+  # 16
+  listing16 = Listing.create!(
     host_id: generate_random_user_id(users),
     property_type: "Private Room",
     address: "2500 Western Ave",
@@ -457,10 +504,21 @@ ApplicationRecord.transaction do
     has_heat: true,
     has_tv: true,
     has_parking: false,
-    has_fireplace: false
+    has_fireplace: false,
   )
 
+  listings << listing16
 
   puts "Listings created!"
-  puts "Done!"
 end
+
+listings.each_with_index do |listing, i|
+  (1..5).each do |j|
+    photo_url = "https://nextbnb-seed.s3.amazonaws.com/listings/listing#{i + 1}_#{j}.webp"
+    photo = URI.open(photo_url)
+    listing.photos.attach(io: photo, filename: "listing#{i + 1}_#{j}.webp")
+  end
+end
+
+
+puts "Done!"

@@ -24,7 +24,7 @@ const ListingShowPage = () => {
     }
   };
 
-  const host = useSelector(hostSelector)
+  const host = useSelector(hostSelector);
 
   useEffect(() => {
     dispatch(fetchListing(listingId)).catch(async (res) => {
@@ -45,6 +45,38 @@ const ListingShowPage = () => {
   } else if (!listing || !host) {
     return <LoadingPage />;
   }
+  const imageGroup = listing.photoUrls ? (
+    <div className="listing-img-group-container">
+      <div className="img-group-left">
+        <div className="img-wrapper">
+          <img src={listing.photoUrls[0]} alt={`listing${listing.id}_1`} />
+        </div>
+      </div>
+      <div className="img-group-right">
+        <div className="img-wrapper">
+          <img src={listing.photoUrls[1]} alt={`listing${listing.id}_2`} />
+        </div>
+
+        <div className="img-wrapper">
+          <img src={listing.photoUrls[2]} alt={`listing${listing.id}_3`} />
+        </div>
+        <div className="img-wrapper">
+          <img src={listing.photoUrls[3]} alt={`listing${listing.id}_4`} />
+        </div>
+        <div className="img-wrapper">
+          <img src={listing.photoUrls[4]} alt={`listing${listing.id}_5`} />
+        </div>
+      </div>
+    </div>
+  ) : (
+    <div className="listing-img-group-container">
+      <img
+        className="listing-img-group-container"
+        src={sampleHouse}
+        alt="sample"
+      />
+    </div>
+  );
 
   return (
     <div className="listing-show">
@@ -57,9 +89,7 @@ const ListingShowPage = () => {
             </span>
           </div>
         </div>
-        <div className="show-images">
-          <img className="listing-img" src={sampleHouse} alt="" />
-        </div>
+        <div className="show-images">{imageGroup}</div>
         <div className="show-container">
           <div className="listing-info">
             <div className="listing-headers">
