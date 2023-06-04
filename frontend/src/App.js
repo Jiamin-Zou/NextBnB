@@ -1,13 +1,39 @@
-import { useState } from "react";
+import { Route, Switch } from "react-router-dom";
 import LoginSignUpModal from "./components/LoginSignUpModal";
 import NavBar from "./components/NavBar";
+import ListingIndexPage from "./components/ListingIndexPage/Index";
+import ListingShowPage from "./components/ListingShowPage";
+import Footer from "./components/Footer";
+import { useModal } from "./context/ModalContext";
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
+import PageNotFound from "./util/PageNotFound";
 
 function App() {
-  const [toggleModal, setToggleModal] = useState(false);
+  const { toggleModal } = useModal();
+
+  const location = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location]);
+
   return (
     <div className="app">
-      <NavBar setToggleModal={setToggleModal} />
-      {toggleModal && <LoginSignUpModal setToggleModal={setToggleModal} />}
+      <NavBar />
+      {toggleModal && <LoginSignUpModal />}
+      <Switch>
+        <Route path="/" exact>
+          <ListingIndexPage />
+        </Route>
+        <Route path="/listings/:listingId">
+          <ListingShowPage />
+        </Route>
+        <Route>
+          <PageNotFound />
+        </Route>
+      </Switch>
+      <Footer />
     </div>
   );
 }

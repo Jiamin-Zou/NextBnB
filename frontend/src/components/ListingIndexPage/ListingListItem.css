@@ -1,0 +1,73 @@
+.listing-list-item {
+  padding: 5px;
+  padding-top: 10px;
+  padding-bottom: 15px;
+  cursor: pointer;
+  transition: 0.5s;
+  display: flex;
+  flex-direction: column;
+  margin-right: auto;
+}
+
+.listing-list-item:hover {
+    border-radius: 20px;
+    box-shadow: 0px 0px 10px rgba(213, 213, 213, 0.7);
+    scale: 1.01;
+}
+
+.listing-item-city{
+  font-weight: bold;
+}
+
+.listing-item-city, .listing-item-price {
+  padding: 5px;
+  padding-bottom: 0px;
+}
+
+.listing-item-price span {
+  font-weight: bold;
+}
+
+.image-container {
+  box-sizing: border-box;
+  display: flex;
+  overflow-x: hidden;
+  scroll-snap-type: x proximity;
+  width: 300px;
+  height: 320px;
+  padding-bottom: 2px;
+  margin-bottom: 5px;
+}
+
+.listing-list-item:hover .image-container {
+  overflow-x: scroll;
+}
+.listing-item-pic {
+  width: 300px;
+  min-width: 300px;
+  height: 300px;
+  min-height: 300px;
+  border-radius: 20px;
+  object-fit: cover;
+  scroll-snap-align: center;
+}
+
+.image-container::-webkit-scrollbar {
+  height: 8px;
+}
+
+
+.image-container::-webkit-scrollbar-track {
+  background-color: #f1f1f1;
+  border-radius: 5px;
+  width: 50px;
+}
+
+.image-container::-webkit-scrollbar-thumb {
+  background-color: #8f8f8f;
+  border-radius: 5px;
+}
+
+.image-container::-webkit-scrollbar-thumb:hover {
+  background-color: #555;
+}

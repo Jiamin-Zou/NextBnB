@@ -1,0 +1,34 @@
+.amenities-container {
+ height: 100%;
+}
+
+.amenities-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    /* gap: 10px; */
+}
+
+.amenity-item-show {
+    box-sizing: border-box;
+    width: 50%;
+    height: 50px;
+    margin-right: auto;
+    display: flex;
+    padding-left: 8px;
+    padding-right: 8px;
+    /* justify-content: center; */
+    /* align-items: center; */
+}
+
+.amenity-item{
+    display: flex;
+    align-items: center;
+}
+
+.amenity-item-show img {
+    margin-left: 0;
+    margin-right: 16px;
+    width: 24px;
+    height: 24px;
+}

@@ -1,24 +1,26 @@
 import { useState } from "react";
 import { verifyEmailFormat } from "../../util/util.js";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect } from "react-router-dom";
 import * as sessionActions from "../../store/session";
+import { useModal } from "../../context/ModalContext.js";
 
 const LoginSignUpForm = ({
   formType,
-  setToggleForm,
   email,
   setEmail,
   handleDemoLogin,
   user,
 }) => {
+  const { setToggleForm } = useModal();
   const dispatch = useDispatch();
   const currentUser = useSelector((state) => state.session.currentUser);
 
   const signUp = formType === "Sign Up";
-  const header = signUp ? "Finish signing up" : " Login";
-  const buttonTxt = signUp ? "Sign Up" : "Login";
+  const header = signUp ? "Finish signing up" : " Log in";
+  const buttonTxt = signUp ? "Agree and continue" : "Log in";
+
   let userName;
+
   if (user && !signUp) {
     const first = user.first_name;
     const last = user.last_name;
@@ -43,14 +45,33 @@ const LoginSignUpForm = ({
   const [lNameError, setLNameError] = useState("");
   const [backendErrors, setBEErrors] = useState([]);
 
-  if (currentUser) return <Redirect to="/" />;
+  const [mousePositions, setMousePositions] = useState({
+    logbtn: { x: 0, y: 0 },
+    demo: { x: 0, y: 0 },
+  });
+
+  const handleMouseMove = (event, element) => {
+    const rect = event.target.getBoundingClientRect();
+    const mouseX = ((event.clientX - rect.left) / rect.width) * 100;
+    const mouseY = ((event.clientY - rect.top) / rect.height) * 100;
+
+    setMousePositions((prevMousePositions) => ({
+      ...prevMousePositions,
+      [element]: { x: mouseX, y: mouseY },
+    }));
+  };
+
+  if (currentUser) {
+    setToggleForm(false);
+    // return <Redirect to="/" />;
+  }
   const func = signUp ? sessionActions.signup : sessionActions.login;
 
   const handleSwitch = (e) => {
-    e.preventDefault()
-    setToggleForm(false)
-    setEmail("")
-  }
+    e.preventDefault();
+    setToggleForm(false);
+    setEmail("");
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -62,7 +83,7 @@ const LoginSignUpForm = ({
     const fnameCheck = fName.length > 0;
     const lnameCheck = lName.length > 0;
     const emailCheck = verifyEmailFormat(email);
-    const passwordCheck = password.length >= 6;
+    const passwordCheck = password.length >= 8;
     submitCheck = emailCheck && passwordCheck;
 
     const user = { email, password };
@@ -78,6 +99,7 @@ const LoginSignUpForm = ({
       setEmailError("");
       setFNameError("");
       setLNameError("");
+      setBEErrors([])
 
       user.first_name = fName;
       user.last_name = lName;
@@ -95,29 +117,43 @@ const LoginSignUpForm = ({
           data = await res.text();
         }
         if (data?.errors) {
-          setBEErrors(data.errors);
-          passwordInput.classList.add("error");
+          // debugger
+          setEmailTag(true);
+          setEmailError(data.errors[0])
+          emailInput.classList.add("error");
         } else if (data) setBEErrors([data]);
         else setBEErrors([res.statusText]);
       });
     } else {
       if (!fnameCheck && signUp) {
-        setFNameError("First Name cannot be blank");
+        setFNameTag(true);
+        setFNameError("First name is required.");
         fnameInput.classList.add("error");
       }
 
       if (!lnameCheck && signUp) {
-        setLNameError("Last Name cannot be blank");
+        setLNameTag(true);
+        setLNameError("Last name is required.");
         lnameInput.classList.add("error");
       }
-
-      if (!emailCheck && signUp) {
-        setEmailError("Invalid Email Format");
+      
+      if (email === "") {
+        setEmailTag(true);
+        setEmailError("Email is required.");
+        emailInput.classList.add("error");
+      } else if (!emailCheck && signUp) {
+        setEmailTag(true);
+        setEmailError("Enter a valid email.");
         emailInput.classList.add("error");
       }
-
-      if (!passwordCheck) {
-        setPasswordError("Password cannot be less than 6 characters");
+      
+      if (password === "") {
+        setPasswordTag(true);
+        setPasswordError("Password is required.");
+        passwordInput.classList.add("error");
+      } else if (!passwordCheck) {
+        setPasswordTag(true);
+        setPasswordError("Your password must be at lease 8 characters. Please try again.");
         passwordInput.classList.add("error");
       }
     }
@@ -132,7 +168,7 @@ const LoginSignUpForm = ({
           }}
           id="back-btn"
         >
-          &lt;
+          <div>&lt;</div>
         </button>
         <div>{header}</div>
         <div></div>
@@ -141,9 +177,11 @@ const LoginSignUpForm = ({
       <div className="modal-body">
         {!signUp && (
           <div className="form-header">
-            <i class="fa-solid fa-circle-user fa-2xl"></i>
-            <h2>Welcome back, {userName}!</h2>
-            <p>{user.email}</p>
+            <i className="fa-solid fa-circle-user fa-2xl"></i>
+            <div className="welcome-msg">
+              <h2>Welcome back, {userName}!</h2>
+              <p>{user.email}</p>
+            </div>
           </div>
         )}
         <form onSubmit={handleSubmit} className="second-form">
@@ -178,17 +216,18 @@ const LoginSignUpForm = ({
                   />
                 </div>
               </div>
-
-              {fNameError && (
-                <li className="fname error">
-                  <i className="fa-solid fa-circle-info"></i> {fNameError}
-                </li>
-              )}
-              {lNameError && (
-                <li className="lname error">
-                  <i className="fa-solid fa-circle-info"></i> {lNameError}
-                </li>
-              )}
+              <div className="err-msg-container">
+                {fNameError && (
+                  <li className="fname error err-msg">
+                    <i className="fa-solid fa-circle-info"></i> {fNameError}
+                  </li>
+                )}
+                {lNameError && (
+                  <li className="lname error err-msg">
+                    <i className="fa-solid fa-circle-info"></i> {lNameError}
+                  </li>
+                )}
+              </div>
             </div>
           )}
 
@@ -206,11 +245,13 @@ const LoginSignUpForm = ({
                   onBlur={(e) => setEmailTag(false)}
                 />
               </div>
-              {emailError && (
-                <li className="email error">
-                  <i className="fa-solid fa-circle-info"></i> {emailError}
-                </li>
-              )}
+              <div className="err-msg-container">
+                {emailError && (
+                  <li className="email error err-msg">
+                    <i className="fa-solid fa-circle-info"></i> {emailError}
+                  </li>
+                )}
+              </div>
             </div>
           )}
 
@@ -227,32 +268,62 @@ const LoginSignUpForm = ({
                 onBlur={(e) => setPasswordTag(false)}
               />
             </div>
-            {passwordError && (
-              <li className="password error">
-                <i className="fa-solid fa-circle-info"></i> {passwordError}
-              </li>
-            )}
+            <div className="err-msg-container">
+              {passwordError && (
+                <li className="password error err-msg">
+                  <i className="fa-solid fa-circle-info"></i> {passwordError}
+                </li>
+              )}
+            </div>
           </div>
-
-          <ul>
-            {backendErrors.map((error) => (
-              <li key={error} className="error">
-                <i className="fa-solid fa-circle-info"></i> {error}
-              </li>
-            ))}
-          </ul>
-          <button id="sign-log-btn" type="submit">
+          {backendErrors.length > 0 && (
+            <ul className="err-msg-container">
+              {backendErrors.map((error) => (
+                <li key={error} className="error err-msg">
+                  <i className="fa-solid fa-circle-info"></i> {error}
+                </li>
+              ))}
+            </ul>
+          )}
+          <button
+            id="sign-log-btn"
+            type="submit"
+            style={{
+              backgroundPosition: `calc((100 - ${mousePositions.logbtn.x}) * 1%) calc((100 - ${mousePositions.logbtn.y}) * 1%)`,
+            }}
+            onMouseMove={(e) => handleMouseMove(e, "logbtn")}
+          >
             {buttonTxt}
           </button>
 
-          <button id="demo-login-btn" onClick={handleDemoLogin}>
+          <button
+            id="demo-login-btn"
+            onClick={handleDemoLogin}
+            style={{
+              backgroundPosition: `calc((100 - ${mousePositions.demo.x}) * 1%) calc((100 - ${mousePositions.demo.y}) * 1%)`,
+            }}
+            onMouseMove={(e) => handleMouseMove(e, "demo")}
+          >
             Demo Login
           </button>
         </form>
-
       </div>
-        {!signUp && <div className="not-you">Not You? <span className="switch-acc" onClick={handleSwitch}>Use another account</span></div>}
-        {signUp && <div className="not-you">Alread have an account? <span className="switch-acc" onClick={handleSwitch}>Login</span></div>}
+      {!signUp && (
+        <div className="not-you">
+          Not You?{" "}
+          <span className="switch-acc" onClick={handleSwitch}>
+            Use another account
+          </span>
+        </div>
+      )}
+      {signUp && (
+        <div className="not-you">
+          Already have an account?{" "}
+          <span className="switch-acc" onClick={handleSwitch}>
+            Login
+          </span>
+        </div>
+      )}
     </div>
   );
 };

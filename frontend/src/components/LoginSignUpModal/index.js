@@ -3,22 +3,38 @@ import "./LoginSignUpModal.css";
 import LoginSignUpForm from "./LoginSignUpForm";
 import { accountExist, demoUser, verifyEmailFormat } from "../../util/util.js";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect } from "react-router-dom";
 import * as sessionActions from "../../store/session";
+import { useModal } from "../../context/ModalContext";
 
-const LoginSignUpModal = ({ setToggleModal }) => {
+const LoginSignUpModal = () => {
+  const { setToggleModal, toggleForm, setToggleForm } = useModal();
   const dispatch = useDispatch();
   const currentUser = useSelector((state) => state.session.currentUser);
   const [email, setEmail] = useState("");
   const [formType, setFormType] = useState("");
   const [emailTag, setEmailTag] = useState(false);
-  const [toggleForm, setToggleForm] = useState(false);
   const [emailError, setEmailError] = useState("");
   const [user, setUser] = useState(null);
 
+  const [mousePositions, setMousePositions] = useState({
+    continue: { x: 0, y: 0 },
+    demo: { x: 0, y: 0 },
+  });
+
+  const handleMouseMove = (event, element) => {
+    const rect = event.target.getBoundingClientRect();
+    const mouseX = ((event.clientX - rect.left) / rect.width) * 100;
+    const mouseY = ((event.clientY - rect.top) / rect.height) * 100;
+
+    setMousePositions((prevMousePositions) => ({
+      ...prevMousePositions,
+      [element]: { x: mouseX, y: mouseY },
+    }));
+  };
+
   if (currentUser) {
     setToggleModal(false);
-    return <Redirect to="/" />;
+    // return <Redirect to="/" />;
   }
 
   const handleContinue = async (e) => {
@@ -26,7 +42,11 @@ const LoginSignUpModal = ({ setToggleModal }) => {
     const emailInput = document.querySelector(".email-form");
     emailInput.classList.remove("error");
     setEmailError("");
-    if (verifyEmailFormat(email)) {
+    if (email === "") {
+      setEmailTag(true);
+      setEmailError("Email is required.");
+      emailInput.classList.add("error");
+    } else if (verifyEmailFormat(email)) {
       try {
         const data = await accountExist(email);
         const userExists = data.user_found;
@@ -42,7 +62,8 @@ const LoginSignUpModal = ({ setToggleModal }) => {
         setToggleForm(true);
       }
     } else {
-      setEmailError("Invalid Email Format");
+      setEmailTag(true);
+      setEmailError("Enter a valid email.");
       emailInput.classList.add("error");
     }
   };
@@ -52,7 +73,7 @@ const LoginSignUpModal = ({ setToggleModal }) => {
   };
 
   const handleDemoLogin = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     dispatch(sessionActions.login(demoUser));
   };
 
@@ -62,7 +83,7 @@ const LoginSignUpModal = ({ setToggleModal }) => {
         <div className="modal-content">
           <div className="modal-header">
             <button onClick={closeModal} id="close-btn">
-              X
+              <div>X</div>
             </button>
             <div>Log in or sign Up</div>
             <div></div>
@@ -73,6 +94,7 @@ const LoginSignUpModal = ({ setToggleModal }) => {
               <h3>Welcome to NextBnB</h3>
             </div>
             <form onSubmit={handleContinue} className="first-form">
+            <div className="email-container">
               <div className="email-form">
                 {emailTag && <div className="email-tag">Email</div>}
                 <input
@@ -85,15 +107,32 @@ const LoginSignUpModal = ({ setToggleModal }) => {
                   onBlur={(e) => setEmailTag(false)}
                 />
               </div>
-              {emailError && (
-                <li className="email error">
-                  <i className="fa-solid fa-circle-info"></i> {emailError}
-                </li>
-              )}
-              <button id="continue-btn" type="submit">
+              <div className="err-msg-container">
+                {emailError && (
+                  <li className="email error err-msg">
+                    <i className="fa-solid fa-circle-info"></i> {emailError}
+                  </li>
+                )}
+              </div>
+            </div>
+              <button
+                id="continue-btn"
+                type="submit"
+                style={{
+                  backgroundPosition: `calc((100 - ${mousePositions.continue.x}) * 1%) calc((100 - ${mousePositions.continue.y}) * 1%)`,
+                }}
+                onMouseMove={(e) => handleMouseMove(e, "continue")}
+              >
                 Continue
               </button>
-              <button id="demo-login-btn" onClick={handleDemoLogin}>
+              <button
+                id="demo-login-btn"
+                onClick={handleDemoLogin}
+                style={{
+                  backgroundPosition: `calc((100 - ${mousePositions.demo.x}) * 1%) calc((100 - ${mousePositions.demo.y}) * 1%)`,
+                }}
+                onMouseMove={(e) => handleMouseMove(e, "demo")}
+              >
                 Demo Login
               </button>
             </form>
@@ -103,7 +142,6 @@ const LoginSignUpModal = ({ setToggleModal }) => {
       {toggleForm && (
         <LoginSignUpForm
           formType={formType}
-          setToggleForm={setToggleForm}
           email={email}
           setEmail={setEmail}
           handleDemoLogin={handleDemoLogin}

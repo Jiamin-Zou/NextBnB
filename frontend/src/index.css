@@ -1,4 +1,43 @@
-/* TODO Add site wide styles */
-* {
-  font-family: 'Circular',-apple-system,'BlinkMacSystemFont','Roboto','Helvetica Neue',sans-serif
+@font-face {
+  font-family: "Cereal";
+  src: url("./assets/fonts/AirbnbCereal_W_Lt.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "Cereal-bd";
+  src: url("./assets/fonts/AirbnbCereal_W_Md.otf") format("opentype");
+}
+
+#root {
+  /* font-family: "Circular", -apple-system, "BlinkMacSystemFont", "Roboto",
+    "Helvetica Neue", sans-serif; */
+  font-family: "Cereal";
+  height: calc(100vh - 45px);
+}
+
+h1, h2, h3, h4, header {
+  font-family: "Cereal-bd";
+}
+h1 {
+  font-size: 26px;
+}
+
+h2, h3 {
+  font-size: 22px;
+}
+
+body {
+  margin: 0;
+}
+
+.loading-page {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+button {
+  font-family: inherit;
 }
