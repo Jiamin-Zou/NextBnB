@@ -1,5 +1,5 @@
-import {useEffect, useRef } from "react";
-import { DateRangePicker } from "react-date-range";
+import { useEffect, useRef } from "react";
+import { DateRange } from "react-date-range";
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
 import "./ReservationCalendar.css";
@@ -27,19 +27,22 @@ const ReservationCalendar = ({
   };
 
   const handleSelect = (ranges) => {
-    setStartDate(ranges.selection.startDate)
-    setEndDate(ranges.selection.endDate)
+    setStartDate(ranges.selection.startDate);
+    setEndDate(ranges.selection.endDate);
   };
 
-  useEffect(()=>{
-    document.addEventListener("click", closeOnOutsideClick)
-  },[])
+  useEffect(() => {
+    document.addEventListener("click", closeOnOutsideClick);
+  }, []);
 
   return (
     <div ref={calRef}>
-      <DateRangePicker
+      <DateRange
+        minDate={new Date()}
         ranges={[selectionRange]}
         onChange={handleSelect}
+        months={2}
+        direction="horizontal"
         className="reservation-calendar"
       />
     </div>

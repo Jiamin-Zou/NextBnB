@@ -10,16 +10,17 @@
 }
 
 .listing-list-item:hover {
-    border-radius: 20px;
-    box-shadow: 0px 0px 10px rgba(213, 213, 213, 0.7);
-    scale: 1.01;
+  border-radius: 20px;
+  box-shadow: 0px 0px 10px rgba(213, 213, 213, 0.7);
+  scale: 1.01;
 }
 
-.listing-item-city{
+.listing-item-city {
   font-weight: bold;
 }
 
-.listing-item-city, .listing-item-price {
+.listing-item-city,
+.listing-item-price {
   padding: 5px;
   padding-bottom: 0px;
 }
@@ -55,7 +56,6 @@
 .image-container::-webkit-scrollbar {
   height: 8px;
 }
-
 
 .image-container::-webkit-scrollbar-track {
   background-color: #f1f1f1;
