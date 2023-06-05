@@ -23,11 +23,16 @@ class User < ApplicationRecord
   validates :password, length: { in: 8..255 }, allow_nil: true
 
   before_validation :ensure_session_token
-  
+
   has_many :listings,
-           class_name: :Listing,
-           foreign_key: :host_id,
-           dependent: :destroy
+    class_name: :Listing,
+    foreign_key: :host_id,
+    dependent: :destroy
+
+  has_many :reservations,
+    class_name: :Reservation,
+    foreign_key: :listing_id,
+    dependent: :destroy
 
   def self.find_by_credentials(email, password)
     @user = User.find_by(email: email)

@@ -520,7 +520,7 @@ ApplicationRecord.transaction do
 
   puts "Listings created!"
 
-  puts "Creating listings..."
+  puts "Creating reservations..."
 
   res1_1 = Reservation.create!(
     listing_id: listing1.id,

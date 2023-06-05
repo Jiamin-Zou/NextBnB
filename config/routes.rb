@@ -5,9 +5,12 @@ Rails.application.routes.draw do
   # root "articles#index"
 
   namespace :api, defaults: { format: :json } do
-    get 'listings/categories', to: 'listings#categories'
     resources :users, only: [:index, :create, :update, :destroy]
-    resources :listings, only: [:index, :show]
+    resources :listings, only: [:index, :show] do
+      resources :reservations, only: [:create]
+    end
+
+    resources :reservations, only: [:show, :update, :destroy]
     resource :session, only: [:create, :show, :destroy]
   end
 end

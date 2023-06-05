@@ -35,7 +35,7 @@ class Listing < ApplicationRecord
   CATEGORIES = ["beachfront", "countryside", "cabin", "mansion", "lakefront", "amazing views", "tiny home", "modern", "barn", "omg"]
 
   PROPERTY_TYPES = ["House", "Apartment", "Studio", "Cabin", "Private Room"]
-  
+
   validates :host_id, :address, :city, :state, :country, :title, :description, :longitude, :latitude, presence: true
   validates :property_type, inclusion: { in: PROPERTY_TYPES }
   validates :category, inclusion: { in: CATEGORIES }
@@ -46,14 +46,19 @@ class Listing < ApplicationRecord
   validates_uniqueness_of :address, scope: [:apt_num, :city], message: "has already been listed"
 
   validate :valid_location
-  
+
   before_validation :geocode_address
 
   has_many_attached :photos
 
   belongs_to :host,
-             class_name: :User,
-             foreign_key: :host_id
+    class_name: :User,
+    foreign_key: :host_id
+
+  has_many :reservations,
+    class_name: :Reservation,
+    foreign_key: :listing_id,
+    dependent: :destroy
 
   private
 
