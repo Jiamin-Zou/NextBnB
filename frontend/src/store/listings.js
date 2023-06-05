@@ -1,5 +1,6 @@
 import csrfFetch from "./csrf";
 import { receiveHost } from "./hosts";
+import { receiveReservations } from "./reservations";
 
 // Action verbs
 const SET_LISTINGS = "listings/setListings";
@@ -26,7 +27,8 @@ export const fetchListings = () => async (dispatch) => {
 
   if (res.ok) {
     const data = await res.json();
-    dispatch(setListings(data));
+    dispatch(setListings(data.listings));
+    dispatch(receiveReservations(data.reservations))
   } else {
     throw res;
   }
@@ -39,6 +41,7 @@ export const fetchListing = (listingId) => async (dispatch) => {
     const data = await res.json();
     dispatch(setListing(data.listing));
     dispatch(receiveHost(data.host));
+    dispatch(receiveReservations(data.reservations))
   } else {
     throw res;
   }
