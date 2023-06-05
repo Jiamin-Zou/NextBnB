@@ -1,0 +1,27 @@
+{
+  "files": {
+    "main.css": "/static/css/main.12b23a2c.css",
+    "main.js": "/static/js/main.bb93867a.js",
+    "static/media/sample_house.jpg": "/static/media/sample_house.3f7c838d5f6fbc93025e.jpg",
+    "static/media/404_Airbnb.gif": "/static/media/404_Airbnb.6d39dce6bea2c3dc486f.gif",
+    "static/media/AirbnbCereal_W_Md.otf": "/static/media/AirbnbCereal_W_Md.81798c6cdace650a8c1a.otf",
+    "static/media/AirbnbCereal_W_Lt.otf": "/static/media/AirbnbCereal_W_Lt.6cb70d2c3d67dfe9b7fc.otf",
+    "static/media/nextbnb_logo.png": "/static/media/nextbnb_logo.d8b0c7324d8cc9c6f65f.png",
+    "static/media/fireplace.svg": "/static/media/fireplace.fdccb27462ddfa525df2d24dc5b499b3.svg",
+    "static/media/pets_allowed.svg": "/static/media/pets_allowed.998d5a33d541a478c221c359e7d7520f.svg",
+    "static/media/kitchen.svg": "/static/media/kitchen.86bc51978ab7ef48a048331d2a365d6c.svg",
+    "static/media/ac.svg": "/static/media/ac.f617dfae506752fff228f6a0de8fd0f1.svg",
+    "static/media/parking.svg": "/static/media/parking.d982f186a418044fd760679dfe120d06.svg",
+    "static/media/wifi.svg": "/static/media/wifi.da4cfbf8c2f12b3379c064b5f51e19c8.svg",
+    "index.html": "/index.html",
+    "static/media/heat.svg": "/static/media/heat.ca78aad0c3652aaa70cdf1ee548c2350.svg",
+    "static/media/tv.svg": "/static/media/tv.189ba68f9249178eeb5a1a1bb4176cd5.svg",
+    "static/media/filter.svg": "/static/media/filter.7be01629aa5c1fe30f21816fdfa65c16.svg",
+    "main.12b23a2c.css.map": "/static/css/main.12b23a2c.css.map",
+    "main.bb93867a.js.map": "/static/js/main.bb93867a.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.12b23a2c.css",
+    "static/js/main.bb93867a.js"
+  ]
+}
