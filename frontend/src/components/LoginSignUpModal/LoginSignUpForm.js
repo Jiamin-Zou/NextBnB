@@ -167,7 +167,6 @@ const LoginSignUpForm = ({
     if (refTwo.current && !refTwo.current.contains(e.target)) {
       setToggleForm(false);
       setToggleModal(false);
-      document.removeEventListener("click", handleOutsideClick);
     }
   };
   useEffect(() => {

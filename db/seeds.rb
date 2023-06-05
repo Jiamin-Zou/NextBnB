@@ -5,15 +5,24 @@ listings = []
 ApplicationRecord.transaction do
   puts "Destroying tables..."
   User.destroy_all
+  Listing.destroy_all
+  Reservation.destroy_all
+
+  puts "Deleting Active Storage attachments and blobs..."
+  ActiveStorage::Attachment.delete_all
+  ActiveStorage::Blob.delete_all
 
   puts "Resetting primary keys..."
   ApplicationRecord.connection.reset_pk_sequence!("users")
   ApplicationRecord.connection.reset_pk_sequence!("listings")
+  ApplicationRecord.connection.reset_pk_sequence!("reservations")
+  ApplicationRecord.connection.reset_pk_sequence!("active_storage_attachments")
+  ApplicationRecord.connection.reset_pk_sequence!("active_storage_blobs")
 
   puts "Creating users..."
 
   # Demo User
-  User.create!(
+  demo_user = User.create!(
     first_name: "Demo",
     last_name: "User",
     email: "demo.user@test.com",
@@ -49,7 +58,7 @@ ApplicationRecord.transaction do
 
   def generate_random_user_id(users)
     random_index = rand(users.length)
-    random_user = users.delete_at(random_index)
+    random_user = users[random_index]
     return random_user.id
   end
 
@@ -510,7 +519,109 @@ ApplicationRecord.transaction do
   listings << listing16
 
   puts "Listings created!"
+
+  puts "Creating listings..."
+
+  res1_1 = Reservation.create!(
+    listing_id: listing1.id,
+    guest_id: demo_user.id,
+    num_guests: 4,
+    start_date: Date.today + 1,
+    end_date: Date.today + 5,
+  )
+
+  res1_2 = Reservation.create!(
+    listing_id: listing1.id,
+    guest_id: users[5].id,
+    num_guests: 3,
+    start_date: Date.today + 6,
+    end_date: Date.today + 8,
+  )
+
+  res2_1 = Reservation.create!(
+    listing_id: listing2.id,
+    guest_id: demo_user.id,
+    num_guests: 2,
+    start_date: Date.today + 30,
+    end_date: Date.today + 35,
+  )
+
+  res2_2 = Reservation.create!(
+    listing_id: listing2.id,
+    guest_id: users[10].id,
+    num_guests: 1,
+    start_date: Date.today + 17,
+    end_date: Date.today + 20,
+  )
+
+  res3_1 = Reservation.create!(
+    listing_id: listing3.id,
+    guest_id: users[3].id,
+    num_guests: 7,
+    start_date: Date.today + 2,
+    end_date: Date.today + 4,
+  )
+
+  res3_2 = Reservation.create!(
+    listing_id: listing3.id,
+    guest_id: users[8].id,
+    num_guests: 5,
+    start_date: Date.today + 6,
+    end_date: Date.today + 9,
+  )
+
+  res_5_1 = Reservation.create!(
+    listing_id: listing5.id,
+    guest_id: users[11].id,
+    num_guests: 6,
+    start_date: Date.new(2023, 5, 31),
+    end_date: Date.new(2023, 6, 4),
+  )
+
+  res_6_1 = Reservation.create!(
+    listing_id: listing6.id,
+    guest_id: demo_user.id,
+    num_guests: 2,
+    start_date: Date.new(2023, 5, 17),
+    end_date: Date.new(2023, 5, 19),
+  )
+
+  res9_1 = Reservation.create!(
+    listing_id: listing9.id,
+    guest_id: demo_user.id,
+    num_guests: 1,
+    start_date: Date.today + 8,
+    end_date: Date.today + 11,
+  )
+
+  res10_1 = Reservation.create!(
+    listing_id: listing9.id,
+    guest_id: demo_user.id,
+    num_guests: 1,
+    start_date: Date.today + 40,
+    end_date: Date.today + 43,
+  )
+
+  res13_1 = Reservation.create!(
+    listing_id: listing13.id,
+    guest_id: users[9].id,
+    num_guests: 4,
+    start_date: Date.today + 5,
+    end_date: Date.today + 11,
+  )
+
+  res15_1 = Reservation.create!(
+    listing_id: listing15.id,
+    guest_id: demo_user.id,
+    num_guests: 16,
+    start_date: Date.today + 17,
+    end_date: Date.today + 20,
+  )
+
+  puts "Reservations created!"
 end
+
+puts "Attaching photos to Listings"
 
 listings.each_with_index do |listing, i|
   (1..5).each do |j|
@@ -519,6 +630,5 @@ listings.each_with_index do |listing, i|
     listing.photos.attach(io: photo, filename: "listing#{i + 1}_#{j}.webp")
   end
 end
-
 
 puts "Done!"

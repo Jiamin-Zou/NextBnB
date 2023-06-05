@@ -79,7 +79,6 @@ const LoginSignUpModal = () => {
   const handleOutsideClick = (e) => {
     if(refOne.current && !refOne.current.contains(e.target)) {
       setToggleModal(false)
-      document.removeEventListener("click", handleOutsideClick)
     }
   }
   useEffect(() => {
