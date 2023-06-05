@@ -8,12 +8,15 @@ import PageNotFound from "../../util/PageNotFound";
 import sampleHouse from "../../assets/images/sample_house.jpg";
 import Reservation from "../ReservationForm";
 import Amenities from "./Amenities";
+import addDays from "date-fns/addDays";
 
 const ListingShowPage = () => {
   const dispatch = useDispatch();
   const { listingId } = useParams();
   const listing = useSelector((state) => state.listings[listingId]);
   const [errors, setErrors] = useState([]);
+  const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(addDays(new Date(), 3));
 
   const hostSelector = (state) => {
     if (listing) {
@@ -117,7 +120,13 @@ const ListingShowPage = () => {
           </div>
           <div className="reserve-form-container">
             <div className="reserve-form">
-              <Reservation />
+              <Reservation
+                listing={listing}
+                startDate={startDate}
+                setStartDate={setStartDate}
+                endDate={endDate}
+                setEndDate={setEndDate}
+              />
             </div>
           </div>
         </div>

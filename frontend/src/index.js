@@ -10,6 +10,7 @@ import csrfFetch from "./store/csrf";
 import * as sessionActions from "./store/session";
 import * as listingActions from "./store/listings";
 import ModalProvider from "./context/ModalContext";
+import * as reservationActions from "./store/reservations";
 
 const store = configureStore();
 
@@ -18,6 +19,7 @@ if (process.env.NODE_ENV !== "production") {
   window.csrfFetch = csrfFetch;
   window.sessionActions = sessionActions;
   window.listingActions = listingActions;
+  window.reservationActions = reservationActions
 }
 
 function Root() {

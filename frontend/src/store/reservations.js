@@ -1,5 +1,8 @@
+import csrfFetch from "./csrf";
+
 const RECEIVE_RESERVATION = "reservation/receiveReservation";
 const RECEIVE_RESERVATIONS = "reservation/receiveReservations";
+const REMOVE_RESERVATION = "reservation/removeReservations";
 
 export const receiveReservation = (reservation) => {
   return {
@@ -15,6 +18,61 @@ export const receiveReservations = (reservations) => {
   };
 };
 
+export const removeReservation = (reservationId) => {
+  return {
+    type: REMOVE_RESERVATION,
+    reservationId,
+  };
+};
+
+export const createReservation = (reservation) => async (dispatch) => {
+  const res = await csrfFetch(
+    `/api/listings/${reservation.listing_id}/reservations`,
+    {
+      method: "POST",
+      body: JSON.stringify(reservation),
+    }
+  );
+  if (res.ok) {
+    const data = await res.json();
+    dispatch(receiveReservation(data.reservation));
+  } else {
+    throw res;
+  }
+
+  return res;
+};
+
+export const updateReservation = (reservation) => async (dispatch) => {
+  const res = await csrfFetch(`/api/reservations/${reservation.id}`, {
+    method: "PATCH",
+    body: JSON.stringify(reservation),
+  });
+
+  if (res.ok) {
+    const data = await res.json();
+    dispatch(receiveReservation(data.reservation));
+  } else {
+    throw res;
+  }
+
+  return res;
+};
+
+export const deleteReservation = (reservationId) => async (dispatch) => {
+  const res = await csrfFetch(`/api/reservations/${reservationId}`, {
+    method: "DELETE",
+  });
+
+  if (res.ok) {
+    dispatch(removeReservation(reservationId));
+  } else {
+    throw res;
+  }
+
+  return res;
+};
+
 const reservationReducer = (state = {}, action) => {
   Object.freeze(state);
   const newState = { ...state };
@@ -24,6 +82,9 @@ const reservationReducer = (state = {}, action) => {
       return newState;
     case RECEIVE_RESERVATIONS:
       return { ...newState, ...action.reservations };
+    case REMOVE_RESERVATION:
+      delete newState[action.reservationId];
+      return newState;
     default:
       return state;
   }

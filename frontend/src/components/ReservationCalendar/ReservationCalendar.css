@@ -1,0 +1,36 @@
+.reservation-calendar {
+    box-sizing: border-box;
+    border-radius: 8px;
+    position: absolute;
+    top: 60px;
+    right: 0;
+    transform: translateX(1px);
+    box-shadow: 0px 0px 6px rgba(160, 160, 160, 0.7);
+    z-index: 1;
+    font-size: 14px;
+}
+/* 
+.rdrMonthPicker{
+    width: 60%;
+    display: flex;
+    justify-content: center;
+}
+.rdrYearPicker{
+    width: 40%;
+    display: flex;
+    justify-content: center;
+}
+
+.rdrMonthPicker select, .rdrYearPicker select {
+    font-size: 16px;
+    width: 100%;
+}
+
+
+.rdrMonthAndYearWrapper{
+    width: 100%;
+}
+
+.rdrMonths .rdrMonthsVertical {
+    width: 100%;
+} */
