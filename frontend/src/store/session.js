@@ -33,6 +33,7 @@ export const login = (user) => async (dispatch) => {
   });
   if (res.ok) {
     const data = await res.json();
+    console.log(data)
     storeCurrentUser(data.user);
     dispatch(setCurrentUser(data.user));
   }

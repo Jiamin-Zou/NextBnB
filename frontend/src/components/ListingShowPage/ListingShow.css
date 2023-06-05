@@ -27,6 +27,7 @@
 
 .listing-show {
   animation: fade-in-show 200ms;
+  padding-bottom: 45px;
   /* height: 2000px; */
 }
 

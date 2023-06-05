@@ -28,6 +28,7 @@ const ListingCategoryPicker = ({ handleSelect, category }) => {
       allCategory.classList.add("active");
     }
   }, [location]);
+  
   return (
     <div className="category-picker-container">
       <div className="listing-index-filters">

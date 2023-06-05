@@ -8,21 +8,15 @@ import { useModal } from "./context/ModalContext";
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import PageNotFound from "./util/PageNotFound";
-import { useSelector } from "react-redux";
+import Profile from "./components/Profile";
 
 function App() {
-
   const { toggleModal } = useModal();
   const location = useLocation();
 
-
-
   useEffect(() => {
     window.scrollTo(0, 0);
-    
   }, [location]);
-
-
 
   return (
     <div className="app">
@@ -37,6 +31,9 @@ function App() {
         </Route>
         <Route path="/category/:category" exact>
           <ListingIndexPage />
+        </Route>
+        <Route path="/profile">
+          <Profile />
         </Route>
         <Route>
           <PageNotFound />

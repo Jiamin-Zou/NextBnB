@@ -13,6 +13,10 @@ const ProfileButton = ({ setDropdown }) => {
     setDropdown(false);
   };
 
+  const handleProfileClick = () => {
+    history.push('/profile')
+  }
+
   const handleLogout = () => {
     setDropdown(false);
     dispatch(sessionActions.logout());
@@ -31,6 +35,7 @@ const ProfileButton = ({ setDropdown }) => {
           <p className="user-email">{currentUser.email}</p>
         </div>
         <div className="line"></div>
+        <button onClick={handleProfileClick} className="user-profile">Profile</button>
         <button onClick={handleLogout} className="log-btn">
           Logout
         </button>
