@@ -2,6 +2,10 @@ import csrfFetch from "./csrf";
 import { receiveHost } from "./hosts";
 import { receiveReservations } from "./reservations";
 
+export const filterListings = (category) => state => {
+  return (Object.values(state.listings).filter((listing) => listing.category === category))
+}
+
 // Action verbs
 const SET_LISTINGS = "listings/setListings";
 const SET_LISTING = "listings/setListing";

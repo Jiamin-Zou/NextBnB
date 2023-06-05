@@ -11,8 +11,23 @@ import Omg from "../../assets/images/category_icons/omg.jpg";
 import TinyHome from "../../assets/images/category_icons/tiny_home.jpg";
 import Filter from "../../assets/images/category_icons/filter.svg";
 import "./ListingCategoryPicker.css";
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 
-const ListingCategoryPicker = ({ handleSelect }) => {
+const ListingCategoryPicker = ({ handleSelect, category }) => {
+  const location = useLocation();
+  useEffect(() => {
+    if (!category) {
+      const categories = Array.from(
+        document.getElementsByClassName("category-item")
+      );
+      categories.forEach((category) => {
+        category.classList.remove("active");
+      });
+      const allCategory = document.getElementById("all");
+      allCategory.classList.add("active");
+    }
+  }, [location]);
   return (
     <div className="category-picker-container">
       <div className="listing-index-filters">
@@ -24,12 +39,7 @@ const ListingCategoryPicker = ({ handleSelect }) => {
                 id="all"
                 onClick={handleSelect}
               >
-                <img
-                  className="category-img"
-                  src={All}
-                  alt="cg-All"
-                  onLoad={(e) => handleSelect(e, "all")}
-                />
+                <img className="category-img" src={All} alt="cg-All" />
                 <span className="category-name">All</span>
               </div>
               <div

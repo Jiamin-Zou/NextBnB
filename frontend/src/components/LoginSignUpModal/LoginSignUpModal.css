@@ -140,11 +140,9 @@
   font-family: Cereal-bd;
   border: none;
   font-size: 16px;
-  /* font-weight: bold; */
   color: white;
   height: 48px;
   border-radius: 10px;
-  /* background-color: #e61e4d; */
   background-image: radial-gradient(
     circle at center,
     #ff385c 0%,
@@ -197,6 +195,7 @@
 
 .err-msg {
   display: flex;
+  align-items: center;
   font-weight: normal;
   font-size: 12px;
   padding-top: 10px;

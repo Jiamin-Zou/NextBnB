@@ -28,4 +28,5 @@
 
 .listing-index {
   animation: fade-in-index 0.5s forwards;
+  padding-bottom: 45px;
 }

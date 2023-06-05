@@ -9,6 +9,7 @@ import sampleHouse from "../../assets/images/sample_house.jpg";
 import Reservation from "../ReservationForm";
 import Amenities from "./Amenities";
 import addDays from "date-fns/addDays";
+import ReservationCalendar from "../ReservationCalendar";
 
 const ListingShowPage = () => {
   const dispatch = useDispatch();
@@ -17,6 +18,7 @@ const ListingShowPage = () => {
   const [errors, setErrors] = useState([]);
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(addDays(new Date(), 3));
+  const [calendarOpen, setCalendarOpen] = useState(false);
 
   const hostSelector = (state) => {
     if (listing) {
@@ -116,7 +118,15 @@ const ListingShowPage = () => {
                 <Amenities listing={listing} />
               </div>
             </div>
-            <div className="booking-calender">Full Calender</div>
+            <div className="booking-calender">
+              <ReservationCalendar
+                startDate={startDate}
+                setStartDate={setStartDate}
+                endDate={endDate}
+                setEndDate={setEndDate}
+                setCalendarOpen={setCalendarOpen}
+              />
+            </div>
           </div>
           <div className="reserve-form-container">
             <div className="reserve-form">
@@ -126,6 +136,8 @@ const ListingShowPage = () => {
                 setStartDate={setStartDate}
                 endDate={endDate}
                 setEndDate={setEndDate}
+                calendarOpen={calendarOpen}
+                setCalendarOpen={setCalendarOpen}
               />
             </div>
           </div>

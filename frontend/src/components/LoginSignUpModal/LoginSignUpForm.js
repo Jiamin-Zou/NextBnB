@@ -61,10 +61,6 @@ const LoginSignUpForm = ({
     }));
   };
 
-  if (currentUser) {
-    setToggleForm(false);
-    setToggleModal(false);
-  }
   const func = signUp ? sessionActions.signup : sessionActions.login;
 
   const handleSwitch = (e) => {
@@ -101,8 +97,8 @@ const LoginSignUpForm = ({
       setLNameError("");
       setBEErrors([]);
 
-      user.first_name = fName;
-      user.last_name = lName;
+      user.firstName = fName;
+      user.lastName = lName;
     }
 
     if (submitCheck) {
@@ -172,6 +168,13 @@ const LoginSignUpForm = ({
   useEffect(() => {
     document.addEventListener("click", handleOutsideClick);
   }, []);
+
+  useEffect(() => {
+  if (currentUser) {
+    setToggleForm(false);
+    setToggleModal(false);
+  }
+  }, [currentUser, setToggleModal])
 
   return (
     <div className="modal-content-form" ref={refTwo}>

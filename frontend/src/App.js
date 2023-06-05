@@ -8,8 +8,10 @@ import { useModal } from "./context/ModalContext";
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import PageNotFound from "./util/PageNotFound";
+import { useSelector } from "react-redux";
 
 function App() {
+
   const { toggleModal } = useModal();
   const location = useLocation();
 
@@ -17,6 +19,7 @@ function App() {
 
   useEffect(() => {
     window.scrollTo(0, 0);
+    
   }, [location]);
 
 
@@ -29,8 +32,11 @@ function App() {
         <Route path="/" exact>
           <ListingIndexPage />
         </Route>
-        <Route path="/listings/:listingId">
+        <Route path="/listings/:listingId" exact>
           <ListingShowPage />
+        </Route>
+        <Route path="/category/:category" exact>
+          <ListingIndexPage />
         </Route>
         <Route>
           <PageNotFound />

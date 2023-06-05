@@ -3,8 +3,10 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import ProfileButton from "./ProfileButton";
 import Logo from "../../assets/images/nextbnb_logo.png";
+import { useHistory } from "react-router-dom";
 
 const NavBar = () => {
+  const history = useHistory()
   const [dropdown, setDropdown] = useState(false);
 
   return (

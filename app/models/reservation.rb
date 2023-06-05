@@ -26,11 +26,16 @@ class Reservation < ApplicationRecord
     foreign_key: :guest_id
 
   def calc_total_price
-    nights = (end_date - start_date).to_i
-    listing = Listing.find_by(id: listing_id)
-    
-    self.total_price = ((listing.night_price * nights)* 1.17 + (listing.cleaning_fee))
-    self.total_price = total_price.round(2)
+    if !total_price
+      nights = (end_date - start_date).to_i
+      listing = Listing.find_by(id: listing_id)
+  
+      reserve_price = (listing.night_price * nights)
+      service_fee = (reserve_price * 0.17).round(2)
+  
+      self.total_price = (reserve_price + listing.cleaning_fee + service_fee)
+      self.total_price = total_price.round(2)
+    end
   end
 
   def overlapping_reservations

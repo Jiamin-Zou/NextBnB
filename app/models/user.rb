@@ -31,7 +31,7 @@ class User < ApplicationRecord
 
   has_many :reservations,
     class_name: :Reservation,
-    foreign_key: :listing_id,
+    foreign_key: :guest_id,
     dependent: :destroy
 
   def self.find_by_credentials(email, password)

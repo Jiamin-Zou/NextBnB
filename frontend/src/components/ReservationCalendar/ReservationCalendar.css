@@ -9,28 +9,3 @@
     z-index: 1;
     font-size: 14px;
 }
-/* 
-.rdrMonthPicker{
-    width: 60%;
-    display: flex;
-    justify-content: center;
-}
-.rdrYearPicker{
-    width: 40%;
-    display: flex;
-    justify-content: center;
-}
-
-.rdrMonthPicker select, .rdrYearPicker select {
-    font-size: 16px;
-    width: 100%;
-}
-
-
-.rdrMonthAndYearWrapper{
-    width: 100%;
-}
-
-.rdrMonths .rdrMonthsVertical {
-    width: 100%;
-} */

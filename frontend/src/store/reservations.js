@@ -27,10 +27,10 @@ export const removeReservation = (reservationId) => {
 
 export const createReservation = (reservation) => async (dispatch) => {
   const res = await csrfFetch(
-    `/api/listings/${reservation.listing_id}/reservations`,
+    `/api/listings/${reservation.listingId}/reservations`,
     {
       method: "POST",
-      body: JSON.stringify(reservation),
+      body: JSON.stringify({reservation: reservation}),
     }
   );
   if (res.ok) {
@@ -46,7 +46,7 @@ export const createReservation = (reservation) => async (dispatch) => {
 export const updateReservation = (reservation) => async (dispatch) => {
   const res = await csrfFetch(`/api/reservations/${reservation.id}`, {
     method: "PATCH",
-    body: JSON.stringify(reservation),
+    body: JSON.stringify({reservation: reservation}),
   });
 
   if (res.ok) {

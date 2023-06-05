@@ -1,7 +1,7 @@
 import { useModal } from "../../context/ModalContext";
 import { useDispatch, useSelector } from "react-redux";
 import ReservationCalendar from "../ReservationCalendar";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import "./ReservationForm.css";
 import format from "date-fns/format";
 import { createReservation } from "../../store/reservations";
@@ -13,32 +13,94 @@ const Reservation = ({
   setStartDate,
   endDate,
   setEndDate,
+  calendarOpen,
+  setCalendarOpen,
 }) => {
   const dispatch = useDispatch();
   const { setToggleModal } = useModal();
   const currentUser = useSelector((state) => state.session.currentUser);
-  const [calenderOpen, setCalenderOpen] = useState(false);
   const [numGuests, setNumGuests] = useState(1);
   const [numNights, setNumNights] = useState(1);
   const [serviceFee, setServiceFee] = useState(0);
+  const [errors, setErrors] = useState([]);
   const [total, setTotal] = useState(0);
   const nightPrice = listing.nightPrice;
   const cleaningFee = listing.cleaningFee;
+  const [mousePositions, setMousePositions] = useState({
+    reserve: { x: 0, y: 0 },
+    login: { x: 0, y: 0 },
+  });
+
+  const handleMouseMove = (event, element) => {
+    const rect = event.target.getBoundingClientRect();
+    const mouseX = ((event.clientX - rect.left) / rect.width) * 100;
+    const mouseY = ((event.clientY - rect.top) / rect.height) * 100;
+
+    setMousePositions((prevMousePositions) => ({
+      ...prevMousePositions,
+      [element]: { x: mouseX, y: mouseY },
+    }));
+  };
+  const validateDates = () => numNights >= 1;
 
   const handleReserve = (e) => {
-    const reservation = {
-      listingId: listing.id,
-      numGuests,
-      startDate: format(startDate, "yyyy-MM-dd"),
-      endDate: format(startDate, "yyyy-MM-dd"),
-    };
-    dispatch(createReservation(reservation));
+    e.preventDefault();
+    setErrors([]);
+
+    const inputField = document.querySelector(".input-fields");
+    const dateField = document.querySelector(".date-fields");
+    const checkin = document.querySelector(".check-in-field");
+    const checkout = document.querySelector(".check-out-field");
+    inputField.classList.remove("date-error");
+    dateField.classList.remove("date-error");
+    checkin.classList.remove("date-error");
+    checkout.classList.remove("date-error");
+    if (validateDates()) {
+      const reservation = {
+        listingId: listing.id,
+        numGuests,
+        totalPrice: total,
+        startDate: format(startDate, "yyyy-MM-dd"),
+        endDate: format(endDate, "yyyy-MM-dd"),
+      };
+      console.log(numNights);
+      console.log(reservation);
+      dispatch(createReservation(reservation)).catch(async (res) => {
+        let data;
+        try {
+          data = await res.clone().json();
+        } catch {
+          data = await res.text();
+        }
+        if (data?.errors) {
+          setErrors(data.errors);
+          inputField.classList.add("date-error");
+          dateField.classList.add("date-error");
+          checkin.classList.add("date-error");
+          checkout.classList.add("date-error");
+        } else if (data) setErrors([data]);
+        else setErrors([res.statusText]);
+      });
+    } else {
+      setErrors(["Minimum of 1 night required!"]);
+      inputField.classList.add("date-error");
+      dateField.classList.add("date-error");
+      checkin.classList.add("date-error");
+      checkout.classList.add("date-error");
+    }
+    // dispatch(createReservation(reservation));
   };
 
   useEffect(() => {
     const calculatedNumNights = differenceInDays(endDate, startDate);
-    const calculatedServiceFee = parseFloat(nightPrice * calculatedNumNights * 0.17).toFixed(2);
-    const calculatedTotal = ((nightPrice * calculatedNumNights) + cleaningFee + parseFloat(calculatedServiceFee)).toFixed(2);
+    const calculatedServiceFee = parseFloat(
+      nightPrice * calculatedNumNights * 0.17
+    ).toFixed(2);
+    const calculatedTotal = (
+      nightPrice * calculatedNumNights +
+      cleaningFee +
+      parseFloat(calculatedServiceFee)
+    ).toFixed(2);
 
     setNumNights(calculatedNumNights);
     setServiceFee(calculatedServiceFee);
@@ -47,63 +109,70 @@ const Reservation = ({
 
   return (
     <>
-      <div>Status: {currentUser ? "Logged in" : "Not Logged in"}</div>
+      <div className="booking-header">
+        <div className="booking-price">
+          <h2>${listing.nightPrice}</h2>
+          <span>night</span>
+        </div>
+        <div className="booking-reviews">
+          <div>x-stars</div>
+          <span className="separator">&#x2022;</span>
+          <div className="review-count">review count</div>
+        </div>
+      </div>
       {!currentUser && (
-        <div>
+        <div className="require-login">
           <div>Please Login to make a reservation</div>
-          <button onClick={() => setToggleModal(true)}>Login/Signup</button>
+          <button
+            id="login-btn"
+            onClick={() => setToggleModal(true)}
+            style={{
+              backgroundPosition: `calc((100 - ${mousePositions.login.x}) * 1%) calc((100 - ${mousePositions.login.y}) * 1%)`,
+            }}
+            onMouseMove={(e) => handleMouseMove(e, "login")}
+          >
+            Login/Signup
+          </button>
         </div>
       )}
       {currentUser && (
         <div className="booking-form">
-          <div className="booking-header">
-            <div className="booking-price">
-              <h2>${listing.nightPrice}</h2>
-              <span>night</span>
-            </div>
-            <div className="booking-reviews">
-              <div>x review-score</div>
-              <span className="separator">&#x2022;</span>
-              <div>listing.reviews.length</div>
-            </div>
-          </div>
           <div className="input-fields">
             <div className="date-fields">
               <div
                 className="check-in-field"
-                onClick={() => setCalenderOpen((prevState) => !prevState)}
+                onClick={() => setCalendarOpen((prevState) => !prevState)}
               >
                 <div className="check-in-tag">CHECK-IN</div>
                 <input
                   className="check-in-input"
-                  placeHolder="MM/DD/YYYY"
+                  placeholder="MM/DD/YYYY"
                   readOnly
                   value={format(startDate, "MM/dd/yyyy")}
                 />
               </div>
               <div
                 className="check-out-field"
-                onClick={() => setCalenderOpen((prevState) => !prevState)}
+                onClick={() => setCalendarOpen((prevState) => !prevState)}
               >
                 <div className="check-out-tag">CHECKOUT</div>
                 <input
                   className="check-out-input"
-                  placeHolder="MM/DD/YYYY"
+                  placeholder="MM/DD/YYYY"
                   readOnly
                   value={format(endDate, "MM/dd/yyyy")}
                 />
               </div>
-              {calenderOpen && (
+              {calendarOpen && (
                 <ReservationCalendar
                   startDate={startDate}
                   setStartDate={setStartDate}
                   endDate={endDate}
                   setEndDate={setEndDate}
-                  setCalenderOpen={setCalenderOpen}
+                  setCalendarOpen={setCalendarOpen}
                 />
               )}
             </div>
-
             <div>
               <div className="num-guests-field">
                 <div className="num-guests-tag">GUESTS</div>
@@ -117,8 +186,17 @@ const Reservation = ({
               </div>
             </div>
           </div>
+          {errors.length > 0 && (
+            <ul className="err-msg-container">
+              {errors.map((error) => (
+                <li key={error} className="error err-msg">
+                  <i className="fa-solid fa-circle-info"></i> {error}
+                </li>
+              ))}
+            </ul>
+          )}
 
-          <div>
+          <div className="price-field">
             <div className="price-calc-line">
               <div>
                 ${nightPrice} x {numNights} nights
@@ -137,11 +215,20 @@ const Reservation = ({
               <hr />
             </div>
             <div className="price-calc-line">
-              <div>Total before taxes</div>
-              <div>${total}</div>
+              <div className="total-price">Total before taxes</div>
+              <div className="total-price">${total}</div>
             </div>
           </div>
-          <button>Reserve</button>
+          <button
+            id="reserve-btn"
+            onClick={handleReserve}
+            style={{
+              backgroundPosition: `calc((100 - ${mousePositions.reserve.x}) * 1%) calc((100 - ${mousePositions.reserve.y}) * 1%)`,
+            }}
+            onMouseMove={(e) => handleMouseMove(e, "reserve")}
+          >
+            Reserve
+          </button>
         </div>
       )}
     </>

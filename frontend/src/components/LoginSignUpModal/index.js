@@ -32,10 +32,6 @@ const LoginSignUpModal = () => {
     }));
   };
 
-  if (currentUser) {
-    setToggleModal(false);
-  }
-
   const handleContinue = async (e) => {
     e.preventDefault();
     const emailInput = document.querySelector(".email-form");
@@ -84,6 +80,12 @@ const LoginSignUpModal = () => {
   useEffect(() => {
     document.addEventListener("click", handleOutsideClick)
   }, [])
+
+  useEffect(() => {
+    if (currentUser) {
+      setToggleModal(false);
+    }
+  }, [currentUser, setToggleModal])
 
   return (
     <div className="modal-bg">
