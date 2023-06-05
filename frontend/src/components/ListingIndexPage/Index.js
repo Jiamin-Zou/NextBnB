@@ -9,33 +9,37 @@ import ListingCategoryPicker from "./LisingCategoryPicker";
 const ListingIndexPage = () => {
   const dispatch = useDispatch();
   const listings = useSelector((state) => Object.values(state.listings));
-  const [filteredListings, setFilteredListings] = useState(listings)
-  const [loading,setLoading] = useState(true)
+  const [filteredListings, setFilteredListings] = useState(listings);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    dispatch(fetchListings()).then(()=> setLoading(false))
+    dispatch(fetchListings()).then(() => setLoading(false));
   }, [dispatch]);
 
   const handleSelect = (e, param) => {
     // const categories = document.getElementsByClassName("category-item")
-    const categories = Array.from(document.getElementsByClassName("category-item"));
-    categories.forEach((category)=> {
-      category.classList.remove("active")
-    })
-    e.currentTarget.classList.add("active")
-    
-    if (param) {categories[0].classList.add("active")}
+    const categories = Array.from(
+      document.getElementsByClassName("category-item")
+    );
+    categories.forEach((category) => {
+      category.classList.remove("active");
+    });
+    e.currentTarget.classList.add("active");
+
+    if (param) {
+      categories[0].classList.add("active");
+    }
 
     param ||= e.currentTarget.id;
 
     if (param === "all") {
-      setFilteredListings(listings)
+      setFilteredListings(listings);
     } else {
       const filtered = listings.filter(
         (listing) => listing.category === param.toLowerCase()
       );
 
-      setFilteredListings(filtered)
+      setFilteredListings(filtered);
     }
   };
 

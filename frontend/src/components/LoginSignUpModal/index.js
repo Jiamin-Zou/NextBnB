@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./LoginSignUpModal.css";
 import LoginSignUpForm from "./LoginSignUpForm";
 import { accountExist, demoUser, verifyEmailFormat } from "../../util/util.js";
@@ -15,7 +15,7 @@ const LoginSignUpModal = () => {
   const [emailTag, setEmailTag] = useState(false);
   const [emailError, setEmailError] = useState("");
   const [user, setUser] = useState(null);
-
+  const refOne = useRef(null)
   const [mousePositions, setMousePositions] = useState({
     continue: { x: 0, y: 0 },
     demo: { x: 0, y: 0 },
@@ -34,7 +34,6 @@ const LoginSignUpModal = () => {
 
   if (currentUser) {
     setToggleModal(false);
-    // return <Redirect to="/" />;
   }
 
   const handleContinue = async (e) => {
@@ -77,10 +76,20 @@ const LoginSignUpModal = () => {
     dispatch(sessionActions.login(demoUser));
   };
 
+  const handleOutsideClick = (e) => {
+    if(refOne.current && !refOne.current.contains(e.target)) {
+      setToggleModal(false)
+      document.removeEventListener("click", handleOutsideClick)
+    }
+  }
+  useEffect(() => {
+    document.addEventListener("click", handleOutsideClick)
+  }, [])
+
   return (
     <div className="modal-bg">
       {!toggleForm && (
-        <div className="modal-content">
+        <div className="modal-content" ref={refOne}>
           <div className="modal-header">
             <button onClick={closeModal} id="close-btn">
               <div>X</div>

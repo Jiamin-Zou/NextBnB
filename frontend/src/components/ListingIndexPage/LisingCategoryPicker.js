@@ -12,18 +12,31 @@ import TinyHome from "../../assets/images/category_icons/tiny_home.jpg";
 import Filter from "../../assets/images/category_icons/filter.svg";
 import "./ListingCategoryPicker.css";
 
-const ListingCategoryPicker = ({handleSelect}) => {
+const ListingCategoryPicker = ({ handleSelect }) => {
   return (
     <div className="category-picker-container">
       <div className="listing-index-filters">
         <div className="filter-bar">
           <div className="category-picker">
             <div className="categories">
-              <div className="category-item active" id="all" onClick={handleSelect}>
-                <img className="category-img" src={All} alt="cg-All" onLoad={(e) => handleSelect(e, 'all')}/>
+              <div
+                className="category-item active"
+                id="all"
+                onClick={handleSelect}
+              >
+                <img
+                  className="category-img"
+                  src={All}
+                  alt="cg-All"
+                  onLoad={(e) => handleSelect(e, "all")}
+                />
                 <span className="category-name">All</span>
               </div>
-              <div className="category-item" id="beachfront" onClick={handleSelect}>
+              <div
+                className="category-item"
+                id="beachfront"
+                onClick={handleSelect}
+              >
                 <img
                   className="category-img"
                   src={Beachfront}
@@ -35,7 +48,11 @@ const ListingCategoryPicker = ({handleSelect}) => {
                 <img className="category-img" src={Omg} alt="cg-Omg" />
                 <span className="category-name">OMG!</span>
               </div>
-              <div className="category-item" id="amazing views" onClick={handleSelect}>
+              <div
+                className="category-item"
+                id="amazing views"
+                onClick={handleSelect}
+              >
                 <img
                   className="category-img"
                   src={AmazingViews}
@@ -51,7 +68,11 @@ const ListingCategoryPicker = ({handleSelect}) => {
                 <img className="category-img" src={Cabin} alt="cg-Cabin" />
                 <span className="category-name">Cabin</span>
               </div>
-              <div className="category-item" id="lakefront" onClick={handleSelect}>
+              <div
+                className="category-item"
+                id="lakefront"
+                onClick={handleSelect}
+              >
                 <img
                   className="category-img"
                   src={Lakefront}
@@ -59,7 +80,11 @@ const ListingCategoryPicker = ({handleSelect}) => {
                 />
                 <span className="category-name">Lakefront</span>
               </div>
-              <div className="category-item" id="tiny home" onClick={handleSelect}>
+              <div
+                className="category-item"
+                id="tiny home"
+                onClick={handleSelect}
+              >
                 <img
                   className="category-img"
                   src={TinyHome}
@@ -67,7 +92,11 @@ const ListingCategoryPicker = ({handleSelect}) => {
                 />
                 <span className="category-name">Tiny Home</span>
               </div>
-              <div className="category-item" id="countryside" onClick={handleSelect}>
+              <div
+                className="category-item"
+                id="countryside"
+                onClick={handleSelect}
+              >
                 <img
                   className="category-img"
                   src={Countryside}
@@ -75,7 +104,11 @@ const ListingCategoryPicker = ({handleSelect}) => {
                 />
                 <span className="category-name">Countryside</span>
               </div>
-              <div className="category-item" id="mansion" onClick={handleSelect}>
+              <div
+                className="category-item"
+                id="mansion"
+                onClick={handleSelect}
+              >
                 <img className="category-img" src={Mansion} alt="cg-Mansion" />
                 <span className="category-name">Mansion</span>
               </div>

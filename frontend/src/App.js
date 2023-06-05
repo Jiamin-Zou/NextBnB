@@ -11,12 +11,15 @@ import PageNotFound from "./util/PageNotFound";
 
 function App() {
   const { toggleModal } = useModal();
-
   const location = useLocation();
+
+
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [location]);
+
+
 
   return (
     <div className="app">

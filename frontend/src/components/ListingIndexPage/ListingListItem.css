@@ -60,7 +60,6 @@
 .image-container::-webkit-scrollbar-track {
   background-color: #f1f1f1;
   border-radius: 5px;
-  width: 50px;
 }
 
 .image-container::-webkit-scrollbar-thumb {

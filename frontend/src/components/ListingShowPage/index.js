@@ -19,7 +19,6 @@ const ListingShowPage = () => {
     if (listing) {
       const id = listing.hostId;
       const listingHost = state.hosts[id];
-      console.log(listingHost);
       return listingHost;
     }
   };

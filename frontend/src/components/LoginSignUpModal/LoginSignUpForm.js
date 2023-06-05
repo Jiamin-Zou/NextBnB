@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { verifyEmailFormat } from "../../util/util.js";
 import { useDispatch, useSelector } from "react-redux";
 import * as sessionActions from "../../store/session";
@@ -11,7 +11,7 @@ const LoginSignUpForm = ({
   handleDemoLogin,
   user,
 }) => {
-  const { setToggleForm } = useModal();
+  const { setToggleForm, setToggleModal } = useModal();
   const dispatch = useDispatch();
   const currentUser = useSelector((state) => state.session.currentUser);
 
@@ -63,7 +63,7 @@ const LoginSignUpForm = ({
 
   if (currentUser) {
     setToggleForm(false);
-    // return <Redirect to="/" />;
+    setToggleModal(false);
   }
   const func = signUp ? sessionActions.signup : sessionActions.login;
 
@@ -99,7 +99,7 @@ const LoginSignUpForm = ({
       setEmailError("");
       setFNameError("");
       setLNameError("");
-      setBEErrors([])
+      setBEErrors([]);
 
       user.first_name = fName;
       user.last_name = lName;
@@ -119,7 +119,7 @@ const LoginSignUpForm = ({
         if (data?.errors) {
           // debugger
           setEmailTag(true);
-          setEmailError(data.errors[0])
+          setEmailError(data.errors[0]);
           emailInput.classList.add("error");
         } else if (data) setBEErrors([data]);
         else setBEErrors([res.statusText]);
@@ -136,7 +136,7 @@ const LoginSignUpForm = ({
         setLNameError("Last name is required.");
         lnameInput.classList.add("error");
       }
-      
+
       if (email === "") {
         setEmailTag(true);
         setEmailError("Email is required.");
@@ -146,21 +146,36 @@ const LoginSignUpForm = ({
         setEmailError("Enter a valid email.");
         emailInput.classList.add("error");
       }
-      
+
       if (password === "") {
         setPasswordTag(true);
         setPasswordError("Password is required.");
         passwordInput.classList.add("error");
       } else if (!passwordCheck) {
         setPasswordTag(true);
-        setPasswordError("Your password must be at lease 8 characters. Please try again.");
+        setPasswordError(
+          "Your password must be at lease 8 characters. Please try again."
+        );
         passwordInput.classList.add("error");
       }
     }
   };
 
+  const refTwo = useRef(null);
+
+  const handleOutsideClick = (e) => {
+    if (refTwo.current && !refTwo.current.contains(e.target)) {
+      setToggleForm(false);
+      setToggleModal(false);
+      document.removeEventListener("click", handleOutsideClick);
+    }
+  };
+  useEffect(() => {
+    document.addEventListener("click", handleOutsideClick);
+  }, []);
+
   return (
-    <div className="modal-content-form">
+    <div className="modal-content-form" ref={refTwo}>
       <div className="modal-header">
         <button
           onClick={() => {
