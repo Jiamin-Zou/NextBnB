@@ -1,0 +1,165 @@
+.booking-form {
+  display: flex;
+  flex-direction: column;
+}
+.booking-header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  align-items: flex-end;
+}
+
+.booking-price{
+  width: 50%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+}
+
+.booking-reviews {
+  width: 50%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.separator {
+  margin-left: 5px;
+  margin-right: 5px;
+  font-family: Cereal-bd;
+  font-weight: bold;
+}
+
+.booking-reviews> div {
+  align-items: end;
+}
+
+.booking-price h2 {
+  margin-right: 5px;
+}
+
+.input-fields {
+  box-sizing: border;
+  border-radius: 8px;
+  border: 1px solid black;
+  position: relative;
+  margin-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+  font-family: Cereal-bd;
+  font-size: 12px;
+}
+
+.date-fields {
+  position: relative;
+  display: flex;
+  height: 50%;
+  width: 100%;
+  border-bottom: 1px solid black;
+  box-sizing: border-box;
+}
+
+.check-in-field,
+.check-out-field {
+  min-height: 56px;
+  width: 50%;
+  box-sizing: border-box;
+  padding: 15px 15px 3px 10px;
+  overflow: hidden;
+}
+
+.check-in-field {
+  border-right: 1px solid black;
+}
+
+.num-guests-field {
+  box-sizing: border-box;
+  min-height: 56px;
+  width: 100%;
+  height: 50%;
+  overflow: hidden;
+  padding: 15px 30px 3px 10px;
+}
+.check-in-input,
+.check-out-input,
+.num-guests-input,
+.check-in-input:focus-visible,
+.check-out-input:focus-visible,
+.num-guests-input:focus-visible {
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 16px;
+  box-sizing: border-box;
+  height: 36px;
+  width: 100%;
+}
+
+.check-in-input:hover,
+.check-out-input:hover {
+  cursor: pointer;
+}
+
+.price-calc-line {
+  display: flex;
+  justify-content: space-between;
+}
+
+#reserve-btn,
+#login-btn {
+  font-family: Cereal-bd;
+  border: none;
+  font-size: 16px;
+  color: white;
+  height: 48px;
+  border-radius: 10px;
+  background-image: radial-gradient(
+    circle at center,
+    #ff385c 0%,
+    #e61e4d 27.5%,
+    #e31c5f 40%,
+    #d70466 57.5%,
+    #bd1e59 75%,
+    #bd1e59 100%
+  );
+  background-size: 200% 200%;
+}
+
+.require-login {
+  height: 120px;
+  display: flex;
+  flex-direction: column;
+  /* margin-top: 10px;
+  margin-bottom: 10px; */
+  justify-content: space-evenly;
+}
+
+.price-field {
+  height: 150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.total-price{
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.reserve-header{
+  display: flex;
+  justify-content: space-between;
+}
+
+.reserve-night-price{
+  display: flex;
+}
+.review-count{
+  text-decoration: underline;
+  color: rgb(60, 60, 60);
+}
+.date-error{
+  color: red;
+  border-color: red;
+  border-width: 2px;
+}

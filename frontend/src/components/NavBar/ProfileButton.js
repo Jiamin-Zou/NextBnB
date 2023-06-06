@@ -13,6 +13,11 @@ const ProfileButton = ({ setDropdown }) => {
     setDropdown(false);
   };
 
+  const handleTripClick = () => {
+    setDropdown(false);
+    history.push('/user/trips')
+  }
+
   const handleLogout = () => {
     setDropdown(false);
     dispatch(sessionActions.logout());
@@ -31,7 +36,8 @@ const ProfileButton = ({ setDropdown }) => {
           <p className="user-email">{currentUser.email}</p>
         </div>
         <div className="line"></div>
-        <button onClick={handleLogout} className="log-btn">
+        <button onClick={handleTripClick} className="trips-btn">Trips</button>
+        <button onClick={handleLogout} className="logout-btn">
           Logout
         </button>
       </div>

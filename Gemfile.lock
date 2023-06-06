@@ -106,6 +106,7 @@ GEM
       i18n (>= 1.8.11, < 2)
     ffi (1.15.5)
     geocoder (1.8.1)
+    geokit (1.14.0)
     globalid (1.1.0)
       activesupport (>= 5.0)
     i18n (1.13.0)
@@ -204,6 +205,7 @@ DEPENDENCIES
   byebug
   faker
   geocoder
+  geokit
   jbuilder
   pg (~> 1.1)
   pry-rails

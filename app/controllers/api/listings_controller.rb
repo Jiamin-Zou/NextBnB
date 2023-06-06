@@ -16,6 +16,5 @@ class Api::ListingsController < ApplicationController
         else
             render json: { errors: ["Oops... That listing doesn't exist!"] }, status: 404
         end
-
     end
 end

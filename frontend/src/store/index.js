@@ -4,10 +4,12 @@ import logger from "redux-logger";
 import session from "./session";
 import listings from "./listings";
 import hosts from "./hosts";
+import reservations from "./reservations";
 
 const rootReducer = combineReducers({
   session,
   listings,
+  reservations,
   hosts
 });
 

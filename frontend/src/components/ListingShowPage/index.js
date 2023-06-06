@@ -8,18 +8,23 @@ import PageNotFound from "../../util/PageNotFound";
 import sampleHouse from "../../assets/images/sample_house.jpg";
 import Reservation from "../ReservationForm";
 import Amenities from "./Amenities";
+import addDays from "date-fns/addDays";
+import ReservationCalendar from "../ReservationCalendar";
+import ImageLoader from "../../util/ImageLoader";
 
 const ListingShowPage = () => {
   const dispatch = useDispatch();
   const { listingId } = useParams();
   const listing = useSelector((state) => state.listings[listingId]);
   const [errors, setErrors] = useState([]);
+  const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(addDays(new Date(), 3));
+  const [calendarOpen, setCalendarOpen] = useState(false);
 
   const hostSelector = (state) => {
     if (listing) {
       const id = listing.hostId;
       const listingHost = state.hosts[id];
-      console.log(listingHost);
       return listingHost;
     }
   };
@@ -49,22 +54,22 @@ const ListingShowPage = () => {
     <div className="listing-img-group-container">
       <div className="img-group-left">
         <div className="img-wrapper">
-          <img src={listing.photoUrls[0]} alt={`listing${listing.id}_1`} />
+          <ImageLoader src={listing.photoUrls[0]} alt={`listing${listing.id}_1`} />
         </div>
       </div>
       <div className="img-group-right">
         <div className="img-wrapper">
-          <img src={listing.photoUrls[1]} alt={`listing${listing.id}_2`} />
+          <ImageLoader src={listing.photoUrls[1]} alt={`listing${listing.id}_2`} />
         </div>
 
         <div className="img-wrapper">
-          <img src={listing.photoUrls[2]} alt={`listing${listing.id}_3`} />
+          <ImageLoader src={listing.photoUrls[2]} alt={`listing${listing.id}_3`} />
         </div>
         <div className="img-wrapper">
-          <img src={listing.photoUrls[3]} alt={`listing${listing.id}_4`} />
+          <ImageLoader src={listing.photoUrls[3]} alt={`listing${listing.id}_4`} />
         </div>
         <div className="img-wrapper">
-          <img src={listing.photoUrls[4]} alt={`listing${listing.id}_5`} />
+          <ImageLoader src={listing.photoUrls[4]} alt={`listing${listing.id}_5`} />
         </div>
       </div>
     </div>
@@ -114,11 +119,28 @@ const ListingShowPage = () => {
                 <Amenities listing={listing} />
               </div>
             </div>
-            <div className="booking-calender">Full Calender</div>
+            <div className="booking-calender">
+              <ReservationCalendar
+                startDate={startDate}
+                setStartDate={setStartDate}
+                endDate={endDate}
+                setEndDate={setEndDate}
+                calenderOpen={calendarOpen}
+                setCalendarOpen={setCalendarOpen}
+              />
+            </div>
           </div>
           <div className="reserve-form-container">
             <div className="reserve-form">
-              <Reservation />
+              <Reservation
+                listing={listing}
+                startDate={startDate}
+                setStartDate={setStartDate}
+                endDate={endDate}
+                setEndDate={setEndDate}
+                calendarOpen={calendarOpen}
+                setCalendarOpen={setCalendarOpen}
+              />
             </div>
           </div>
         </div>

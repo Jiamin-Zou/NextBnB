@@ -7,9 +7,9 @@
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
-    "moment": "^2.29.4",
+    "date-fns": "^2.30.0",
     "react": "^16.14.0",
-    "react-dates": "^21.8.0",
+    "react-date-range": "^1.4.0",
     "react-dom": "^16.14.0",
     "react-redux": "^8.0.5",
     "react-responsive-carousel": "^3.2.23",
@@ -21,7 +21,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "BUILD_PATH='../public' react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

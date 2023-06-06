@@ -8,10 +8,10 @@ import { useModal } from "./context/ModalContext";
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import PageNotFound from "./util/PageNotFound";
+import TripsIndex from "./components/Trips";
 
 function App() {
   const { toggleModal } = useModal();
-
   const location = useLocation();
 
   useEffect(() => {
@@ -26,8 +26,14 @@ function App() {
         <Route path="/" exact>
           <ListingIndexPage />
         </Route>
-        <Route path="/listings/:listingId">
+        <Route path="/listings/:listingId" exact>
           <ListingShowPage />
+        </Route>
+        <Route path="/category/:category" exact>
+          <ListingIndexPage />
+        </Route>
+        <Route path="/user/trips" exact>
+          <TripsIndex />
         </Route>
         <Route>
           <PageNotFound />

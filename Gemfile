@@ -26,6 +26,7 @@ gem "jbuilder"
 gem "bcrypt"
 
 gem 'geocoder'
+gem 'geokit'
 
 gem 'aws-sdk-s3'
 

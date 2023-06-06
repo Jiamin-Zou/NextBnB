@@ -20,3 +20,10 @@ export const accountExist = async (email) => {
 };
 
 export const demoUser = { email: "demo.user@test.com", password: "demouser" };
+
+export const convertToDate = (dateString) => {
+
+  const date = new Date(dateString)
+  const result = new Date(date.toISOString().slice(0, -1));
+  return result;
+};
