@@ -34,7 +34,7 @@ class User < ApplicationRecord
     foreign_key: :guest_id,
     dependent: :destroy
 
-  has_many :trips,
+  has_many :trip_listings,
       through: :reservations,
       source: :listing
 

@@ -8,7 +8,7 @@ import { useModal } from "./context/ModalContext";
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import PageNotFound from "./util/PageNotFound";
-import Profile from "./components/Profile";
+import TripsIndex from "./components/Trips";
 
 function App() {
   const { toggleModal } = useModal();
@@ -32,8 +32,8 @@ function App() {
         <Route path="/category/:category" exact>
           <ListingIndexPage />
         </Route>
-        <Route path="/profile">
-          <Profile />
+        <Route path="/trips" exact>
+          <TripsIndex />
         </Route>
         <Route>
           <PageNotFound />

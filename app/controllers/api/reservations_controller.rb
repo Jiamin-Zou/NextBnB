@@ -1,8 +1,14 @@
 class Api::ReservationsController < ApplicationController
-  before_action :require_logged_in, only: [:create, :show, :update, :destroy]
+  before_action :require_logged_in, only: [:index, :create, :show, :update, :destroy]
   before_action :set_reservation, only: [:show, :update, :destroy]
 
   wrap_parameters include: Reservation.attribute_names
+
+  def index
+    @reservations = current_user.reservations
+    @listings = current_user.trip_listings
+    render :index
+  end
 
   def create
     listing = Listing.find_by(id: params[:listing_id])

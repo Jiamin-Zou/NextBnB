@@ -1,8 +1,24 @@
 import csrfFetch from "./csrf";
+import { setListings } from "./listings";
 
 const RECEIVE_RESERVATION = "reservation/receiveReservation";
 const RECEIVE_RESERVATIONS = "reservation/receiveReservations";
 const REMOVE_RESERVATION = "reservation/removeReservations";
+
+export const getTrips = (state) => {
+  const currentUser = state.session.currentUser;
+  const reservations = Object.values(state.reservations).filter((res) => res.guestId === currentUser.id);
+
+  const trips = reservations.map((reservation) => {
+    const listing = state.listings[reservation.listingId];
+    return { reservation, listing };
+  });
+
+  // Sort trips by reservation end date
+  trips.sort((a, b) => new Date(a.reservation.endDate) - new Date(b.reservation.endDate));
+
+  return trips;
+};
 
 export const receiveReservation = (reservation) => {
   return {
@@ -25,12 +41,25 @@ export const removeReservation = (reservationId) => {
   };
 };
 
+export const fetchTrips = () => async (dispatch) => {
+  const res = await csrfFetch(`/api/reservations`);
+  if (res.ok) {
+    const data = await res.json();
+    dispatch(setListings(data.listings));
+    dispatch(receiveReservations(data.reservations));
+  } else {
+    throw res;
+  }
+
+  return res;
+};
+
 export const createReservation = (reservation) => async (dispatch) => {
   const res = await csrfFetch(
     `/api/listings/${reservation.listingId}/reservations`,
     {
       method: "POST",
-      body: JSON.stringify({reservation: reservation}),
+      body: JSON.stringify({ reservation: reservation }),
     }
   );
   if (res.ok) {
@@ -46,7 +75,7 @@ export const createReservation = (reservation) => async (dispatch) => {
 export const updateReservation = (reservation) => async (dispatch) => {
   const res = await csrfFetch(`/api/reservations/${reservation.id}`, {
     method: "PATCH",
-    body: JSON.stringify({reservation: reservation}),
+    body: JSON.stringify({ reservation: reservation }),
   });
 
   if (res.ok) {
