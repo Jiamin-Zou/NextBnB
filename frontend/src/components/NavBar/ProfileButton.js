@@ -15,7 +15,7 @@ const ProfileButton = ({ setDropdown }) => {
 
   const handleTripClick = () => {
     setDropdown(false);
-    history.push('/trips')
+    history.push('/user/trips')
   }
 
   const handleLogout = () => {

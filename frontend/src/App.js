@@ -32,7 +32,7 @@ function App() {
         <Route path="/category/:category" exact>
           <ListingIndexPage />
         </Route>
-        <Route path="/trips" exact>
+        <Route path="/user/trips" exact>
           <TripsIndex />
         </Route>
         <Route>

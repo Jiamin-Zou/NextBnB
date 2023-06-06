@@ -105,10 +105,12 @@
       #bd1e59 100%
     );
     background-size: 200% 200%;
+    transition: 0.2s;
 }
 
 .trip-search-btn:hover {
   box-shadow: 0px 0px 2px #d70466;
+  scale: 1.01;
 }
 
 .divisor {
