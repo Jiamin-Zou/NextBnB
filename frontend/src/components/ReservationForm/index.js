@@ -6,6 +6,7 @@ import "./ReservationForm.css";
 import format from "date-fns/format";
 import { createReservation } from "../../store/reservations";
 import { differenceInDays } from "date-fns";
+import {useHistory} from 'react-router-dom'
 
 const Reservation = ({
   listing,
@@ -16,6 +17,7 @@ const Reservation = ({
   calendarOpen,
   setCalendarOpen,
 }) => {
+  const history = useHistory();
   const dispatch = useDispatch();
   const { setToggleModal } = useModal();
   const currentUser = useSelector((state) => state.session.currentUser);
@@ -43,7 +45,7 @@ const Reservation = ({
   };
   const validateDates = () => numNights >= 1;
 
-  const handleReserve = (e) => {
+  const handleReserve = async(e) => {
     e.preventDefault();
     setErrors([]);
 
@@ -65,7 +67,14 @@ const Reservation = ({
       };
       console.log(numNights);
       console.log(reservation);
-      dispatch(createReservation(reservation)).catch(async (res) => {
+      try {
+        await new Promise((resolve, reject) => {
+          dispatch(createReservation(reservation))
+            .then(resolve)
+            .catch(reject);
+        });
+        history.push('/user/trips')
+      } catch ( res ) {
         let data;
         try {
           data = await res.clone().json();
@@ -80,7 +89,7 @@ const Reservation = ({
           checkout.classList.add("date-error");
         } else if (data) setErrors([data]);
         else setErrors([res.statusText]);
-      });
+      }
     } else {
       setErrors(["Minimum of 1 night required!"]);
       inputField.classList.add("date-error");
@@ -168,6 +177,7 @@ const Reservation = ({
                   setStartDate={setStartDate}
                   endDate={endDate}
                   setEndDate={setEndDate}
+                  calenderOpen={calendarOpen}
                   setCalendarOpen={setCalendarOpen}
                 />
               )}

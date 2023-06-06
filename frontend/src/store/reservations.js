@@ -15,8 +15,7 @@ export const getTrips = (state) => {
   });
 
   // Sort trips by reservation end date
-  trips.sort((a, b) => new Date(a.reservation.endDate) - new Date(b.reservation.endDate));
-
+  trips.sort((a, b) => new Date(b.reservation.endDate) - new Date(a.reservation.endDate));
   return trips;
 };
 

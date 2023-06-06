@@ -125,6 +125,7 @@ const ListingShowPage = () => {
                 setStartDate={setStartDate}
                 endDate={endDate}
                 setEndDate={setEndDate}
+                calenderOpen={calendarOpen}
                 setCalendarOpen={setCalendarOpen}
               />
             </div>

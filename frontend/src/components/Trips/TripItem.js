@@ -2,11 +2,15 @@ import { useHistory } from "react-router-dom";
 import format from "date-fns/format";
 import sampleHouse from "../../assets/images/sample_house.jpg";
 import "./TripItem.css";
+import { convertToDate } from "../../util/util";
+import { useDispatch } from "react-redux";
+import { deleteReservation } from "../../store/reservations";
 
 const TripItem = ({ trip, type }) => {
   const history = useHistory();
-  const startDate = new Date(trip.reservation.startDate);
-  const endDate = new Date(trip.reservation.endDate);
+  const dispatch = useDispatch();
+  const startDate = convertToDate(trip.reservation.startDate);
+  const endDate = convertToDate(trip.reservation.endDate);
 
   const formatDate = (date) => {
     return format(date, "MMM dd, yy");
@@ -22,7 +26,9 @@ const TripItem = ({ trip, type }) => {
     return;
   };
 
-  const toCancel = () => {};
+  const toCancel = () => {
+    dispatch(deleteReservation(trip.reservation.id))
+  };
 
   let buttonGroup;
   switch (type) {
@@ -46,7 +52,7 @@ const TripItem = ({ trip, type }) => {
       buttonGroup = (
         <>
           <button className="res-btn">Update</button>
-          <button className="res-btn">Cancel</button>
+          <button className="res-btn" onClick={toCancel}>Cancel</button>
         </>
       );
       break;

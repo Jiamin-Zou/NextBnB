@@ -9,6 +9,7 @@ const ReservationCalendar = ({
   setStartDate,
   endDate,
   setEndDate,
+  calenderOpen,
   setCalendarOpen,
 }) => {
   const calRef = useRef(null);
@@ -20,7 +21,7 @@ const ReservationCalendar = ({
   };
 
   const closeOnOutsideClick = (e) => {
-    if (calRef.current && !calRef.current.contains(e.target)) {
+    if (calRef.current && !calRef.current.contains(e.target) && calenderOpen === true) {
       setCalendarOpen(false);
       document.removeEventListener("click", closeOnOutsideClick);
     }

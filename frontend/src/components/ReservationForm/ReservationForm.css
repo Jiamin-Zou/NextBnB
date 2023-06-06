@@ -95,6 +95,11 @@
   width: 100%;
 }
 
+.check-in-input:hover,
+.check-out-input:hover {
+  cursor: pointer;
+}
+
 .price-calc-line {
   display: flex;
   justify-content: space-between;
