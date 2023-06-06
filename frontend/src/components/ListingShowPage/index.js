@@ -10,6 +10,7 @@ import Reservation from "../ReservationForm";
 import Amenities from "./Amenities";
 import addDays from "date-fns/addDays";
 import ReservationCalendar from "../ReservationCalendar";
+import ImageLoader from "../../util/ImageLoader";
 
 const ListingShowPage = () => {
   const dispatch = useDispatch();
@@ -53,22 +54,22 @@ const ListingShowPage = () => {
     <div className="listing-img-group-container">
       <div className="img-group-left">
         <div className="img-wrapper">
-          <img src={listing.photoUrls[0]} alt={`listing${listing.id}_1`} />
+          <ImageLoader src={listing.photoUrls[0]} alt={`listing${listing.id}_1`} />
         </div>
       </div>
       <div className="img-group-right">
         <div className="img-wrapper">
-          <img src={listing.photoUrls[1]} alt={`listing${listing.id}_2`} />
+          <ImageLoader src={listing.photoUrls[1]} alt={`listing${listing.id}_2`} />
         </div>
 
         <div className="img-wrapper">
-          <img src={listing.photoUrls[2]} alt={`listing${listing.id}_3`} />
+          <ImageLoader src={listing.photoUrls[2]} alt={`listing${listing.id}_3`} />
         </div>
         <div className="img-wrapper">
-          <img src={listing.photoUrls[3]} alt={`listing${listing.id}_4`} />
+          <ImageLoader src={listing.photoUrls[3]} alt={`listing${listing.id}_4`} />
         </div>
         <div className="img-wrapper">
-          <img src={listing.photoUrls[4]} alt={`listing${listing.id}_5`} />
+          <ImageLoader src={listing.photoUrls[4]} alt={`listing${listing.id}_5`} />
         </div>
       </div>
     </div>

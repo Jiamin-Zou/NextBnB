@@ -1,7 +1,7 @@
 import { useModal } from "../../context/ModalContext";
 import { useDispatch, useSelector } from "react-redux";
 import ReservationCalendar from "../ReservationCalendar";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import "./ReservationForm.css";
 import format from "date-fns/format";
 import { createReservation } from "../../store/reservations";
@@ -88,7 +88,6 @@ const Reservation = ({
       checkin.classList.add("date-error");
       checkout.classList.add("date-error");
     }
-    // dispatch(createReservation(reservation));
   };
 
   useEffect(() => {

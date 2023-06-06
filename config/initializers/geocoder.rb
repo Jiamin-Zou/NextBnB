@@ -1,3 +1,4 @@
 Geocoder.configure(
-    timeout: 10, # Increase the timeout value (in seconds) to a suitable value
-  )
+  lookup: :bing,
+  api_key: Rails.application.credentials.bing[:api_key]
+)

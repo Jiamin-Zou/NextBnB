@@ -1,6 +1,7 @@
 import { useHistory } from "react-router-dom";
 import sampleHouse from '../../assets/images/sample_house.jpg'
 import "./ListingListItem.css"
+import ImageLoader from "../../util/ImageLoader";
 
 const ListingListItem = ({ listing }) => {
   const history = useHistory();
@@ -9,7 +10,7 @@ const ListingListItem = ({ listing }) => {
   };
 
   const listImgs = listing.photoUrls.map((pic, idx) => (
-    <img key={`${listing.id}_${idx}`} src={pic} className="listing-item-pic" alt={`listing${listing.id}_${idx + 1}`} />
+    <ImageLoader key={`${listing.id}_${idx}`} src={pic} className={"listing-item-pic"} alt={`listing${listing.id}_${idx + 1}`} />
   ) )
 
   const images = listing.photoUrls ? listImgs : <img src={sampleHouse} className="listing-item-pic" alt="listing-item-pic" />

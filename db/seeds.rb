@@ -96,7 +96,7 @@ ApplicationRecord.transaction do
   listing2 = Listing.create!(
     host_id: generate_random_user_id(users),
     property_type: "Apartment",
-    address: "221B Baker Street",
+    address: "221b Baker St",
     apt_num: "3H",
     city: "London",
     state: "England",
@@ -624,11 +624,13 @@ end
 puts "Attaching photos to Listings"
 
 listings.each_with_index do |listing, i|
-  (1..5).each do |j|
-    photo_url = "https://nextbnb-seed.s3.amazonaws.com/listings/listing#{i + 1}_#{j}.webp"
-    photo = URI.open(photo_url)
-    listing.photos.attach(io: photo, filename: "listing#{i + 1}_#{j}.webp")
-  end
+    listing.photos.attach([
+      {io: URI.open("https://nextbnb-seed.s3.amazonaws.com/listings/listing#{i + 1}_#{1}.webp"), filename: "listing#{i + 1}_#{1}.webp"},
+      {io: URI.open("https://nextbnb-seed.s3.amazonaws.com/listings/listing#{i + 1}_#{2}.webp"), filename: "listing#{i + 1}_#{2}.webp"},
+      {io: URI.open("https://nextbnb-seed.s3.amazonaws.com/listings/listing#{i + 1}_#{3}.webp"), filename: "listing#{i + 1}_#{3}.webp"},
+      {io: URI.open("https://nextbnb-seed.s3.amazonaws.com/listings/listing#{i + 1}_#{4}.webp"), filename: "listing#{i + 1}_#{4}.webp"},
+      {io: URI.open("https://nextbnb-seed.s3.amazonaws.com/listings/listing#{i + 1}_#{5}.webp"), filename: "listing#{i + 1}_#{5}.webp"},
+    ])
 end
 
 puts "Done!"

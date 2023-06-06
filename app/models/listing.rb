@@ -32,6 +32,7 @@
 #  has_fireplace :boolean          default(FALSE), not null
 #
 class Listing < ApplicationRecord
+
   CATEGORIES = ["beachfront", "countryside", "cabin", "mansion", "lakefront", "amazing views", "tiny home", "modern", "barn", "omg"]
 
   PROPERTY_TYPES = ["House", "Apartment", "Studio", "Cabin", "Private Room"]
@@ -47,7 +48,8 @@ class Listing < ApplicationRecord
 
   validate :valid_location
 
-  before_validation :geocode_address
+  geocoded_by :full_address
+  before_validation :geocode
 
   has_many_attached :photos
 
@@ -66,9 +68,8 @@ class Listing < ApplicationRecord
     errors.add(:address, "is not a valid location") if latitude.blank? || longitude.blank?
   end
 
-  def geocode_address
-    coordinates = Geocoder.coordinates("#{address}, #{city}, #{state}, #{country}")
-    self.latitude = coordinates[0]
-    self.longitude = coordinates[1]
+  def full_address
+    [address, city, state, country].compact.join(', ')
   end
+
 end

@@ -113,7 +113,6 @@ const LoginSignUpForm = ({
           data = await res.text();
         }
         if (data?.errors) {
-          // debugger
           setEmailTag(true);
           setEmailError(data.errors[0]);
           emailInput.classList.add("error");
