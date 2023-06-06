@@ -1,0 +1,17 @@
+{
+  "name": "nextbnb",
+  "version": "1.0.0",
+  "description": "An Airbnb clone.",
+  "directories": {
+    "lib": "lib"
+  },
+  "engines": {
+    "node": "16.19.1"
+  },
+  "scripts": {
+    "build": "npm install --prefix frontend && npm run build --prefix frontend"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
