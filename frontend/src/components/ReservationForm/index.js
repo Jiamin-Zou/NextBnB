@@ -65,8 +65,6 @@ const Reservation = ({
         startDate: format(startDate, "yyyy-MM-dd"),
         endDate: format(endDate, "yyyy-MM-dd"),
       };
-      console.log(numNights);
-      console.log(reservation);
       try {
         await new Promise((resolve, reject) => {
           dispatch(createReservation(reservation))
