@@ -16,6 +16,7 @@ const Reservation = ({
   setEndDate,
   calendarOpen,
   setCalendarOpen,
+  blockedDates
 }) => {
   const history = useHistory();
   const dispatch = useDispatch();
@@ -177,6 +178,7 @@ const Reservation = ({
                   setEndDate={setEndDate}
                   calenderOpen={calendarOpen}
                   setCalendarOpen={setCalendarOpen}
+                  blockedDates={blockedDates}
                 />
               )}
             </div>

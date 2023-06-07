@@ -11,6 +11,7 @@ const ReservationCalendar = ({
   setEndDate,
   calenderOpen,
   setCalendarOpen,
+  blockedDates
 }) => {
   const calRef = useRef(null);
 
@@ -43,6 +44,7 @@ const ReservationCalendar = ({
         ranges={[selectionRange]}
         onChange={handleSelect}
         months={2}
+        disabledDates={blockedDates}
         direction="horizontal"
         className="reservation-calendar"
       />

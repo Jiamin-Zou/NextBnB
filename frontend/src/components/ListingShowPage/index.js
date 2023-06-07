@@ -20,7 +20,7 @@ const ListingShowPage = () => {
   const listing = useSelector((state) => state.listings[listingId]);
   const [errors, setErrors] = useState([]);
   const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndDate] = useState(addDays(new Date(), 3));
+  const [endDate, setEndDate] = useState(new Date());
   const [calendarOpen, setCalendarOpen] = useState(false);
 
   const hostSelector = (state) => {
@@ -51,7 +51,7 @@ const ListingShowPage = () => {
   // }
 
   const host = useSelector(hostSelector);
-  const blockDates = useSelector(getReservedDates(listing?.id))
+  const blockedDates = useSelector(getReservedDates(listing?.id))
 
   useEffect(() => {
     dispatch(fetchListing(listingId)).catch(async (res) => {
@@ -69,11 +69,11 @@ const ListingShowPage = () => {
 
   if (!listing && errors.length > 0) {
     return <PageNotFound />;
-  } else if (!listing || !host || !blockDates) {
+  } else if (!listing || !host || !blockedDates) {
     return <LoadingPage />;
   }
 
-  console.log(blockDates)
+  console.log(blockedDates)
   const imageGroup = listing.photoUrls ? (
     <div className="listing-img-group-container">
       <div className="img-group-left">
@@ -151,6 +151,7 @@ const ListingShowPage = () => {
                 setEndDate={setEndDate}
                 calenderOpen={calendarOpen}
                 setCalendarOpen={setCalendarOpen}
+                blockedDates={blockedDates}
               />
             </div>
           </div>
@@ -164,6 +165,7 @@ const ListingShowPage = () => {
                 setEndDate={setEndDate}
                 calendarOpen={calendarOpen}
                 setCalendarOpen={setCalendarOpen}
+                blockedDates={blockedDates}
               />
             </div>
           </div>
