@@ -29,7 +29,7 @@ export const getReservedDates = (listingId) => (state) => {
 
     const currentDate = new Date(start)
 
-    while (currentDate < end) {
+    while (currentDate <= end) {
       reservedDates.push(new Date(currentDate));
       currentDate.setDate(currentDate.getDate() + 1);
     }
