@@ -1,12 +1,12 @@
 .listing-list-container {
     margin-top: 20px;
     display: flex;
+
 }
 
 .listing-index-list {
-    padding: 0 5% 0;
+    padding: 0 4% 0;
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
-    gap: 40px;    
+    gap: 3vw;    
 }

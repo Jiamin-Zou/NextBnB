@@ -4,18 +4,21 @@ import { useHistory } from "react-router-dom";
 import "./Trips.css";
 import { fetchTrips, getTrips } from "../../store/reservations";
 import wave from "../../assets/images/wave.svg";
-import adventure from "../../assets/images/adventure.jpg"
+import adventure from "../../assets/images/adventure.jpg";
 import TripsList from "./TripList";
 import LoadingPage from "../../util/LoadingPage";
+import { useModal } from "../../context/ModalContext";
+import UpdateReservationModal from "../ReservationForm/UpdateReservationModal";
 
 const TripsIndex = () => {
+  const { toggleEditModal } = useModal();
   const dispatch = useDispatch();
   const history = useHistory();
   const currentUser = useSelector((state) => state.session.currentUser);
   const trips = useSelector(getTrips);
 
   const [mousePositions, setMousePositions] = useState({
-    search: { x: 0, y: 0 }
+    search: { x: 0, y: 0 },
   });
 
   const handleMouseMove = (event, element) => {
@@ -30,8 +33,8 @@ const TripsIndex = () => {
   };
 
   const handleClickSearch = () => {
-    history.push("/")
-  }
+    history.push("/");
+  };
 
   useEffect(() => {
     if (!currentUser) {
@@ -40,7 +43,7 @@ const TripsIndex = () => {
     dispatch(fetchTrips());
   }, [dispatch, currentUser, history]);
 
-  if(!currentUser || !trips) return <LoadingPage />;
+  if (!currentUser || !trips) return <LoadingPage />;
 
   const pastTrips = trips?.filter(
     (trip) => new Date(trip.reservation.endDate) < new Date()
@@ -58,52 +61,70 @@ const TripsIndex = () => {
   const bannerCard =
     futureTrips?.length > 0 ? (
       <div className="banner-container">
-        <div className="banner-first">You have {futureTrips.length} upcoming trips!</div>
-        <div className="banner-second">Continue the excitment and look for more adventures</div>
+        <div className="banner-first">
+          You have {futureTrips.length} upcoming trips!
+        </div>
+        <div className="banner-second">
+          Continue the excitment and look for more adventures
+        </div>
       </div>
     ) : (
       <div className="banner-container">
         <div className="banner-first">No trips booked...yet!</div>
-        <div className="banner-second">Time to dust off your bags and start planning your next adventure</div>
+        <div className="banner-second">
+          Time to dust off your bags and start planning your next adventure
+        </div>
       </div>
     );
 
   return (
     <div className="trips-index-page">
       <div className="trips-index-container">
-
-      <div className="trips-page-header">
-        <h1>Trips</h1>
-        <h3>
-          You booked a total of <span id="trips-count">{trips.length}</span> trips so far!
-        </h3>
-      </div>
-      <div className="search-trips-box">
-        <div className="search-trips left">
-        <div className="hello">
-          <div className="wave-img">
-
-          <img src={wave} alt="hand wave" width="48" height="48" />
+        <div className="trips-page-header">
+          <h1>Trips</h1>
+          <h3>
+            You booked a total of <span id="trips-count">{trips.length}</span>{" "}
+            trips so far!
+          </h3>
+        </div>
+        <div className="search-trips-box">
+          <div className="search-trips left">
+            <div className="hello">
+              <div className="wave-img">
+                <img src={wave} alt="hand wave" width="48" height="48" />
+              </div>
+              <h2>Hi {currentUser.firstName}, welcome back!</h2>
+            </div>
+            <div className="banner-card">{bannerCard}</div>
+            <button
+              className="trip-search-btn"
+              onClick={handleClickSearch}
+              style={{
+                backgroundPosition: `calc((100 - ${mousePositions.search.x}) * 1%) calc((100 - ${mousePositions.search.y}) * 1%)`,
+              }}
+              onMouseMove={(e) => handleMouseMove(e, "search")}
+            >
+              Start searching
+            </button>
           </div>
-          <h2>Hi {currentUser.firstName}, welcome back!</h2>
+          <div className="search-trips right">
+            <img src={adventure} alt="adventure" />
+          </div>
         </div>
-        <div className="banner-card">{bannerCard}</div>
-    <button className="trip-search-btn" onClick={handleClickSearch}                 style={{
-                  backgroundPosition: `calc((100 - ${mousePositions.search.x}) * 1%) calc((100 - ${mousePositions.search.y}) * 1%)`,
-                }}
-                onMouseMove={(e) => handleMouseMove(e, "search")}>Start searching</button>
+        <div className="divisor">
+          <hr />
         </div>
-        <div className="search-trips right">
-          <img src={adventure} alt="adventure" />
+        <TripsList trips={currentTrips} type={"current"} />
+        <div className="divisor">
+          <hr />
         </div>
+        <TripsList trips={futureTrips} type={"future"} />
+        <div className="divisor">
+          <hr />
+        </div>
+        <TripsList trips={pastTrips} type={"past"} />
       </div>
-      <div className="divisor"><hr /></div>
-      <TripsList trips={currentTrips} type={'current'}/>
-      <div className="divisor"><hr /></div>
-      <TripsList trips={futureTrips} type={'future'}/>
-      <div className="divisor"><hr /></div>
-      <TripsList trips={pastTrips} type={'past'}/>
-      </div>
+      {toggleEditModal && <UpdateReservationModal />}
     </div>
   );
 };

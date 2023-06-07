@@ -7,17 +7,20 @@ export const useModal = () => useContext(ModalContext);
 export default function ModalProvider({ children }) {
   const [toggleModal, setToggleModal] = useState(false);
   const [toggleForm, setToggleForm] = useState(false);
-  const [toggleEditTrip, setToggleEditTrip] = useState(false)
+  const [toggleEditModal, setToggleEditModal] = useState(false)
+  const [tripToUpdate, setTripToUpdate] = useState(null)
 
   return (
     <ModalContext.Provider
       value={{
         toggleModal,
         toggleForm,
-        toggleEditTrip,
         setToggleModal,
         setToggleForm,
-        setToggleEditTrip
+        toggleEditModal,
+        setToggleEditModal,
+        tripToUpdate,
+        setTripToUpdate
       }}
     >
       {children}

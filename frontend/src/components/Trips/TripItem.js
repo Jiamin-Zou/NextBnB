@@ -5,12 +5,15 @@ import "./TripItem.css";
 import { convertToDate } from "../../util/util";
 import { useDispatch } from "react-redux";
 import { deleteReservation } from "../../store/reservations";
+import ImageLoader from "../../util/ImageLoader";
+import { useModal } from "../../context/ModalContext";
 
 const TripItem = ({ trip, type }) => {
   const history = useHistory();
   const dispatch = useDispatch();
   const startDate = convertToDate(trip.reservation.startDate);
   const endDate = convertToDate(trip.reservation.endDate);
+  const { setToggleEditModal, setTripToUpdate } = useModal();
 
   const formatDate = (date) => {
     return format(date, "MMM dd, yy");
@@ -23,11 +26,12 @@ const TripItem = ({ trip, type }) => {
   };
 
   const toUpdate = () => {
-    return;
+    setTripToUpdate(trip)
+    setToggleEditModal(true)
   };
 
   const toCancel = () => {
-    dispatch(deleteReservation(trip.reservation.id))
+    dispatch(deleteReservation(trip.reservation.id));
   };
 
   let buttonGroup;
@@ -51,23 +55,24 @@ const TripItem = ({ trip, type }) => {
     case "future":
       buttonGroup = (
         <>
-          <button className="res-btn">Update</button>
-          <button className="res-btn" onClick={toCancel}>Cancel</button>
+          <button className="res-btn" onClick={toUpdate}>
+            Update
+          </button>
+          <button className="res-btn" onClick={toCancel}>
+            Cancel
+          </button>
         </>
       );
       break;
     default:
-      buttonGroup = (
-        <>
-          <button className="res-btn">To Listing</button>
-        </>
-      );
+      buttonGroup = <></>;
   }
 
   return (
     <div className="trip-item">
       <div className="trip-item-left">
-        <img
+        <ImageLoader
+          className={"trip-img"}
           onClick={toListing}
           src={
             trip.listing.photoUrls.length > 0
