@@ -11,6 +11,8 @@ import Amenities from "./Amenities";
 import addDays from "date-fns/addDays";
 import ReservationCalendar from "../ReservationCalendar";
 import ImageLoader from "../../util/ImageLoader";
+import { convertToDate } from "../../util/util";
+import { getReservedDates } from "../../store/reservations";
 
 const ListingShowPage = () => {
   const dispatch = useDispatch();
@@ -29,7 +31,27 @@ const ListingShowPage = () => {
     }
   };
 
+  // const getReservedDates = (state) => {
+  //   if(listing) {
+  //     const listingReservations = Object.values(state.reservations).filter((res) => res.listingId === listing.id)
+  //     const reservedDates = []
+  //     listingReservations.forEach((res) =>{
+  //       const start = convertToDate(res.startDate)
+  //       const end = convertToDate(res.endDate)
+    
+  //       const currentDate = new Date(start)
+  //       while (currentDate <= end) {
+  //         reservedDates.push(new Date(currentDate));
+  //         currentDate.setDate(currentDate.getDate() + 1);
+  //       }
+  //     })
+    
+  //     return reservedDates
+  //   }
+  // }
+
   const host = useSelector(hostSelector);
+  const blockDates = useSelector(getReservedDates(listing?.id))
 
   useEffect(() => {
     dispatch(fetchListing(listingId)).catch(async (res) => {
@@ -47,9 +69,11 @@ const ListingShowPage = () => {
 
   if (!listing && errors.length > 0) {
     return <PageNotFound />;
-  } else if (!listing || !host) {
+  } else if (!listing || !host || !blockDates) {
     return <LoadingPage />;
   }
+
+  console.log(blockDates)
   const imageGroup = listing.photoUrls ? (
     <div className="listing-img-group-container">
       <div className="img-group-left">

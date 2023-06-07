@@ -26,8 +26,8 @@ const TripItem = ({ trip, type }) => {
   };
 
   const toUpdate = () => {
-    setTripToUpdate(trip)
-    setToggleEditModal(true)
+    setTripToUpdate(trip);
+    setToggleEditModal(true);
   };
 
   const toCancel = () => {
@@ -70,10 +70,9 @@ const TripItem = ({ trip, type }) => {
 
   return (
     <div className="trip-item">
-      <div className="trip-item-left">
+      <div className="trip-item-left" onClick={toListing}>
         <ImageLoader
           className={"trip-img"}
-          onClick={toListing}
           src={
             trip.listing.photoUrls.length > 0
               ? trip.listing.photoUrls[0]
