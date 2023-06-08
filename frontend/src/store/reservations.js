@@ -1,5 +1,6 @@
 import csrfFetch from "./csrf";
 import { setListings } from "./listings";
+import { convertToDate } from "../util/util";
 
 const RECEIVE_RESERVATION = "reservation/receiveReservation";
 const RECEIVE_RESERVATIONS = "reservation/receiveReservations";
@@ -18,6 +19,24 @@ export const getTrips = (state) => {
   trips.sort((a, b) => new Date(a.reservation.endDate) - new Date(b.reservation.endDate));
   return trips;
 };
+
+export const getReservedDates = (listingId) => (state) => {
+  const listingReservations = Object.values(state.reservations).filter((res) => res.listingId === listingId)
+  const reservedDates = []
+  listingReservations.forEach((res) =>{
+    const start = convertToDate(res.startDate)
+    const end = convertToDate(res.endDate)
+
+    const currentDate = new Date(start)
+
+    while (currentDate <= end) {
+      reservedDates.push(new Date(currentDate));
+      currentDate.setDate(currentDate.getDate() + 1);
+    }
+  })
+
+  return reservedDates
+}
 
 export const receiveReservation = (reservation) => {
   return {

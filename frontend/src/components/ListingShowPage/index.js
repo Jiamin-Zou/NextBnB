@@ -11,6 +11,8 @@ import Amenities from "./Amenities";
 import addDays from "date-fns/addDays";
 import ReservationCalendar from "../ReservationCalendar";
 import ImageLoader from "../../util/ImageLoader";
+import { getReservedDates } from "../../store/reservations";
+import MapContainer from "../Map";
 
 const ListingShowPage = () => {
   const dispatch = useDispatch();
@@ -18,7 +20,7 @@ const ListingShowPage = () => {
   const listing = useSelector((state) => state.listings[listingId]);
   const [errors, setErrors] = useState([]);
   const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndDate] = useState(addDays(new Date(), 3));
+  const [endDate, setEndDate] = useState(new Date());
   const [calendarOpen, setCalendarOpen] = useState(false);
 
   const hostSelector = (state) => {
@@ -30,6 +32,7 @@ const ListingShowPage = () => {
   };
 
   const host = useSelector(hostSelector);
+  const blockedDates = useSelector(getReservedDates(listing?.id))
 
   useEffect(() => {
     dispatch(fetchListing(listingId)).catch(async (res) => {
@@ -47,9 +50,10 @@ const ListingShowPage = () => {
 
   if (!listing && errors.length > 0) {
     return <PageNotFound />;
-  } else if (!listing || !host) {
+  } else if (!listing || !host || !blockedDates) {
     return <LoadingPage />;
   }
+
   const imageGroup = listing.photoUrls ? (
     <div className="listing-img-group-container">
       <div className="img-group-left">
@@ -127,6 +131,7 @@ const ListingShowPage = () => {
                 setEndDate={setEndDate}
                 calenderOpen={calendarOpen}
                 setCalendarOpen={setCalendarOpen}
+                blockedDates={blockedDates}
               />
             </div>
           </div>
@@ -140,13 +145,14 @@ const ListingShowPage = () => {
                 setEndDate={setEndDate}
                 calendarOpen={calendarOpen}
                 setCalendarOpen={setCalendarOpen}
+                blockedDates={blockedDates}
               />
             </div>
           </div>
         </div>
 
         <div className="reviews-section">Reviews Component</div>
-        <div className="map-section">Map component</div>
+        <div className="map-section"><MapContainer center={{lat: listing.latitude, lng: listing.longitude}}/></div>
       </main>
     </div>
   );
