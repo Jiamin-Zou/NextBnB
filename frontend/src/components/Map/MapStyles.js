@@ -1,6 +1,6 @@
 // https://snazzymaps.com/editor/customize/1243
 
-export default [
+const mapStyles = [
     {
         "featureType": "all",
         "elementType": "labels.text",
@@ -65,3 +65,5 @@ export default [
         ]
     }
 ]
+
+export default mapStyles
