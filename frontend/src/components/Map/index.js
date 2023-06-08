@@ -30,6 +30,10 @@ const MapContainer = ({ listings, center }) => {
     zoomControlOptions: {
       position: window.google.maps.ControlPosition.RIGHT_TOP,
     },
+    fullscreenControl: true,
+    fullscreenControlOptions: {
+      position: window.google.maps.ControlPosition.RIGHT_BOTTOM,
+    },
   };
 
   const overLays = {};

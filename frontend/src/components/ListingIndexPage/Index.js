@@ -6,14 +6,18 @@ import LoadingPage from "../../util/LoadingPage";
 import "./ListingIndex.css";
 import ListingCategoryPicker from "./LisingCategoryPicker";
 import { useHistory, useParams } from "react-router-dom";
+import { ReactComponent as ListIcon } from "../../assets/images/list_icon.svg";
+import { ReactComponent as MapIcon } from "../../assets/images/map_icon.svg";
+import Map from "../Map";
 
 const ListingIndexPage = () => {
   const { category } = useParams();
   const history = useHistory();
   const dispatch = useDispatch();
   const listings = useSelector((state) => Object.values(state.listings));
-  const categoryListing = useSelector(filterListings(category))
+  const categoryListing = useSelector(filterListings(category));
   const [loading, setLoading] = useState(true);
+  const [toggleMap, setToggleMap] = useState(false);
 
   const handleCategorySelect = (e) => {
     const categories = Array.from(
@@ -24,8 +28,8 @@ const ListingIndexPage = () => {
     });
     e.currentTarget.classList.add("active");
     const categoryFilter = e.currentTarget.id;
-    if(categoryFilter === "all"){
-      return history.push("/")
+    if (categoryFilter === "all") {
+      return history.push("/");
     }
     history.push(`/category/${categoryFilter}`);
   };
@@ -37,8 +41,28 @@ const ListingIndexPage = () => {
 
   return (
     <div className="listing-index">
-      <ListingCategoryPicker handleSelect={handleCategorySelect} category={category}/>
-      <ListingList listings={category ? categoryListing : listings} />
+      <ListingCategoryPicker
+        handleSelect={handleCategorySelect}
+        category={category}
+      />
+      {toggleMap ? (
+        <div className="index-map-wrapper">
+
+          <Map />
+        </div>
+      ) : (
+        <ListingList listings={category ? categoryListing : listings} />
+      )}
+
+      <button
+        className="map-toggle"
+        onClick={() => setToggleMap((prev) => !prev)}
+      >
+        <div>{toggleMap ? "Show list" : "Show map"}</div>
+        <div className="toggle-map-svg">
+          {toggleMap ? <ListIcon /> : <MapIcon />}
+        </div>
+      </button>
     </div>
   );
 };

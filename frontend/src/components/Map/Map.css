@@ -1,5 +1,5 @@
 .map-container {
     width: 100%;
-    height: calc(100vh - 80px - 45px);
-    box-sizing: border-box;
+    height: calc(90vh - 80px - 45px);
+    min-height: 500px;
 }
