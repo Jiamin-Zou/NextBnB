@@ -11,24 +11,12 @@ import Omg from "../../assets/images/category_icons/omg.jpg";
 import TinyHome from "../../assets/images/category_icons/tiny_home.jpg";
 import Filter from "../../assets/images/category_icons/filter.svg";
 import "./ListingCategoryPicker.css";
-import { useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
-const ListingCategoryPicker = ({ handleSelect, category }) => {
-  const location = useLocation();
-  useEffect(() => {
-    if (!category) {
-      const categories = Array.from(
-        document.getElementsByClassName("category-item")
-      );
-      categories.forEach((category) => {
-        category.classList.remove("active");
-      });
-      const allCategory = document.getElementById("all");
-      allCategory.classList.add("active");
-    }
-  }, [location]);
-  
+const ListingCategoryPicker = ({ handleSelect }) => {
+  const { category } = useParams();
+
+
   return (
     <div className="category-picker-container">
       <div className="listing-index-filters">
@@ -36,7 +24,7 @@ const ListingCategoryPicker = ({ handleSelect, category }) => {
           <div className="category-picker">
             <div className="categories">
               <div
-                className="category-item active"
+                className={`category-item ${!category ? "active" : ""}`}
                 id="all"
                 onClick={handleSelect}
               >
@@ -44,7 +32,9 @@ const ListingCategoryPicker = ({ handleSelect, category }) => {
                 <span className="category-name">All</span>
               </div>
               <div
-                className="category-item"
+                className={`category-item ${
+                  category === "beachfront" ? "active" : ""
+                }`}
                 id="beachfront"
                 onClick={handleSelect}
               >
@@ -55,12 +45,20 @@ const ListingCategoryPicker = ({ handleSelect, category }) => {
                 />
                 <span className="category-name">Beachfront</span>
               </div>
-              <div className="category-item" id="omg" onClick={handleSelect}>
+              <div
+                className={`category-item ${
+                  category === "omg" ? "active" : ""
+                }`}
+                id="omg"
+                onClick={handleSelect}
+              >
                 <img className="category-img" src={Omg} alt="cg-Omg" />
                 <span className="category-name">OMG!</span>
               </div>
               <div
-                className="category-item"
+                className={`category-item ${
+                  category === "amazing view" ? "active" : ""
+                }`}
                 id="amazing views"
                 onClick={handleSelect}
               >
@@ -71,16 +69,30 @@ const ListingCategoryPicker = ({ handleSelect, category }) => {
                 />
                 <span className="category-name">Amazing Views</span>
               </div>
-              <div className="category-item" id="modern" onClick={handleSelect}>
+              <div
+                className={`category-item ${
+                  category === "modern" ? "active" : ""
+                }`}
+                id="modern"
+                onClick={handleSelect}
+              >
                 <img className="category-img" src={Modern} alt="cg-Modern" />
                 <span className="category-name">Modern</span>
               </div>
-              <div className="category-item" id="cabin" onClick={handleSelect}>
+              <div
+                className={`category-item ${
+                  category === "cabin" ? "active" : ""
+                }`}
+                id="cabin"
+                onClick={handleSelect}
+              >
                 <img className="category-img" src={Cabin} alt="cg-Cabin" />
                 <span className="category-name">Cabin</span>
               </div>
               <div
-                className="category-item"
+                className={`category-item ${
+                  category === "lakefront" ? "active" : ""
+                }`}
                 id="lakefront"
                 onClick={handleSelect}
               >
@@ -92,7 +104,9 @@ const ListingCategoryPicker = ({ handleSelect, category }) => {
                 <span className="category-name">Lakefront</span>
               </div>
               <div
-                className="category-item"
+                className={`category-item ${
+                  category === "tiny home" ? "active" : ""
+                }`}
                 id="tiny home"
                 onClick={handleSelect}
               >
@@ -104,7 +118,9 @@ const ListingCategoryPicker = ({ handleSelect, category }) => {
                 <span className="category-name">Tiny Home</span>
               </div>
               <div
-                className="category-item"
+                className={`category-item ${
+                  category === "countryside" ? "active" : ""
+                }`}
                 id="countryside"
                 onClick={handleSelect}
               >
@@ -116,14 +132,22 @@ const ListingCategoryPicker = ({ handleSelect, category }) => {
                 <span className="category-name">Countryside</span>
               </div>
               <div
-                className="category-item"
+                className={`category-item ${
+                  category === "mansion" ? "active" : ""
+                }`}
                 id="mansion"
                 onClick={handleSelect}
               >
                 <img className="category-img" src={Mansion} alt="cg-Mansion" />
                 <span className="category-name">Mansion</span>
               </div>
-              <div className="category-item" id="barn" onClick={handleSelect}>
+              <div
+                className={`category-item ${
+                  category === "barn" ? "active" : ""
+                }`}
+                id="barn"
+                onClick={handleSelect}
+              >
                 <img className="category-img" src={Barn} alt="cg-Barn" />
                 <span className="category-name">Barn</span>
               </div>

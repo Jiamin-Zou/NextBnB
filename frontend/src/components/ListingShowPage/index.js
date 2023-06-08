@@ -53,7 +53,6 @@ const ListingShowPage = () => {
     return <LoadingPage />;
   }
 
-  console.log(blockedDates)
   const imageGroup = listing.photoUrls ? (
     <div className="listing-img-group-container">
       <div className="img-group-left">

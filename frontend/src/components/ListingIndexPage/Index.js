@@ -20,13 +20,13 @@ const ListingIndexPage = () => {
   const [toggleMap, setToggleMap] = useState(false);
 
   const handleCategorySelect = (e) => {
-    const categories = Array.from(
-      document.getElementsByClassName("category-item")
-    );
-    categories.forEach((category) => {
-      category.classList.remove("active");
-    });
-    e.currentTarget.classList.add("active");
+    // const categories = Array.from(
+    //   document.getElementsByClassName("category-item")
+    // );
+    // categories.forEach((category) => {
+    //   category.classList.remove("active");
+    // });
+    // e.currentTarget.classList.add("active");
     const categoryFilter = e.currentTarget.id;
     if (categoryFilter === "all") {
       return history.push("/");
@@ -43,12 +43,10 @@ const ListingIndexPage = () => {
     <div className="listing-index">
       <ListingCategoryPicker
         handleSelect={handleCategorySelect}
-        category={category}
       />
       {toggleMap ? (
         <div className="index-map-wrapper">
-
-          <Map />
+          <Map listings={category ? categoryListing : listings}/>
         </div>
       ) : (
         <ListingList listings={category ? categoryListing : listings} />
