@@ -15,6 +15,10 @@
   transition: 0.2s ease;
 }
 
+.list-map-marker {
+  transform: translate(-50%, -50%);
+}
+
 .active-marker {
   scale: 1.2;
   z-index: 1;
