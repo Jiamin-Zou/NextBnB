@@ -12,6 +12,7 @@ import addDays from "date-fns/addDays";
 import ReservationCalendar from "../ReservationCalendar";
 import ImageLoader from "../../util/ImageLoader";
 import { getReservedDates } from "../../store/reservations";
+import MapContainer from "../Map";
 
 const ListingShowPage = () => {
   const dispatch = useDispatch();
@@ -151,7 +152,7 @@ const ListingShowPage = () => {
         </div>
 
         <div className="reviews-section">Reviews Component</div>
-        <div className="map-section">Map component</div>
+        <div className="map-section"><MapContainer center={{lat: listing.latitude, lng: listing.longitude}}/></div>
       </main>
     </div>
   );

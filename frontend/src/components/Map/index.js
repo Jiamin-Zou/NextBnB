@@ -50,7 +50,7 @@ const MapContainer = ({ listings, center }) => {
 
   return (
     <GoogleMap
-      zoom={10}
+      zoom={center ? 13 : 10}
       center={mapCenter}
       mapContainerClassName="map-container"
       options={options}

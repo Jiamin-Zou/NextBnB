@@ -31,6 +31,9 @@ const ReservationCalendar = ({
   const handleSelect = (ranges) => {
     setStartDate(ranges.selection.startDate);
     setEndDate(ranges.selection.endDate);
+    if (ranges.selection.endDate !== ranges.selection.startDate) {
+      setCalendarOpen(false)
+    }
   };
 
   useEffect(() => {
@@ -47,6 +50,7 @@ const ReservationCalendar = ({
         disabledDates={blockedDates}
         direction="horizontal"
         className="reservation-calendar"
+        retainEndDateOnFirstSelection={false}
       />
     </div>
   );
