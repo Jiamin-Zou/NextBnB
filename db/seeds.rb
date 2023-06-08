@@ -7,6 +7,7 @@ ApplicationRecord.transaction do
   User.destroy_all
   Listing.destroy_all
   Reservation.destroy_all
+  Review.destroy_all
 
   puts "Deleting Active Storage attachments and blobs..."
   ActiveStorage::Attachment.delete_all
@@ -16,6 +17,7 @@ ApplicationRecord.transaction do
   ApplicationRecord.connection.reset_pk_sequence!("users")
   ApplicationRecord.connection.reset_pk_sequence!("listings")
   ApplicationRecord.connection.reset_pk_sequence!("reservations")
+  ApplicationRecord.connection.reset_pk_sequence!("reviews")
   ApplicationRecord.connection.reset_pk_sequence!("active_storage_attachments")
   ApplicationRecord.connection.reset_pk_sequence!("active_storage_blobs")
 
@@ -55,6 +57,8 @@ ApplicationRecord.transaction do
   end
 
   puts "Users created!"
+
+  puts "Total users generated: #{users.length}"
 
   def generate_random_user_id(users)
     random_index = rand(users.length)
@@ -474,8 +478,8 @@ ApplicationRecord.transaction do
     num_beds: 12,
     num_bedrooms: 8,
     num_bathrooms: 5,
-    night_price: 1299.0,
-    cleaning_fee: 300.0,
+    night_price: 1967.0,
+    cleaning_fee: 689.0,
     category: "mansion",
     has_wifi: true,
     has_pets: true,
@@ -518,7 +522,118 @@ ApplicationRecord.transaction do
 
   listings << listing16
 
+  listing17 = Listing.create!(
+    host_id: generate_random_user_id(users),
+    property_type: "Apartment",
+    address: "440 W 41st St",
+    apt_num: "16H",
+    city: "Manhattan",
+    state: "New York",
+    country: "USA",
+    title: "Chic City Abode | 2BR/2BA",
+    description: "Immerse yourself in a sophisticated retreat at this impeccably positioned condo in the heart of Midtown Manhattan. Embrace the essence of New York living as you step into this exquisite escape, where sweeping city vistas greet you at every turn. From the mesmerizing sunrise to the captivating sunset, indulge in breathtaking views that will leave you in awe. With its spacious layout, family-friendly atmosphere, and meticulous design, this condo offers a true sense of comfort and homeliness in the world's greatest city. Experience the epitome of stylish living and create cherished memories in this remarkable urban oasis.",
+    num_beds: 2,
+    num_bedrooms: 2,
+    num_bathrooms: 2,
+    night_price: 537.0,
+    cleaning_fee: 219.0,
+    category: "omg",
+    has_wifi: true,
+    has_pets: false,
+    has_kitchen: true,
+    has_ac: true,
+    has_heat: true,
+    has_tv: true,
+    has_parking: true,
+    has_fireplace: false,
+  )
+
+  listings << listing17
+
+  listing18 = Listing.create!(
+    host_id: generate_random_user_id(users),
+    property_type: "Cabin",
+    address: "607 Stewart Creek Rd",
+    city: "Lehighton",
+    state: "Pennsylvania",
+    country: "USA",
+    title: "Tiny cabin with outdoor hot tub",
+    description: "Discover a serene off-grid retreat nestled in a sprawling twelve-acre estate, where a gentle brook meanders alongside. Immerse yourself in the captivating beauty of this Japanese-inspired tiny cabin, perched atop a deck overlooking a tranquil waterway fed by a year-round natural spring. Relax and rejuvenate in the cedar-lined, in-ground hot tub, heated by a wood-burning stove, as you marvel at the surrounding wooded scenery. With its alternative power source and eco-friendly design, this private oasis offers a unique glamping experience—one of two magnificent sites within the expansive grounds.",
+    num_beds: 1,
+    num_bedrooms: 1,
+    num_bathrooms: 1,
+    night_price: 190.0,
+    cleaning_fee: 60.0,
+    category: "tiny home",
+    has_wifi: true,
+    has_pets: true,
+    has_kitchen: true,
+    has_ac: false,
+    has_heat: true,
+    has_tv: true,
+    has_parking: true,
+    has_fireplace: true,
+  )
+
+  listings << listing18
+
+  listing19 = Listing.create!(
+    host_id: generate_random_user_id(users),
+    property_type: "House",
+    address: "20 Ellen Dr",
+    city: "Browns Mills",
+    state: "New Jersey",
+    country: "USA",
+    title: "Cottage with gorgeous pond view",
+    description: "Immerse yourself in the beauty of nature at this enchanting cottage in Browns Mills, New Jersey. Bask in the breathtaking views of the tranquil pond just steps away from your doorstep. Explore the pristine waters by kayak, or venture onto nearby trails for exhilarating hikes through picturesque landscapes. With two bedrooms, a cozy fireplace, and ample space to unwind, this retreat offers a perfect blend of comfort and natural splendor. Experience the serenity of lakeside living and create cherished memories in this idyllic getaway.",
+    num_beds: 4,
+    num_bedrooms: 2,
+    num_bathrooms: 2,
+    night_price: 255.0,
+    cleaning_fee: 129.0,
+    category: "lakefront",
+    has_wifi: true,
+    has_pets: true,
+    has_kitchen: true,
+    has_ac: true,
+    has_heat: true,
+    has_tv: true,
+    has_parking: true,
+    has_fireplace: true,
+  )
+
+  listings << listing19
+
+  listing20 = Listing.create!(
+    host_id: generate_random_user_id(users),
+    property_type: "House",
+    address: "244 Banks Rd",
+    city: "Easton",
+    state: "Connecticut",
+    country: "USA",
+    title: "Luxurious Mansion Retreat in Tranquil Easton",
+    description: "Indulge in the ultimate luxury at this magnificent mansion nestled in the serene town of Easton, Connecticut. With nine beds, six bedrooms, and six bathrooms, this opulent retreat offers ample space for relaxation and entertainment. Immerse yourself in the grandeur of the meticulously designed interiors, featuring modern amenities and elegant decor. Enjoy the convenience of WiFi, a fully equipped kitchen, AC, and a cozy fireplace. With pristine surroundings and impeccable craftsmanship, this mansion provides a haven of tranquility and sophistication. Experience a lavish escape like no other, where every detail is crafted to perfection.",
+    num_beds: 9,
+    num_bedrooms: 6,
+    num_bathrooms: 6,
+    night_price: 1855.0,
+    cleaning_fee: 541.0,
+    category: "mansion",
+    has_wifi: true,
+    has_pets: false,
+    has_kitchen: true,
+    has_ac: true,
+    has_heat: true,
+    has_tv: true,
+    has_parking: true,
+    has_fireplace: true,
+  )
+
+  listings << listing20
+
   puts "Listings created!"
+
+  puts "Total listings generated: #{listings.length}"
 
   puts "Creating reservations..."
 
@@ -526,111 +641,928 @@ ApplicationRecord.transaction do
     listing_id: listing1.id,
     guest_id: demo_user.id,
     num_guests: 4,
-    start_date: Date.today + 1,
-    end_date: Date.today + 5,
+    start_date: Date.new(2022, 11, 30),
+    end_date: Date.new(2022, 12, 8),
   )
 
   res1_2 = Reservation.create!(
     listing_id: listing1.id,
     guest_id: users[5].id,
     num_guests: 3,
-    start_date: Date.today + 6,
-    end_date: Date.today + 8,
+    start_date: Date.new(2023, 5, 16),
+    end_date: Date.new(2023, 5, 19),
+  )
+
+  res1_3 = Reservation.create!(
+    listing_id: listing1.id,
+    guest_id: users[3].id,
+    num_guests: 3,
+    start_date: Date.new(2023, 6, 13),
+    end_date: Date.new(2023, 6, 19),
+  )
+
+  res1_4 = Reservation.create!(
+    listing_id: listing1.id,
+    guest_id: users[18].id,
+    num_guests: 2,
+    start_date: Date.new(2023, 7, 6),
+    end_date: Date.new(2023, 7, 11),
+  )
+
+  res1_5 = Reservation.create!(
+    listing_id: listing1.id,
+    guest_id: users[8].id,
+    num_guests: 3,
+    start_date: Date.new(2023, 7, 15),
+    end_date: Date.new(2023, 7, 17),
+  )
+
+  res1_6 = Reservation.create!(
+    listing_id: listing1.id,
+    guest_id: users[15].id,
+    num_guests: 2,
+    start_date: Date.new(2023, 9, 18),
+    end_date: Date.new(2023, 9, 22),
+  )
+
+  res1_7 = Reservation.create!(
+    listing_id: listing1.id,
+    guest_id: users[11].id,
+    num_guests: 4,
+    start_date: Date.new(2023, 9, 28),
+    end_date: Date.new(2023, 10, 1),
+  )
+  res1_8 = Reservation.create!(
+    listing_id: listing1.id,
+    guest_id: users[2].id,
+    num_guests: 3,
+    start_date: Date.new(2023, 10, 9),
+    end_date: Date.new(2023, 10, 16),
+  )
+  res1_9 = Reservation.create!(
+    listing_id: listing1.id,
+    guest_id: users[16].id,
+    num_guests: 2,
+    start_date: Date.new(2023, 11, 3),
+    end_date: Date.new(2023, 11, 10),
+  )
+  res1_10 = Reservation.create!(
+    listing_id: listing1.id,
+    guest_id: users[7].id,
+    num_guests: 2,
+    start_date: Date.new(2023, 12, 5),
+    end_date: Date.new(2023, 12, 8),
+  )
+  res1_11 = Reservation.create!(
+    listing_id: listing1.id,
+    guest_id: users[14].id,
+    num_guests: 3,
+    start_date: Date.new(2023, 12, 16),
+    end_date: Date.new(2023, 12, 20),
   )
 
   res2_1 = Reservation.create!(
     listing_id: listing2.id,
+    guest_id: users[5].id,
+    num_guests: 2,
+    start_date: Date.new(2023, 6, 20),
+    end_date: Date.new(2023, 6, 21),
+  )
+
+  res2_2 = Reservation.create!(
+    listing_id: listing2.id,
     guest_id: demo_user.id,
     num_guests: 2,
-    start_date: Date.today + 30,
-    end_date: Date.today + 35,
+    start_date: Date.new(2023, 7, 11),
+    end_date: Date.new(2023, 7, 15),
   )
 
   res2_2 = Reservation.create!(
     listing_id: listing2.id,
     guest_id: users[10].id,
     num_guests: 1,
-    start_date: Date.today + 17,
-    end_date: Date.today + 20,
+    start_date: Date.new(2023, 7, 19),
+    end_date: Date.new(2023, 7, 21),
+  )
+
+  res2_3 = Reservation.create!(
+    listing_id: listing2.id,
+    guest_id: users[13].id,
+    num_guests: 3,
+    start_date: Date.new(2023, 8, 4),
+    end_date: Date.new(2023, 8, 6),
+  )
+  res2_4 = Reservation.create!(
+    listing_id: listing2.id,
+    guest_id: users[4].id,
+    num_guests: 2,
+    start_date: Date.new(2023, 8, 19),
+    end_date: Date.new(2023, 8, 23),
+  )
+  res2_5 = Reservation.create!(
+    listing_id: listing2.id,
+    guest_id: users[9].id,
+    num_guests: 3,
+    start_date: Date.new(2023, 8, 26),
+    end_date: Date.new(2023, 8, 30),
+  )
+  res2_6 = Reservation.create!(
+    listing_id: listing2.id,
+    guest_id: users[17].id,
+    num_guests: 1,
+    start_date: Date.new(2023, 9, 14),
+    end_date: Date.new(2023, 9, 27),
+  )
+  res2_7 = Reservation.create!(
+    listing_id: listing2.id,
+    guest_id: users[14].id,
+    num_guests: 1,
+    start_date: Date.new(2023, 11, 5),
+    end_date: Date.new(2023, 11, 9),
+  )
+  res2_8 = Reservation.create!(
+    listing_id: listing2.id,
+    guest_id: users[7].id,
+    num_guests: 3,
+    start_date: Date.new(2023, 11, 28),
+    end_date: Date.new(2023, 12, 4),
+  )
+  res2_9 = Reservation.create!(
+    listing_id: listing2.id,
+    guest_id: users[13].id,
+    num_guests: 1,
+    start_date: Date.new(2023, 12, 11),
+    end_date: Date.new(2023, 12, 13),
+  )
+  res2_10 = Reservation.create!(
+    listing_id: listing2.id,
+    guest_id: users[18].id,
+    num_guests: 2,
+    start_date: Date.new(2024, 1, 3),
+    end_date: Date.new(2024, 1, 7),
+  )
+  res2_11 = Reservation.create!(
+    listing_id: listing2.id,
+    guest_id: users[5].id,
+    num_guests: 2,
+    start_date: Date.new(2024, 1, 19),
+    end_date: Date.new(2024, 1, 22),
+  )
+  res2_12 = Reservation.create!(
+    listing_id: listing2.id,
+    guest_id: users[8].id,
+    num_guests: 2,
+    start_date: Date.new(2024, 2, 8),
+    end_date: Date.new(2024, 2, 11),
   )
 
   res3_1 = Reservation.create!(
     listing_id: listing3.id,
     guest_id: users[3].id,
     num_guests: 7,
-    start_date: Date.today + 2,
-    end_date: Date.today + 4,
+    start_date: Date.new(2023, 1, 18),
+    end_date: Date.new(2023, 1, 21),
   )
-
   res3_2 = Reservation.create!(
     listing_id: listing3.id,
+    guest_id: users[3].id,
+    num_guests: 6,
+    start_date: Date.new(2023, 6, 12),
+    end_date: Date.new(2023, 6, 16),
+  )
+  res3_3 = Reservation.create!(
+    listing_id: listing3.id,
     guest_id: users[8].id,
-    num_guests: 5,
-    start_date: Date.today + 6,
-    end_date: Date.today + 9,
+    num_guests: 8,
+    start_date: Date.new(2023, 6, 29),
+    end_date: Date.new(2023, 7, 2),
+  )
+  res3_4 = Reservation.create!(
+    listing_id: listing3.id,
+    guest_id: users[2].id,
+    num_guests: 6,
+    start_date: Date.new(2023, 7, 21),
+    end_date: Date.new(2023, 7, 26),
+  )
+
+  res3_5 = Reservation.create!(
+    listing_id: listing3.id,
+    guest_id: users[10].id,
+    num_guests: 8,
+    start_date: Date.new(2023, 8, 7),
+    end_date: Date.new(2023, 8, 12),
+  )
+  res3_6 = Reservation.create!(
+    listing_id: listing3.id,
+    guest_id: demo_user.id,
+    num_guests: 7,
+    start_date: Date.new(2023, 8, 17),
+    end_date: Date.new(2023, 8, 20),
+  )
+  res3_6 = Reservation.create!(
+    listing_id: listing3.id,
+    guest_id: users[14].id,
+    num_guests: 7,
+    start_date: Date.new(2023, 9, 9),
+    end_date: Date.new(2023, 9, 12),
+  )
+  res3_7 = Reservation.create!(
+    listing_id: listing3.id,
+    guest_id: users[17].id,
+    num_guests: 6,
+    start_date: Date.new(2023, 10, 4),
+    end_date: Date.new(2023, 10, 8),
+  )
+  res3_8 = Reservation.create!(
+    listing_id: listing3.id,
+    guest_id: users[6].id,
+    num_guests: 6,
+    start_date: Date.new(2023, 11, 18),
+    end_date: Date.new(2023, 11, 22),
+  )
+  res3_9 = Reservation.create!(
+    listing_id: listing3.id,
+    guest_id: users[16].id,
+    num_guests: 7,
+    start_date: Date.new(2023, 12, 3),
+    end_date: Date.new(2023, 12, 6),
+  )
+
+  res4_1 = Reservation.create!(
+    listing_id: listing4.id,
+    guest_id: demo_user.id,
+    num_guests: 2,
+    start_date: Date.new(2022, 12, 17),
+    end_date: Date.new(2022, 12, 20),
+  )
+  res4_2 = Reservation.create!(
+    listing_id: listing4.id,
+    guest_id: users[19].id,
+    num_guests: 1,
+    start_date: Date.new(2023, 7, 2),
+    end_date: Date.new(2023, 7, 5),
+  )
+  res4_3 = Reservation.create!(
+    listing_id: listing4.id,
+    guest_id: users[11].id,
+    num_guests: 1,
+    start_date: Date.new(2023, 7, 22),
+    end_date: Date.new(2023, 7, 28),
+  )
+  res4_4 = Reservation.create!(
+    listing_id: listing4.id,
+    guest_id: users[13].id,
+    num_guests: 2,
+    start_date: Date.new(2023, 8, 15),
+    end_date: Date.new(2023, 8, 17),
+  )
+  res4_5 = Reservation.create!(
+    listing_id: listing4.id,
+    guest_id: users[7].id,
+    num_guests: 2,
+    start_date: Date.new(2023, 8, 23),
+    end_date: Date.new(2023, 8, 27),
+  )
+  res4_6 = Reservation.create!(
+    listing_id: listing4.id,
+    guest_id: users[4].id,
+    num_guests: 2,
+    start_date: Date.new(2023, 9, 7),
+    end_date: Date.new(2023, 9, 9),
+  )
+  res4_8 = Reservation.create!(
+    listing_id: listing4.id,
+    guest_id: users[8].id,
+    num_guests: 2,
+    start_date: Date.new(2023, 9, 26),
+    end_date: Date.new(2023, 10, 1),
+  )
+  res4_9 = Reservation.create!(
+    listing_id: listing4.id,
+    guest_id: users[13].id,
+    num_guests: 2,
+    start_date: Date.new(2023, 10, 19),
+    end_date: Date.new(2023, 10, 25),
   )
 
   res_5_1 = Reservation.create!(
     listing_id: listing5.id,
     guest_id: users[11].id,
     num_guests: 6,
-    start_date: Date.new(2023, 5, 31),
-    end_date: Date.new(2023, 6, 4),
+    start_date: Date.new(2023, 5, 17),
+    end_date: Date.new(2023, 5, 19),
+  )
+  res_5_2 = Reservation.create!(
+    listing_id: listing5.id,
+    guest_id: users[4].id,
+    num_guests: 7,
+    start_date: Date.new(2023, 6, 6),
+    end_date: Date.new(2023, 6, 10),
+  )
+  res_5_3 = Reservation.create!(
+    listing_id: listing5.id,
+    guest_id: users[7].id,
+    num_guests: 8,
+    start_date: Date.new(2023, 6, 21),
+    end_date: Date.new(2023, 6, 29),
+  )
+  res_5_4 = Reservation.create!(
+    listing_id: listing5.id,
+    guest_id: users[9].id,
+    num_guests: 5,
+    start_date: Date.new(2023, 7, 16),
+    end_date: Date.new(2023, 7, 18),
+  )
+  res_5_5 = Reservation.create!(
+    listing_id: listing5.id,
+    guest_id: users[5].id,
+    num_guests: 6,
+    start_date: Date.new(2023, 7, 31),
+    end_date: Date.new(2023, 8, 2),
+  )
+  res_5_6 = Reservation.create!(
+    listing_id: listing5.id,
+    guest_id: users[15].id,
+    num_guests: 6,
+    start_date: Date.new(2023, 8, 16),
+    end_date: Date.new(2023, 8, 17),
+  )
+  res_5_7 = Reservation.create!(
+    listing_id: listing5.id,
+    guest_id: users[4].id,
+    num_guests: 3,
+    start_date: Date.new(2023, 9, 11),
+    end_date: Date.new(2023, 9, 15),
+  )
+  res_5_8 = Reservation.create!(
+    listing_id: listing5.id,
+    guest_id: users[17].id,
+    num_guests: 6,
+    start_date: Date.new(2023, 10, 3),
+    end_date: Date.new(2023, 10, 6),
+  )
+  res_5_9 = Reservation.create!(
+    listing_id: listing5.id,
+    guest_id: users[14].id,
+    num_guests: 5,
+    start_date: Date.new(2023, 11, 14),
+    end_date: Date.new(2023, 11, 16),
   )
 
   res_6_1 = Reservation.create!(
     listing_id: listing6.id,
     guest_id: demo_user.id,
     num_guests: 2,
-    start_date: Date.new(2023, 5, 17),
-    end_date: Date.new(2023, 5, 19),
+    start_date: Date.new(2023, 2, 11),
+    end_date: Date.new(2023, 2, 14),
+  )
+  res_6_2 = Reservation.create!(
+    listing_id: listing6.id,
+    guest_id: users[3].id,
+    num_guests: 4,
+    start_date: Date.new(2023, 6, 7),
+    end_date: Date.new(2023, 6, 11),
+  )
+  res_6_3 = Reservation.create!(
+    listing_id: listing6.id,
+    guest_id: users[10].id,
+    num_guests: 3,
+    start_date: Date.new(2023, 6, 27),
+    end_date: Date.new(2023, 6, 30),
+  )
+  res_6_4 = Reservation.create!(
+    listing_id: listing6.id,
+    guest_id: users[11].id,
+    num_guests: 4,
+    start_date: Date.new(2023, 7, 23),
+    end_date: Date.new(2023, 7, 26),
+  )
+  res_6_5 = Reservation.create!(
+    listing_id: listing6.id,
+    guest_id: users[12].id,
+    num_guests: 3,
+    start_date: Date.new(2023, 8, 8),
+    end_date: Date.new(2023, 8, 14),
+  )
+  res_6_6 = Reservation.create!(
+    listing_id: listing6.id,
+    guest_id: users[15].id,
+    num_guests: 4,
+    start_date: Date.new(2023, 9, 8),
+    end_date: Date.new(2023, 9, 13),
+  )
+  res_6_7 = Reservation.create!(
+    listing_id: listing6.id,
+    guest_id: users[13].id,
+    num_guests: 4,
+    start_date: Date.new(2023, 10, 10),
+    end_date: Date.new(2023, 10, 12),
+  )
+  res_6_8 = Reservation.create!(
+    listing_id: listing6.id,
+    guest_id: users[6].id,
+    num_guests: 3,
+    start_date: Date.new(2023, 11, 2),
+    end_date: Date.new(2023, 11, 6),
+  )
+
+  res_7_1 = Reservation.create!(
+    listing_id: listing7.id,
+    guest_id: demo_user.id,
+    num_guests: 2,
+    start_date: Date.new(2022, 12, 28),
+    end_date: Date.new(2023, 1, 1),
+  )
+  res_7_2 = Reservation.create!(
+    listing_id: listing7.id,
+    guest_id: users[0].id,
+    num_guests: 2,
+    start_date: Date.new(2023, 6, 13),
+    end_date: Date.new(2023, 6, 15),
+  )
+  res_7_3 = Reservation.create!(
+    listing_id: listing7.id,
+    guest_id: users[2].id,
+    num_guests: 1,
+    start_date: Date.new(2023, 6, 25),
+    end_date: Date.new(2023, 6, 29),
+  )
+  res_7_4 = Reservation.create!(
+    listing_id: listing7.id,
+    guest_id: users[5].id,
+    num_guests: 2,
+    start_date: Date.new(2023, 7, 18),
+    end_date: Date.new(2023, 7, 23),
+  )
+  res_7_5 = Reservation.create!(
+    listing_id: listing7.id,
+    guest_id: demo_user.id,
+    num_guests: 2,
+    start_date: Date.new(2023, 8, 1),
+    end_date: Date.new(2023, 8, 5),
+  )
+  res_7_6 = Reservation.create!(
+    listing_id: listing7.id,
+    guest_id: users[11].id,
+    num_guests: 2,
+    start_date: Date.new(2023, 8, 17),
+    end_date: Date.new(2023, 8, 20),
+  )
+  res_7_7 = Reservation.create!(
+    listing_id: listing7.id,
+    guest_id: users[9].id,
+    num_guests: 2,
+    start_date: Date.new(2023, 8, 23),
+    end_date: Date.new(2023, 8, 27),
+  )
+  res_7_8 = Reservation.create!(
+    listing_id: listing7.id,
+    guest_id: users[10].id,
+    num_guests: 1,
+    start_date: Date.new(2023, 9, 6),
+    end_date: Date.new(2023, 9, 9),
+  )
+  res_7_9 = Reservation.create!(
+    listing_id: listing7.id,
+    guest_id: users[12].id,
+    num_guests: 2,
+    start_date: Date.new(2023, 10, 9),
+    end_date: Date.new(2023, 10, 15),
+  )
+
+  res_8_1 = Reservation.create!(
+    listing_id: listing8.id,
+    guest_id: users[12].id,
+    num_guests: 3,
+    start_date: Date.new(2023, 6, 15),
+    end_date: Date.new(2023, 6, 19),
+  )
+  res_8_2 = Reservation.create!(
+    listing_id: listing8.id,
+    guest_id: users[14].id,
+    num_guests: 2,
+    start_date: Date.new(2023, 6, 27),
+    end_date: Date.new(2023, 6, 29),
+  )
+  res_8_3 = Reservation.create!(
+    listing_id: listing8.id,
+    guest_id: demo_user.id,
+    num_guests: 3,
+    start_date: Date.new(2023, 7, 4),
+    end_date: Date.new(2023, 7, 8),
+  )
+  res_8_4 = Reservation.create!(
+    listing_id: listing8.id,
+    guest_id: users[0].id,
+    num_guests: 2,
+    start_date: Date.new(2023, 7, 23),
+    end_date: Date.new(2023, 7, 29),
+  )
+  res_8_5 = Reservation.create!(
+    listing_id: listing8.id,
+    guest_id: users[11].id,
+    num_guests: 3,
+    start_date: Date.new(2023, 8, 14),
+    end_date: Date.new(2023, 8, 19),
+  )
+  res_8_6 = Reservation.create!(
+    listing_id: listing8.id,
+    guest_id: users[7].id,
+    num_guests: 2,
+    start_date: Date.new(2023, 9, 21),
+    end_date: Date.new(2023, 9, 23),
   )
 
   res9_1 = Reservation.create!(
     listing_id: listing9.id,
+    guest_id: users[2].id,
+    num_guests: 2,
+    start_date: Date.new(2023, 6, 5),
+    end_date: Date.new(2023, 6, 8),
+  )
+  res9_2 = Reservation.create!(
+    listing_id: listing9.id,
     guest_id: demo_user.id,
-    num_guests: 1,
-    start_date: Date.today + 8,
-    end_date: Date.today + 11,
+    num_guests: 2,
+    start_date: Date.new(2023, 6, 19),
+    end_date: Date.new(2023, 6, 23),
+  )
+  res9_3 = Reservation.create!(
+    listing_id: listing9.id,
+    guest_id: users[0].id,
+    num_guests: 2,
+    start_date: Date.new(2023, 7, 2),
+    end_date: Date.new(2023, 7, 8),
+  )
+  res9_4 = Reservation.create!(
+    listing_id: listing9.id,
+    guest_id: users[3].id,
+    num_guests: 2,
+    start_date: Date.new(2023, 7, 19),
+    end_date: Date.new(2023, 7, 26),
+  )
+  res9_5 = Reservation.create!(
+    listing_id: listing9.id,
+    guest_id: users[4].id,
+    num_guests: 2,
+    start_date: Date.new(2023, 8, 21),
+    end_date: Date.new(2023, 8, 23),
+  )
+  res9_6 = Reservation.create!(
+    listing_id: listing9.id,
+    guest_id: demo_user.id,
+    num_guests: 2,
+    start_date: Date.new(2023, 9, 3),
+    end_date: Date.new(2023, 9, 9),
+  )
+  res9_7 = Reservation.create!(
+    listing_id: listing9.id,
+    guest_id: users[10].id,
+    num_guests: 2,
+    start_date: Date.new(2023, 10, 11),
+    end_date: Date.new(2023, 10, 15),
   )
 
   res10_1 = Reservation.create!(
-    listing_id: listing9.id,
+    listing_id: listing10.id,
     guest_id: demo_user.id,
     num_guests: 1,
-    start_date: Date.today + 40,
-    end_date: Date.today + 43,
+    start_date: Date.new(2023, 5, 30),
+    end_date: Date.new(2023, 6, 2),
+  )
+  res10_2 = Reservation.create!(
+    listing_id: listing10.id,
+    guest_id: users[12].id,
+    num_guests: 2,
+    start_date: Date.new(2023, 7, 17),
+    end_date: Date.new(2023, 7, 19),
+  )
+  res10_3 = Reservation.create!(
+    listing_id: listing10.id,
+    guest_id: users[7].id,
+    num_guests: 2,
+    start_date: Date.new(2023, 7, 29),
+    end_date: Date.new(2023, 8, 1),
+  )
+  res10_4 = Reservation.create!(
+    listing_id: listing10.id,
+    guest_id: users[5].id,
+    num_guests: 2,
+    start_date: Date.new(2023, 8, 15),
+    end_date: Date.new(2023, 8, 18),
+  )
+  res10_5 = Reservation.create!(
+    listing_id: listing10.id,
+    guest_id: users[7].id,
+    num_guests: 2,
+    start_date: Date.new(2023, 8, 27),
+    end_date: Date.new(2023, 9, 3),
+  )
+  res10_6 = Reservation.create!(
+    listing_id: listing10.id,
+    guest_id: users[9].id,
+    num_guests: 2,
+    start_date: Date.new(2023, 9, 9),
+    end_date: Date.new(2023, 9, 13),
+  )
+
+  res11_1 = Reservation.create!(
+    listing_id: listing11.id,
+    guest_id: users[6].id,
+    num_guests: 2,
+    start_date: Date.new(2023, 6, 29),
+    end_date: Date.new(2023, 7, 3),
+  )
+  res11_2 = Reservation.create!(
+    listing_id: listing11.id,
+    guest_id: users[2].id,
+    num_guests: 2,
+    start_date: Date.new(2023, 7, 19),
+    end_date: Date.new(2023, 7, 22),
+  )
+  res11_3 = Reservation.create!(
+    listing_id: listing11.id,
+    guest_id: users[0].id,
+    num_guests: 2,
+    start_date: Date.new(2023, 8, 1),
+    end_date: Date.new(2023, 8, 7),
+  )
+  res11_4 = Reservation.create!(
+    listing_id: listing11.id,
+    guest_id: demo_user.id,
+    num_guests: 2,
+    start_date: Date.new(2023, 8, 8),
+    end_date: Date.new(2023, 8, 10),
+  )
+
+  res12_1 = Reservation.create!(
+    listing_id: listing12.id,
+    guest_id: users[11].id,
+    num_guests: 8,
+    start_date: Date.new(2023, 6, 13),
+    end_date: Date.new(2023, 6, 15),
+  )
+  res12_2 = Reservation.create!(
+    listing_id: listing12.id,
+    guest_id: users[4].id,
+    num_guests: 10,
+    start_date: Date.new(2023, 7, 1),
+    end_date: Date.new(2023, 7, 4),
+  )
+  res12_3 = Reservation.create!(
+    listing_id: listing12.id,
+    guest_id: users[8].id,
+    num_guests: 9,
+    start_date: Date.new(2023, 7, 12),
+    end_date: Date.new(2023, 7, 13),
+  )
+  res12_4 = Reservation.create!(
+    listing_id: listing12.id,
+    guest_id: users[14].id,
+    num_guests: 9,
+    start_date: Date.new(2023, 8, 9),
+    end_date: Date.new(2023, 8, 12),
+  )
+  res12_5 = Reservation.create!(
+    listing_id: listing12.id,
+    guest_id: users[18].id,
+    num_guests: 7,
+    start_date: Date.new(2023, 9, 2),
+    end_date: Date.new(2023, 9, 5),
   )
 
   res13_1 = Reservation.create!(
     listing_id: listing13.id,
     guest_id: users[9].id,
     num_guests: 4,
-    start_date: Date.today + 5,
-    end_date: Date.today + 11,
+    start_date: Date.new(2023, 6, 14),
+    end_date: Date.new(2023, 6, 17),
+  )
+  res13_2 = Reservation.create!(
+    listing_id: listing13.id,
+    guest_id: users[5].id,
+    num_guests: 5,
+    start_date: Date.new(2023, 7, 8),
+    end_date: Date.new(2023, 7, 20),
+  )
+  res13_3 = Reservation.create!(
+    listing_id: listing13.id,
+    guest_id: users[10].id,
+    num_guests: 3,
+    start_date: Date.new(2023, 8, 11),
+    end_date: Date.new(2023, 8, 15),
+  )
+  res13_4 = Reservation.create!(
+    listing_id: listing13.id,
+    guest_id: demo_user.id,
+    num_guests: 4,
+    start_date: Date.new(2023, 8, 19),
+    end_date: Date.new(2023, 8, 23),
+  )
+
+  res14_1 = Reservation.create!(
+    listing_id: listing14.id,
+    guest_id: users[3].id,
+    num_guests: 4,
+    start_date: Date.new(2023, 6, 11),
+    end_date: Date.new(2023, 6, 12),
+  )
+  res14_2 = Reservation.create!(
+    listing_id: listing14.id,
+    guest_id: users[7].id,
+    num_guests: 4,
+    start_date: Date.new(2023, 6, 27),
+    end_date: Date.new(2023, 6, 30),
+  )
+  res14_3 = Reservation.create!(
+    listing_id: listing14.id,
+    guest_id: users[17].id,
+    num_guests: 4,
+    start_date: Date.new(2023, 7, 8),
+    end_date: Date.new(2023, 7, 15),
+  )
+  res14_4 = Reservation.create!(
+    listing_id: listing14.id,
+    guest_id: users[16].id,
+    num_guests: 4,
+    start_date: Date.new(2023, 8, 20),
+    end_date: Date.new(2023, 8, 24),
   )
 
   res15_1 = Reservation.create!(
     listing_id: listing15.id,
+    guest_id: users[1].id,
+    num_guests: 20,
+    start_date: Date.new(2023, 7, 2),
+    end_date: Date.new(2023, 7, 4),
+  )
+  res15_2 = Reservation.create!(
+    listing_id: listing15.id,
     guest_id: demo_user.id,
-    num_guests: 16,
-    start_date: Date.today + 17,
-    end_date: Date.today + 20,
+    num_guests: 18,
+    start_date: Date.new(2023, 7, 8),
+    end_date: Date.new(2023, 7, 10),
+  )
+
+  res15_3 = Reservation.create!(
+    listing_id: listing15.id,
+    guest_id: users[14].id,
+    num_guests: 19,
+    start_date: Date.new(2023, 7, 18),
+    end_date: Date.new(2023, 7, 21),
+  )
+
+  res16_1 = Reservation.create!(
+    listing_id: listing16.id,
+    guest_id: demo_user.id,
+    num_guests: 3,
+    start_date: Date.new(2023, 3, 18),
+    end_date: Date.new(2023, 3, 22),
+  )
+  res16_2 = Reservation.create!(
+    listing_id: listing16.id,
+    guest_id: users[16].id,
+    num_guests: 3,
+    start_date: Date.new(2023, 8, 9),
+    end_date: Date.new(2023, 8, 19),
+  )
+  res16_3 = Reservation.create!(
+    listing_id: listing16.id,
+    guest_id: users[16].id,
+    num_guests: 3,
+    start_date: Date.new(2023, 10, 13),
+    end_date: Date.new(2023, 10, 16),
+  )
+  res17_1 = Reservation.create!(
+    listing_id: listing17.id,
+    guest_id: demo_user.id,
+    num_guests: 4,
+    start_date: Date.new(2023, 9, 27),
+    end_date: Date.new(2023, 9, 29),
+  )
+  res17_2 = Reservation.create!(
+    listing_id: listing17.id,
+    guest_id: users[19].id,
+    num_guests: 3,
+    start_date: Date.new(2023, 6, 24),
+    end_date: Date.new(2023, 6, 30),
+  )
+
+  res18_1 = Reservation.create!(
+    listing_id: listing18.id,
+    guest_id: users[19].id,
+    num_guests: 2,
+    start_date: Date.new(2023, 6, 24),
+    end_date: Date.new(2023, 6, 30),
+  )
+  res18_2 = Reservation.create!(
+    listing_id: listing18.id,
+    guest_id: users[9].id,
+    num_guests: 1,
+    start_date: Date.new(2023, 8, 3),
+    end_date: Date.new(2023, 8, 11),
+  )
+  res18_3 = Reservation.create!(
+    listing_id: listing18.id,
+    guest_id: demo_user.id,
+    num_guests: 2,
+    start_date: Date.new(2023, 5, 12),
+    end_date: Date.new(2023, 5, 14),
+  )
+
+  res19_1 = Reservation.create!(
+    listing_id: listing19.id,
+    guest_id: demo_user.id,
+    num_guests: 4,
+    start_date: Date.new(2023, 4, 6),
+    end_date: Date.new(2023, 4, 9),
+  )
+
+  res20_1 = Reservation.create!(
+    listing_id: listing20.id,
+    guest_id: demo_user.id,
+    num_guests: 10,
+    start_date: Date.new(2023, 7, 12),
+    end_date: Date.new(2023, 7, 15),
+  )
+  res20_2 = Reservation.create!(
+    listing_id: listing20.id,
+    guest_id: users[16].id,
+    num_guests: 20,
+    start_date: Date.new(2023, 9, 12),
+    end_date: Date.new(2023, 9, 17),
   )
 
   puts "Reservations created!"
+
+  reservations = Reservation.all
+
+  puts "Total reservations generated: #{reservations.length}"
+
+
+
+  puts "Creating reviews..."
+
+  def generate_reviews(reservations)
+    reviews = []
+    
+    review_texts = [
+      "We had an amazing stay at this place! The cleanliness and accuracy were top-notch. The host was very communicative and the check-in process was seamless.",
+      "The value for the price was unbeatable. The location was perfect for exploring the city and the overall experience exceeded our expectations.",
+      "We thoroughly enjoyed our stay here. The host was friendly and the communication was excellent. The check-in was smooth and the location was convenient.",
+      "The cleanliness of the place was exceptional. The accuracy of the listing matched our expectations perfectly. We would definitely recommend this place to others.",
+      "The value for the price was outstanding. The communication with the host was prompt and helpful. The location was ideal for exploring nearby attractions.",
+      "We had a wonderful time staying here. The check-in process was easy, and the host provided all the necessary information. The location was beautiful and peaceful.",
+      "Everything about our stay was fantastic. The cleanliness, accuracy, and communication were all superb. The value for the price exceeded our expectations.",
+      "We loved our time at this place. The host was very accommodating and the check-in was hassle-free. The location was great with easy access to local amenities.",
+      "We absolutely loved our stay at this place! The cleanliness was impeccable, and the host's communication was outstanding. The location was perfect for exploring the city.",
+      "The accuracy of the listing was spot on, and the value for the price exceeded our expectations. The check-in process was seamless, and the host provided great recommendations for local attractions.",
+      "We had a fantastic experience staying here. The host was incredibly responsive and accommodating. The check-in was smooth, and the overall cleanliness and comfort of the place were exceptional.",
+      "We had a wonderful time at this charming accommodation. The host went above and beyond to ensure our stay was enjoyable. The location was peaceful, and the cleanliness of the place was top-notch.",
+      "Our stay at this place was amazing! The host was friendly and communicative, making us feel welcome throughout our visit. The accuracy of the listing and the overall value were excellent.",
+      "We had a delightful time at this property. The check-in process was easy, and the host provided clear instructions. The cleanliness and comfort of the place were exceptional.",
+      "The host was incredibly helpful and responsive throughout our stay. The accuracy of the listing and the cleanliness of the place were outstanding. We would highly recommend this accommodation.",
+      "We had a fantastic stay at this place. The location was convenient, and the host's communication was excellent. The cleanliness and amenities provided were top-notch.",
+      "Our experience at this accommodation was wonderful. The host was attentive, and the check-in process was seamless. The cleanliness and accuracy of the listing were exceptional.",
+      "We had a great time staying at this property. The host was friendly and responsive, and the overall value for the price was excellent. The cleanliness and comfort exceeded our expectations."
+    ]
+    
+    reservations.each_with_index do |reservation, index|
+      review = {
+        reservation_id: reservation.id,
+        reviewer_id: reservation.guest_id,
+        cleanliness: rand(4..5),
+        accuracy: rand(4..5),
+        value: rand(4..5),
+        communication: rand(4..5),
+        check_in: rand(4..5),
+        location: rand(4..5),
+        body: review_texts.sample
+      }
+      
+      reviews << review
+    end
+    
+    Review.create!(reviews)
+  end
+
+  generate_reviews(reservations)
+  
+  puts "Reviews created!"
+  reviews = Review.all
+  puts "Total reviews generated: #{reviews.length}"
 end
 
 puts "Attaching photos to Listings"
 
 listings.each_with_index do |listing, i|
-    listing.photos.attach([
-      {io: URI.open("https://nextbnb-seed.s3.amazonaws.com/listings/listing#{i + 1}_#{1}.webp"), filename: "listing#{i + 1}_#{1}.webp"},
-      {io: URI.open("https://nextbnb-seed.s3.amazonaws.com/listings/listing#{i + 1}_#{2}.webp"), filename: "listing#{i + 1}_#{2}.webp"},
-      {io: URI.open("https://nextbnb-seed.s3.amazonaws.com/listings/listing#{i + 1}_#{3}.webp"), filename: "listing#{i + 1}_#{3}.webp"},
-      {io: URI.open("https://nextbnb-seed.s3.amazonaws.com/listings/listing#{i + 1}_#{4}.webp"), filename: "listing#{i + 1}_#{4}.webp"},
-      {io: URI.open("https://nextbnb-seed.s3.amazonaws.com/listings/listing#{i + 1}_#{5}.webp"), filename: "listing#{i + 1}_#{5}.webp"},
-    ])
+  listing.photos.attach([
+    { io: URI.open("https://nextbnb-seed.s3.amazonaws.com/listings/listing#{i + 1}_#{1}.webp"), filename: "listing#{i + 1}_#{1}.webp" },
+    { io: URI.open("https://nextbnb-seed.s3.amazonaws.com/listings/listing#{i + 1}_#{2}.webp"), filename: "listing#{i + 1}_#{2}.webp" },
+    { io: URI.open("https://nextbnb-seed.s3.amazonaws.com/listings/listing#{i + 1}_#{3}.webp"), filename: "listing#{i + 1}_#{3}.webp" },
+    { io: URI.open("https://nextbnb-seed.s3.amazonaws.com/listings/listing#{i + 1}_#{4}.webp"), filename: "listing#{i + 1}_#{4}.webp" },
+    { io: URI.open("https://nextbnb-seed.s3.amazonaws.com/listings/listing#{i + 1}_#{5}.webp"), filename: "listing#{i + 1}_#{5}.webp" },
+  ])
 end
 
 puts "Done!"

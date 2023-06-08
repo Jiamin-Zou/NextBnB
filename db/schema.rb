@@ -95,7 +95,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_08_153456) do
   end
 
   create_table "reviews", force: :cascade do |t|
-    t.bigint "listing_id", null: false
+    t.bigint "reservation_id", null: false
     t.bigint "reviewer_id", null: false
     t.integer "cleanliness", null: false
     t.integer "accuracy", null: false
@@ -107,7 +107,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_08_153456) do
     t.text "body"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["listing_id"], name: "index_reviews_on_listing_id"
+    t.index ["reservation_id"], name: "index_reviews_on_reservation_id"
+    t.index ["reviewer_id", "reservation_id"], name: "index_reviews_on_reviewer_id_and_reservation_id", unique: true
     t.index ["reviewer_id"], name: "index_reviews_on_reviewer_id"
   end
 
@@ -128,6 +129,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_08_153456) do
   add_foreign_key "listings", "users", column: "host_id"
   add_foreign_key "reservations", "listings"
   add_foreign_key "reservations", "users", column: "guest_id"
-  add_foreign_key "reviews", "listings"
+  add_foreign_key "reviews", "reservations"
   add_foreign_key "reviews", "users", column: "reviewer_id"
 end

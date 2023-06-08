@@ -20,6 +20,11 @@ class Reservation < ApplicationRecord
 
   before_validation :calc_total_price
 
+  has_one :review,
+    class_name: :Review,
+    foreign_key: :reservation_id,
+    dependent: :destroy
+
   belongs_to :listing
   belongs_to :guest,
     class_name: :User,

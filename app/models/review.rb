@@ -3,7 +3,7 @@
 # Table name: reviews
 #
 #  id             :bigint           not null, primary key
-#  listing_id     :bigint           not null
+#  reservation_id :bigint           not null
 #  reviewer_id    :bigint           not null
 #  cleanliness    :integer          not null
 #  accuracy       :integer          not null
@@ -17,18 +17,21 @@
 #  updated_at     :datetime         not null
 #
 class Review < ApplicationRecord
-  validates :listing_id, :reviewer_id, presence: true
-  validates :cleanliness, :accuracy, :value, :communication, :check_in, :location, presence: true, inclusion: { in: 0..5 }
+  validates :reservation_id, :reviewer_id, presence: true
+  validates :cleanliness, :accuracy, :value, :communication, :check_in, :location, presence: true, inclusion: { in: 1..5 }
   before_save :calculate_rating
 
-  belongs_to :listing
+  belongs_to :reservation
   belongs_to :reviewer,
              class_name: :User,
-             foreign_key: :listings_id
-  has_many :reviews,
-           dependent: :destroy
+             foreign_key: :reviewer_id
+
+  has_one :listing,
+    through: :reservation,
+    source: :listing,
+    dependent: :destroy
 
   def calculate_rating
-    self.overall_rating = (cleanliness + accuracy + value + communication + check_in + location) / 6.0
+    self.overall_rating = ((cleanliness + accuracy + value + communication + check_in + location) / 6.0).round(2)
   end
 end

@@ -1,7 +1,7 @@
 class CreateReviews < ActiveRecord::Migration[7.0]
   def change
     create_table :reviews do |t|
-      t.references :listing, null: false, index: true, foreign_key: true
+      t.references :reservation, null: false, index: true, foreign_key: true
       t.references :reviewer, null: false,index: true, foreign_key: { to_table: :users }
       t.integer :cleanliness, null: false
       t.integer :accuracy, null: false
@@ -14,5 +14,6 @@ class CreateReviews < ActiveRecord::Migration[7.0]
 
       t.timestamps
     end
+    add_index :reviews, [:reviewer_id, :reservation_id], unique: true
   end
 end

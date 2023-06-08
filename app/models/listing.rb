@@ -61,15 +61,10 @@ class Listing < ApplicationRecord
     foreign_key: :listing_id,
     dependent: :destroy
 
-  private
-
-  def valid_location
-    errors.add(:address, "is not a valid location") if latitude.blank? || longitude.blank?
-  end
-
-  def full_address
-    [address, city, state, country].compact.join(", ")
-  end
+  has_many :reviews,
+    through: :reservations,
+    source: :review,
+    dependent: :destroy
 
   def calc_avg_reviews
     averages = {
@@ -93,5 +88,15 @@ class Listing < ApplicationRecord
     end
 
     averages
+  end
+
+  private
+
+  def valid_location
+    errors.add(:address, "is not a valid location") if latitude.blank? || longitude.blank?
+  end
+
+  def full_address
+    [address, city, state, country].compact.join(", ")
   end
 end
