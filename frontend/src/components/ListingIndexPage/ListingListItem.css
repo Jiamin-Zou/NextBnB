@@ -21,10 +21,17 @@
   font-weight: bold;
 }
 
-.listing-item-city,
+.listing-item-headline,
+.listing-item-title,
 .listing-item-price {
   padding: 5px;
   padding-bottom: 0px;
+  font-size: 15px;
+}
+
+.listing-item-title {
+  color: gray;
+  text-overflow: ellipsis;
 }
 
 .listing-item-price span {
@@ -71,4 +78,24 @@
 
 .image-container::-webkit-scrollbar-thumb:hover {
   background-color: #555;
+}
+
+.listing-item-headline{
+  display: flex;
+  justify-content: space-between;
+}
+
+.listing-item-rating{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.review-star svg {
+  width: 12px;
+  height: 12px;
+  align-items: baseline;
+}
+.listing-item-rating{
+  margin-left: 4px;
 }
