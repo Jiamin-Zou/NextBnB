@@ -51,7 +51,7 @@ class Listing < ApplicationRecord
   geocoded_by :full_address
   before_validation :geocode
 
-  has_many_attached :photos
+  has_many_attached :photos, dependent: :destroy
 
   belongs_to :host,
     class_name: :User,
