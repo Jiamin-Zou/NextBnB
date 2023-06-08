@@ -9,7 +9,6 @@ import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import PageNotFound from "./util/PageNotFound";
 import TripsIndex from "./components/Trips";
-import Map from "./components/Map";
 
 function App() {
   const { toggleModal } = useModal();
@@ -35,9 +34,6 @@ function App() {
         </Route>
         <Route path="/user/trips" exact>
           <TripsIndex />
-        </Route>
-        <Route path="/map" exact>
-          <Map />
         </Route>
         <Route>
           <PageNotFound />
