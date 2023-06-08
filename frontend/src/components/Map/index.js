@@ -4,11 +4,13 @@ import {
   useLoadScript,
   Marker,
   OverlayView,
+  Circle
 } from "@react-google-maps/api";
 import LoadingPage from "../../util/LoadingPage";
 import "./Map.css";
 import mapStyles from "./MapStyles";
 import ListingMarker from "./ListingMarker";
+import { ReactComponent as HomeIcon } from "react"; 
 
 
 const MapContainer = ({ listings, center }) => {
@@ -48,6 +50,14 @@ const MapContainer = ({ listings, center }) => {
     }
   };
 
+  const circleOptions = {
+    strokeColor: "#FF0000",
+    strokeOpacity: 0.1,
+    strokeWeight: 2,
+    fillColor: "#FF0000",
+    fillOpacity: 0.35,
+  }
+
   return (
     <GoogleMap
       zoom={center ? 13 : 10}
@@ -55,7 +65,7 @@ const MapContainer = ({ listings, center }) => {
       mapContainerClassName="map-container"
       options={options}
     >
-      {center && <Marker position={center} />}
+      {center && <Circle center={center} radius={800} options={circleOptions}/>}
       {!center &&
         listings.map((listing) => {
           return (
