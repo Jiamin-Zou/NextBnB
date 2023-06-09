@@ -74,8 +74,8 @@ const Reviews = ({ listing }) => {
           </div>
         </div>
         <span className="separator">&#x2022;</span>
-        <div className="listing-num-reviews">
-          <span>{listing.numReviews} reviews</span>
+        <div id="listing-num-reviews">
+          <span id="num-reviews">{listing.numReviews} reviews</span>
         </div>
       </div>
       <div className="listing-average-ratings">{ratingFields}</div>

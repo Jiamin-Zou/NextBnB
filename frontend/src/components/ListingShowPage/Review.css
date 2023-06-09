@@ -11,8 +11,9 @@
   align-items: center;
 }
 
-.listing-review-header .listing-num-reviews span {
+#listing-num-reviews span {
   font-size: 20px;
+  font-weight: bold;
   text-decoration: none;
 }
 

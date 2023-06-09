@@ -21,7 +21,7 @@
   width: 50%;
   display: flex;
   justify-content: right;
-  align-items: end;
+  align-items: flex-end;
 }
 .booking-reviews .review-star svg {
   width: 12px;

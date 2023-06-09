@@ -2,7 +2,6 @@ import { useMemo, useState } from "react";
 import {
   GoogleMap,
   useLoadScript,
-  Marker,
   OverlayView,
   Circle,
 } from "@react-google-maps/api";
@@ -73,7 +72,9 @@ const MapContainer = ({ listings, center }) => {
             position={center}
             mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
           >
-            <div className="overlay-home-icon"><HomeIcon /></div>
+            <div className="overlay-home-icon">
+              <HomeIcon />
+            </div>
           </OverlayView>
         </>
       )}
