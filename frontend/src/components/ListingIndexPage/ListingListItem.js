@@ -31,7 +31,6 @@ const ListingListItem = ({ listing }) => {
   return (
     <div className="listing-list-item" onClick={handleClick}>
       <div className="image-container">
-        {/* <img src={sampleHouse} className="listing-item-pic" alt="listing-item-pic" /> */}
         {images}
       </div>
       <div className="listing-item-headline">

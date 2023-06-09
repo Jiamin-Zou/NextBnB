@@ -153,7 +153,7 @@ const ListingCategoryPicker = ({ handleSelect }) => {
               </div>
             </div>
           </div>
-          <div>
+          {/* <div>
             <button className="filter-btn">
               <div className="filter-btn-container">
                 <img
@@ -166,7 +166,7 @@ const ListingCategoryPicker = ({ handleSelect }) => {
                 <span className="filter-btn-name">Filters</span>
               </div>
             </button>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

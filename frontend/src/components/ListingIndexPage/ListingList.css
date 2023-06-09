@@ -8,5 +8,6 @@
     padding: 0 4% 0;
     display: flex;
     flex-wrap: wrap;
-    gap: 3vw;    
+    gap: 40px; 
+    justify-content: center;
 }
