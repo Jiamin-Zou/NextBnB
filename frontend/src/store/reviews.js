@@ -8,3 +8,10 @@ export const getReviews = (listingId) => (state) => {
   );
   return listingReviews;
 };
+
+export const receiveReviews = (reviews) => {
+  return {
+    type: RECEIVE_REVIEWS,
+    reviews,
+  };
+};

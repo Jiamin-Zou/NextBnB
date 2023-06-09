@@ -6,7 +6,8 @@ import "./ReservationForm.css";
 import format from "date-fns/format";
 import { createReservation } from "../../store/reservations";
 import { differenceInDays } from "date-fns";
-import {useHistory} from 'react-router-dom'
+import { useHistory } from "react-router-dom";
+import { ReactComponent as Star } from "../../assets/images/star.svg";
 
 const Reservation = ({
   listing,
@@ -16,7 +17,7 @@ const Reservation = ({
   setEndDate,
   calendarOpen,
   setCalendarOpen,
-  blockedDates
+  blockedDates,
 }) => {
   const history = useHistory();
   const dispatch = useDispatch();
@@ -46,7 +47,7 @@ const Reservation = ({
   };
   const validateDates = () => numNights >= 1;
 
-  const handleReserve = async(e) => {
+  const handleReserve = async (e) => {
     e.preventDefault();
     setErrors([]);
 
@@ -68,12 +69,10 @@ const Reservation = ({
       };
       try {
         await new Promise((resolve, reject) => {
-          dispatch(createReservation(reservation))
-            .then(resolve)
-            .catch(reject);
+          dispatch(createReservation(reservation)).then(resolve).catch(reject);
         });
-        history.push('/user/trips')
-      } catch ( res ) {
+        history.push("/user/trips");
+      } catch (res) {
         let data;
         try {
           data = await res.clone().json();
@@ -122,9 +121,18 @@ const Reservation = ({
           <span>night</span>
         </div>
         <div className="booking-reviews">
-          <div>x-stars</div>
+          <div className="listing-rating">
+            <div className="review-star">
+              <Star />
+            </div>
+            <div className="listing-rating-score">
+              {listing.ratings.overallRating}
+            </div>
+          </div>
           <span className="separator">&#x2022;</span>
-          <div className="review-count">review count</div>
+          <div className="listing-num-reviews">
+            <span>{listing.numReviews} reviews</span>
+          </div>
         </div>
       </div>
       {!currentUser && (

@@ -73,6 +73,7 @@
   justify-self: left;
   margin-top: 20px;
   margin-bottom: 10px;
+  width: 100%;
 }
 
 .trip-range.update {
@@ -106,7 +107,7 @@
   cursor: auto;
 }
 .trip-img-container.update {
-  width: 75%;
+  width: 100%;
   margin-top: 5px;
   margin-bottom: 30px;
   display: flex;
@@ -190,7 +191,7 @@
 .trip-new-prices {
   margin-top: 20px;
   margin-bottom: 20px;
-  width: 70%;
+  width: 95%;
 }
 
 .update-btn-wrapper {

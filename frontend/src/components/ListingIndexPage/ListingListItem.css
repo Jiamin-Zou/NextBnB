@@ -101,10 +101,10 @@
 }
 
 .review-star svg {
-  width: 12px;
-  height: 12px;
+  width: 14px;
+  height: 14px;
   align-items: baseline;
 }
-.listing-item-rating {
+.listing-item-rating-score {
   margin-left: 4px;
 }

@@ -41,7 +41,7 @@ const ListingListItem = ({ listing }) => {
           <div className="review-star">
             <Star />
           </div>
-          <div className="listing-item-rating">
+          <div className="listing-item-rating-score">
             {listing.ratings.overallRating}
           </div>
         </div>

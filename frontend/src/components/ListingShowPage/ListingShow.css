@@ -173,3 +173,26 @@ div.map-section {
   width: 100%;
   /* z-index: auto; */
 }
+
+.listing-sub-title {
+  display: flex;
+  align-items: center;
+}
+
+.listing-rating{
+  display: flex;
+}
+
+.listing-rating-score, .listing-review-text {
+  margin-left: 8px;
+}
+
+.listing-num-reviews {
+  text-decoration: underline;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.listing-rating-score {
+  font-weight: bold;
+}
