@@ -20,7 +20,21 @@
 .booking-reviews {
   width: 50%;
   display: flex;
-  flex-wrap: wrap;
+  justify-content: right;
+  align-items: end;
+}
+.booking-reviews .review-star svg {
+  width: 12px;
+  height: 12px;
+}
+
+.booking-reviews .listing-rating,.booking-reviews .listing-rating-score,.booking-reviews .listing-num-reviews{
+  align-items: baseline;
+  font-size: 14px;
+}
+
+.booking-reviews .listing-num-reviews {
+  color: gray;
 }
 
 .separator {

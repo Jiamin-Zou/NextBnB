@@ -3,3 +3,19 @@
     height: calc(90vh - 80px - 45px);
     min-height: 500px;
 }
+
+.overlay-home-icon {
+    transform: translate(-50%,-50%);
+    width: 48px;
+    height: 48px;
+    background-color: rgb(255, 56, 92);
+    box-shadow: 0px 2px 4px rgba(0,0,0, 0.3);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.overlay-home-icon svg{
+    fill: white;
+}

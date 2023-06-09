@@ -1,13 +1,14 @@
 import "./ListingMarker.css";
 import ImageLoader from "../../util/ImageLoader";
 import { useHistory } from "react-router-dom";
+import { ReactComponent as Star } from "../../assets/images/star.svg";
 
 const MarkerInfoCard = ({ listing, onClick }) => {
   const history = useHistory();
 
   const handleCardClick = () => {
-    history.push(`/listings/${listing.id}`)
-  }
+    history.push(`/listings/${listing.id}`);
+  };
 
   const handleClick = () => {
     onClick(listing.id);
@@ -30,6 +31,14 @@ const MarkerInfoCard = ({ listing, onClick }) => {
           <div className="info-card-location">
             {listing.city}, {listing.state}
           </div>
+          <div className="info-card-rating">
+            <div className="review-star">
+              <Star />
+            </div>
+            <div className="info-card-rating-score">
+              {listing.ratings.overallRating}
+            </div>
+          </div>
           <div className="info-card-category">
             {listing.category.charAt(0).toUpperCase() +
               listing.category.slice(1)}
@@ -43,7 +52,7 @@ const MarkerInfoCard = ({ listing, onClick }) => {
   );
 };
 
-const ListingMarker = ({ listing, isActive, onClick}) => {
+const ListingMarker = ({ listing, isActive, onClick }) => {
   const handleClick = () => {
     onClick(listing.id);
   };
@@ -53,9 +62,7 @@ const ListingMarker = ({ listing, isActive, onClick}) => {
       onClick={handleClick}
     >
       <div>${listing.nightPrice}</div>
-      {isActive && (
-        <MarkerInfoCard listing={listing} onClick={onClick}/>
-      )}
+      {isActive && <MarkerInfoCard listing={listing} onClick={onClick} />}
     </div>
   );
 };

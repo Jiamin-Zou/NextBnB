@@ -32,7 +32,6 @@
 #  has_fireplace :boolean          default(FALSE), not null
 #
 class Listing < ApplicationRecord
-
   CATEGORIES = ["beachfront", "countryside", "cabin", "mansion", "lakefront", "amazing views", "tiny home", "modern", "barn", "omg"]
 
   PROPERTY_TYPES = ["House", "Apartment", "Studio", "Cabin", "Private Room"]
@@ -62,6 +61,35 @@ class Listing < ApplicationRecord
     foreign_key: :listing_id,
     dependent: :destroy
 
+  has_many :reviews,
+    through: :reservations,
+    source: :review,
+    dependent: :destroy
+
+  def calc_avg_reviews
+    averages = {
+      cleanliness: 0,
+      accuracy: 0,
+      value: 0,
+      communication: 0,
+      check_in: 0,
+      location: 0,
+      overall_rating: 0,
+    }
+
+    reviews_count = self.reviews.count
+
+    return averages if reviews_count.zero?
+
+    attributes_to_average = [:cleanliness, :accuracy, :value, :communication, :check_in, :location, :overall_rating]
+
+    attributes_to_average.each do |attribute|
+      averages[attribute] = self.reviews.average(attribute).to_f.round(2)
+    end
+
+    averages
+  end
+
   private
 
   def valid_location
@@ -69,7 +97,6 @@ class Listing < ApplicationRecord
   end
 
   def full_address
-    [address, city, state, country].compact.join(', ')
+    [address, city, state, country].compact.join(", ")
   end
-
 end
