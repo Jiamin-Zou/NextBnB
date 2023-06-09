@@ -8,12 +8,12 @@ import PageNotFound from "../../util/PageNotFound";
 import sampleHouse from "../../assets/images/sample_house.jpg";
 import Reservation from "../ReservationForm";
 import Amenities from "./Amenities";
-import addDays from "date-fns/addDays";
 import ReservationCalendar from "../ReservationCalendar";
 import ImageLoader from "../../util/ImageLoader";
 import { getReservedDates } from "../../store/reservations";
 import MapContainer from "../Map";
 import { ReactComponent as Star } from "../../assets/images/star.svg";
+import Reviews from "./Reviews"
 
 const ListingShowPage = () => {
   const dispatch = useDispatch();
@@ -180,7 +180,7 @@ const ListingShowPage = () => {
           </div>
         </div>
 
-        <div className="reviews-section">Reviews Component</div>
+        <div className="reviews-section"><Reviews listing={listing}/></div>
         <div className="map-section">
           <MapContainer
             center={{ lat: listing.latitude, lng: listing.longitude }}

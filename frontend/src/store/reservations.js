@@ -120,7 +120,7 @@ export const deleteReservation = (reservationId) => async (dispatch) => {
   return res;
 };
 
-const reservationReducer = (state = {}, action) => {
+const reservationsReducer = (state = {}, action) => {
   Object.freeze(state);
   const newState = { ...state };
   switch (action.type) {
@@ -137,4 +137,4 @@ const reservationReducer = (state = {}, action) => {
   }
 };
 
-export default reservationReducer;
+export default reservationsReducer;
