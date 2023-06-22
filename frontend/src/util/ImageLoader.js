@@ -17,7 +17,6 @@ const ImageLoader = ({ src, alt, className }) => {
             zIndex: 1,
           }}
         >
-          {/* Replace this with your desired loading spinner */}
           <div className="loading-spinner"></div>
         </div>
       )}
