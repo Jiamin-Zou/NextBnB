@@ -57,6 +57,24 @@ export const fetchListingReviews = (listingId) => async (dispatch) => {
   return res;
 };
 
+export const createReview = (review) => async (dispatch) => {
+  const res = await csrfFetch(
+    `/api/reservations/${review.reservationId}/reviews`,
+    {
+      method: "POST",
+      body: JSON.stringify({ review: review }),
+    }
+  );
+  if (res.ok) {
+    const data = await res.json();
+    dispatch(receiveReview(data.review));
+  } else {
+    throw res;
+  }
+
+  return res;
+};
+
 export const deleteReview = (reviewId) => async (dispatch) => {
   const res = await csrfFetch(`/api/reviews/${reviewId}`, {
     method: "DELETE",
