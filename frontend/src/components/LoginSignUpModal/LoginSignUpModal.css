@@ -184,7 +184,6 @@
 
 .error {
   color: red;
-  /* border-color: red; */
   list-style: none;
   font-weight: bold;
   border: 3px solid red;

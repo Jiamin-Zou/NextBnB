@@ -52,7 +52,6 @@
 .dropdown {
   width: 80px;
   display: flex;
-  /* justify-content: space-evenly; */
 }
 
 .dropdown-content {
@@ -61,7 +60,6 @@
   min-width: 240px;
   max-width: 500px;
   min-height: 300px;
-  /* height: 201px; */
   top: 70px;
 
   right: 40px;

@@ -65,9 +65,7 @@
   box-sizing: border-box;
   width: 100%;
   min-width: 300px;
-  /* height: 280px; */
   height: 300px;
-  /* min-height: 280px; */
   border-radius: 20px;
   object-fit: cover;
   scroll-snap-align: center;

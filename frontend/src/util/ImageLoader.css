@@ -22,7 +22,6 @@
 .spinner-wrapper {
   background-color: rgba(231, 231, 231, 0.3);
   box-sizing: border-box;
-  /* border: 1px solid gray; */
   display: flex;
   align-items: center;
   justify-content: center;
