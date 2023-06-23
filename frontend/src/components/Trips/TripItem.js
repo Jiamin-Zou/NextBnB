@@ -19,7 +19,7 @@ const TripItem = ({ trip, type }) => {
   const dispatch = useDispatch();
   const startDate = convertToDate(trip.reservation.startDate);
   const endDate = convertToDate(trip.reservation.endDate);
-  const { setToggleEditModal, setTripToUpdate } = useModal();
+  const { setToggleEditModal, setTripToUpdate, toggleReviewModal, setToggleReviewModal } = useModal();
   const review = useSelector(getReservationReview(trip.reservation.id));
 
   useEffect(() => {
@@ -27,7 +27,11 @@ const TripItem = ({ trip, type }) => {
       dispatch(fetchReview(trip.reservation.id));
     }
   }, []);
-  const handleCreateUpdate = (trip, review = {}) => {};
+
+  const handleCreateUpdate = (e) => {
+    e.preventDefault();
+    setToggleReviewModal(true)
+  };
 
   const handleRemoveReview = (e, reviewId) => {
     e.preventDefault();
@@ -58,7 +62,7 @@ const TripItem = ({ trip, type }) => {
     case "past":
       buttonGroup = review ? (
         <>
-          <button className="res-btn review">Update Review</button>
+          <button className="res-btn review" onClick={handleCreateUpdate}>Update Review</button>
           <button
             className="res-btn review"
             onClick={(e) => {

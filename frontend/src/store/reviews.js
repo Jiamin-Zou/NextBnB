@@ -39,16 +39,19 @@ export const removeReview = (reviewId) => {
   };
 };
 
-export const fetchReview = (reviewId) => async (dispatch) => {
-  const res = await csrfFetch(`/api/reviews/${reviewId}`);
-  if (res.ok) {
-    const data = await res.json();
-    dispatch(receiveReview(data.review));
-  } else {
-    throw res;
-  }
+export const fetchReview = (reservationId) => async (dispatch) => {
+  try {
+    const res = await csrfFetch(`/api/reservations/${reservationId}/review`);
+    if (res.ok) {
+      const data = await res.json();
+      dispatch(receiveReview(data.review));
+    } else {
+      throw res;
+    }
 
-  return res;
+  } catch (errors) {
+
+  }
 };
 
 export const fetchListingReviews = (listingId) => async (dispatch) => {

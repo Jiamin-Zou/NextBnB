@@ -33,6 +33,17 @@ class Api::ReviewsController < ApplicationController
     end
   end
 
+  def reservation_review
+    reservation = Reservation.find_by(id: params[:reservation_id])
+    @review = reservation.review
+    if @review
+      render :show
+    else
+      # render json: { review: {} }
+      render json: { errors: ["Review could not be found"] }, status: 404
+    end
+  end
+
   def update
     if @review
       if (@review.reviewer_id == current_user.id)
