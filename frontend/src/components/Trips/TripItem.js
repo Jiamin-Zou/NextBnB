@@ -7,7 +7,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { deleteReservation } from "../../store/reservations";
 import ImageLoader from "../../util/ImageLoader";
 import { useModal } from "../../context/ModalContext";
-import { fetchReview, getReservationReview } from "../../store/reviews";
+import {
+  deleteReview,
+  fetchReview,
+  getReservationReview,
+} from "../../store/reviews";
 import { useEffect } from "react";
 
 const TripItem = ({ trip, type }) => {
@@ -23,6 +27,12 @@ const TripItem = ({ trip, type }) => {
       dispatch(fetchReview(trip.reservation.id));
     }
   }, []);
+  const handleCreateUpdate = (trip, review = {}) => {};
+
+  const handleRemoveReview = (e, reviewId) => {
+    e.preventDefault();
+    dispatch(deleteReview(reviewId));
+  };
 
   const formatDate = (date) => {
     return format(date, "MMM dd, yy");
@@ -49,8 +59,14 @@ const TripItem = ({ trip, type }) => {
       buttonGroup = review ? (
         <>
           <button className="res-btn review">Update Review</button>
-          <button className="res-btn review">Remove Review</button>
-          
+          <button
+            className="res-btn review"
+            onClick={(e) => {
+              handleRemoveReview(e, review.id);
+            }}
+          >
+            Remove Review
+          </button>
         </>
       ) : (
         <>
