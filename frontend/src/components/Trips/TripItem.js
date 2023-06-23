@@ -3,10 +3,12 @@ import format from "date-fns/format";
 import sampleHouse from "../../assets/images/sample_house.jpg";
 import "./TripItem.css";
 import { convertToDate } from "../../util/util";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { deleteReservation } from "../../store/reservations";
 import ImageLoader from "../../util/ImageLoader";
 import { useModal } from "../../context/ModalContext";
+import { fetchReview, getReservationReview } from "../../store/reviews";
+import { useEffect } from "react";
 
 const TripItem = ({ trip, type }) => {
   const history = useHistory();
@@ -14,6 +16,13 @@ const TripItem = ({ trip, type }) => {
   const startDate = convertToDate(trip.reservation.startDate);
   const endDate = convertToDate(trip.reservation.endDate);
   const { setToggleEditModal, setTripToUpdate } = useModal();
+  const review = useSelector(getReservationReview(trip.reservation.id));
+
+  useEffect(() => {
+    if (type === "past") {
+      dispatch(fetchReview(trip.reservation.id));
+    }
+  }, []);
 
   const formatDate = (date) => {
     return format(date, "MMM dd, yy");
@@ -37,9 +46,15 @@ const TripItem = ({ trip, type }) => {
   let buttonGroup;
   switch (type) {
     case "past":
-      buttonGroup = (
+      buttonGroup = review ? (
         <>
-          <button className="res-btn">Review</button>
+          <button className="res-btn review">Update Review</button>
+          <button className="res-btn review">Remove Review</button>
+          
+        </>
+      ) : (
+        <>
+          <button className="res-btn review">Write a Review</button>
         </>
       );
       break;

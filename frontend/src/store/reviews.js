@@ -4,6 +4,13 @@ const RECEIVE_REVIEW = "reviews/receiveReview";
 const RECEIVE_REVIEWS = "reviews/receiveReviews";
 const REMOVE_REVIEW = "reviews/removeReview";
 
+export const getReservationReview = (reservationId) => (state) => {
+  const reservationReview = Object.values(state.reviews).find(
+    (review) => review.reservationId === reservationId
+  );
+  return reservationReview;
+};
+
 export const getListingReviews = (listingId) => (state) => {
   const listingReviews = Object.values(state.reviews).filter(
     (review) => review.listingId === listingId
