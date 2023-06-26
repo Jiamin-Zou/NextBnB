@@ -10,6 +10,7 @@ export default function ModalProvider({ children }) {
   const [toggleEditModal, setToggleEditModal] = useState(false);
   const [tripToUpdate, setTripToUpdate] = useState(null);
   const [toggleReviewModal, setToggleReviewModal] = useState(false);
+  const [tripData, setTripData] = useState(null);
 
   return (
     <ModalContext.Provider
@@ -24,6 +25,8 @@ export default function ModalProvider({ children }) {
         setTripToUpdate,
         toggleReviewModal,
         setToggleReviewModal,
+        tripData,
+        setTripData
       }}
     >
       {children}

@@ -1,0 +1,36 @@
+.review-modal-bg {
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 3;
+    overflow: auto;
+    display: flex;
+    position: fixed;
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.47);
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+  }
+  .review-modal-wrapper {
+    animation: slideup 0.3s ease-in;
+    width: 65%;
+    height: 90%;
+    box-sizing: border-box;
+    background-color: white;
+    border-radius: 15px;
+    padding: 25px;
+    padding-right: 13px;
+    box-shadow: rgba(0, 0, 0, 0.6) 0px 0px 15px;
+  }
+
+  .review-modal-head {
+    width: 100%;
+    align-content: left;
+    height: 7%;
+    margin-bottom: 5px;
+    border-bottom: 1px solid lightgray;
+    border-style: dashed;
+    box-sizing: border-box;
+  }

@@ -39,8 +39,8 @@ class Api::ReviewsController < ApplicationController
     if @review
       render :show
     else
-      # render json: { review: {} }
-      render json: { errors: ["Review could not be found"] }, status: 404
+      render json: { message: ["No review assoicated with given reservation"] }
+      # render json: { errors: ["Review could not be found"] }, status: 404
     end
   end
 

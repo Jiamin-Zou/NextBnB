@@ -44,13 +44,14 @@ export const fetchReview = (reservationId) => async (dispatch) => {
     const res = await csrfFetch(`/api/reservations/${reservationId}/review`);
     if (res.ok) {
       const data = await res.json();
-      dispatch(receiveReview(data.review));
+      if (data.review) {
+        dispatch(receiveReview(data.review));
+      }
     } else {
       throw res;
     }
-
   } catch (errors) {
-
+    return;
   }
 };
 

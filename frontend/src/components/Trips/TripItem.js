@@ -19,7 +19,12 @@ const TripItem = ({ trip, type }) => {
   const dispatch = useDispatch();
   const startDate = convertToDate(trip.reservation.startDate);
   const endDate = convertToDate(trip.reservation.endDate);
-  const { setToggleEditModal, setTripToUpdate, toggleReviewModal, setToggleReviewModal } = useModal();
+  const {
+    setToggleEditModal,
+    setTripToUpdate,
+    setToggleReviewModal,
+    setTripData
+  } = useModal();
   const review = useSelector(getReservationReview(trip.reservation.id));
 
   useEffect(() => {
@@ -28,10 +33,28 @@ const TripItem = ({ trip, type }) => {
     }
   }, []);
 
-  const handleCreateUpdate = (e) => {
+  const handleCreateUpdate = (e, formType) => {
     e.preventDefault();
+    let reviewData;
+    if(formType === "update") {
+      reviewData = review;
+    } else {
+      reviewData = {
+        accuracy: 5,
+        checkIn: 5,
+        cleanliness: 5,
+        communication: 5,
+        location: 5,
+        value: 5,
+        body: "",
+        reservationId: trip.reservation.id
+      }
+    }
+    const tripInfo = trip
+    tripInfo.reviewData = reviewData
+    setTripData(tripInfo)
     setToggleReviewModal(true)
-  };
+  }
 
   const handleRemoveReview = (e, reviewId) => {
     e.preventDefault();
@@ -62,7 +85,12 @@ const TripItem = ({ trip, type }) => {
     case "past":
       buttonGroup = review ? (
         <>
-          <button className="res-btn review" onClick={handleCreateUpdate}>Update Review</button>
+          <button
+            className="res-btn review"
+            onClick={(e) => handleCreateUpdate(e, "update")}
+          >
+            Update Review
+          </button>
           <button
             className="res-btn review"
             onClick={(e) => {
@@ -74,7 +102,12 @@ const TripItem = ({ trip, type }) => {
         </>
       ) : (
         <>
-          <button className="res-btn review">Write a Review</button>
+          <button
+            className="res-btn review"
+            onClick={(e) => handleCreateUpdate(e, "create")}
+          >
+            Write a Review
+          </button>
         </>
       );
       break;
