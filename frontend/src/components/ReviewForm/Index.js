@@ -54,9 +54,22 @@ const ReviewForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const payload = { ...tripData.reviewData, ...rating, body: body };
-    dispatch(reviewFunction(payload)).then(
-      setMessage(<div>Saving Successful...</div>)
-    );
+    dispatch(reviewFunction(payload)).then(() => {
+      setMessage(
+        <div className="save-success-bg">
+          <div className="save-success-content">
+            <span>Save Successful !</span>
+            <span>Closing in 3 seconds...</span>
+            <button onClick={handleClose} className="res-btn close">
+              Close Now
+            </button>
+          </div>
+        </div>
+      );
+      window.setTimeout(() => {
+        setToggleReviewModal(false);
+      }, 3000);
+    });
   };
 
   const handleChange = (field, i) => {
@@ -69,6 +82,7 @@ const ReviewForm = () => {
   return (
     <div className="review-modal-bg">
       <div className="review-modal-wrapper">
+        {message}
         <div className="review-modal-head">
           <button onClick={handleClose} id="close-btn">
             <div>X</div>
@@ -122,9 +136,23 @@ const ReviewForm = () => {
                 value={body}
                 onChange={(e) => setBody(e.target.value)}
               />
-              <button type="submit">{buttonTxt}</button>
+              <div className="review-form-btn">
+                <button
+                  className="res-btn review"
+                  id="review-modal-btn"
+                  type="submit"
+                >
+                  {buttonTxt}
+                </button>
+                <button
+                  className="res-btn review"
+                  id="review-modal-btn"
+                  onClick={handleClose}
+                >
+                  Cancel
+                </button>
+              </div>
             </form>
-            {message}
           </div>
         </div>
       </div>
