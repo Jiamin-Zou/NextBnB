@@ -4,6 +4,13 @@ const RECEIVE_REVIEW = "reviews/receiveReview";
 const RECEIVE_REVIEWS = "reviews/receiveReviews";
 const REMOVE_REVIEW = "reviews/removeReview";
 
+export const getReservationReview = (reservationId) => (state) => {
+  const reservationReview = Object.values(state.reviews).find(
+    (review) => review.reservationId === reservationId
+  );
+  return reservationReview;
+};
+
 export const getListingReviews = (listingId) => (state) => {
   const listingReviews = Object.values(state.reviews).filter(
     (review) => review.listingId === listingId
@@ -32,16 +39,20 @@ export const removeReview = (reviewId) => {
   };
 };
 
-export const fetchReview = (reviewId) => async (dispatch) => {
-  const res = await csrfFetch(`/api/reviews/${reviewId}`);
-  if (res.ok) {
-    const data = await res.json();
-    dispatch(receiveReview(data.review));
-  } else {
-    throw res;
+export const fetchReview = (reservationId) => async (dispatch) => {
+  try {
+    const res = await csrfFetch(`/api/reservations/${reservationId}/review`);
+    if (res.ok) {
+      const data = await res.json();
+      if (data.review) {
+        dispatch(receiveReview(data.review));
+      }
+    } else {
+      throw res;
+    }
+  } catch (errors) {
+    return;
   }
-
-  return res;
 };
 
 export const fetchListingReviews = (listingId) => async (dispatch) => {
@@ -65,6 +76,21 @@ export const createReview = (review) => async (dispatch) => {
       body: JSON.stringify({ review: review }),
     }
   );
+  if (res.ok) {
+    const data = await res.json();
+    dispatch(receiveReview(data.review));
+  } else {
+    throw res;
+  }
+
+  return res;
+};
+
+export const updateReview = (review) => async (dispatch) => {
+  const res = await csrfFetch(`/api/reviews/${review.id}`, {
+    method: "PATCH",
+    body: JSON.stringify({ review: review }),
+  });
   if (res.ok) {
     const data = await res.json();
     dispatch(receiveReview(data.review));

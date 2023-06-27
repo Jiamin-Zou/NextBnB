@@ -133,7 +133,6 @@
 .update-calender {
   padding: 10px;
   border-radius: 10px;
-  /* border: 1px solid lightgray; */
   box-shadow: 0px 0px 5px rgb(170, 170, 170);
   object-fit: scale-down;
   box-sizing: border-box;

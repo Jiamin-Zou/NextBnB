@@ -64,7 +64,6 @@ div.map-section {
 
 .show-container {
   display: flex;
-  /* height: 800px; */
 }
 
 .listing-info {
@@ -171,7 +170,6 @@ div.map-section {
   position: static;
   left: 0;
   width: 100%;
-  /* z-index: auto; */
 }
 
 .listing-sub-title {

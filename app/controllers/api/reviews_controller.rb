@@ -15,7 +15,7 @@ class Api::ReviewsController < ApplicationController
     if (reservation)
       @review = Review.new(review_params)
       @review.reviewer_id = current_user.id
-      if (reservation.save)
+      if (@review.save)
         render :show
       else
         render json: { errors: @review.errors.full_messages }, status: 422
@@ -30,6 +30,17 @@ class Api::ReviewsController < ApplicationController
       render :show
     else
       render json: { errors: ["Review could not be found"] }, status: 404
+    end
+  end
+
+  def reservation_review
+    reservation = Reservation.find_by(id: params[:reservation_id])
+    @review = reservation.review
+    if @review
+      render :show
+    else
+      render json: { message: ["No review assoicated with given reservation"] }
+      # render json: { errors: ["Review could not be found"] }, status: 404
     end
   end
 

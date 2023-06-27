@@ -15,7 +15,9 @@ Rails.application.routes.draw do
       resources :reviews, only: [:create]
     end
 
-    resources :reviews, only: [:show, :update, :destroy]
+    resources :reviews, only: [:update, :destroy]
+
+    get '/reservations/:reservation_id/review', to: 'reviews#reservation_review'
 
     resource :session, only: [:create, :show, :destroy]
   end

@@ -9,9 +9,10 @@ import TripsList from "./TripList";
 import LoadingPage from "../../util/LoadingPage";
 import { useModal } from "../../context/ModalContext";
 import UpdateReservationModal from "../ReservationForm/UpdateReservationModal";
+import ReviewForm from "../ReviewForm/Index";
 
 const TripsIndex = () => {
-  const { toggleEditModal } = useModal();
+  const { toggleEditModal, toggleReviewModal } = useModal();
   const dispatch = useDispatch();
   const history = useHistory();
   const currentUser = useSelector((state) => state.session.currentUser);
@@ -124,6 +125,7 @@ const TripsIndex = () => {
         </div>
         <TripsList trips={pastTrips} type={"past"} />
       </div>
+      {toggleReviewModal && <ReviewForm />}
       {toggleEditModal && <UpdateReservationModal />}
     </div>
   );

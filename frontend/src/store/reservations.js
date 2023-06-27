@@ -1,5 +1,6 @@
 import csrfFetch from "./csrf";
 import { setListings } from "./listings";
+import { receiveHosts } from "./hosts";
 import { convertToDate } from "../util/util";
 
 const RECEIVE_RESERVATION = "reservation/receiveReservation";
@@ -12,7 +13,8 @@ export const getTrips = (state) => {
 
   const trips = reservations.map((reservation) => {
     const listing = state.listings[reservation.listingId];
-    return { reservation, listing };
+    const host = state.hosts[listing.hostId]
+    return { reservation, listing, host };
   });
 
   // Sort trips by reservation end date most recent first
@@ -65,6 +67,7 @@ export const fetchTrips = () => async (dispatch) => {
     const data = await res.json();
     dispatch(setListings(data.listings));
     dispatch(receiveReservations(data.reservations));
+    dispatch(receiveHosts(data.hosts))
   } else {
     throw res;
   }

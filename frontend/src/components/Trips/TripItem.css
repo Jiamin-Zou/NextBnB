@@ -94,3 +94,9 @@
 .trip-item button:hover, .trip-item-left:hover, .trip-location:hover {
     cursor: pointer;
 }
+
+.res-btn.review {
+  width: auto;
+  height: auto;
+  min-height: 25px;
+}

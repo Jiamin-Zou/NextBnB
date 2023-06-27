@@ -9,8 +9,7 @@
 }
 
 #root {
-  /* font-family: "Circular", -apple-system, "BlinkMacSystemFont", "Roboto",
-    "Helvetica Neue", sans-serif; */
+
   font-family: "Cereal";
   height: calc(100vh - 45px);
 }
@@ -28,6 +27,7 @@ h2, h3 {
 
 body {
   margin: 0;
+  min-width: 900px;
 }
 
 .loading-page {
@@ -40,4 +40,8 @@ body {
 
 button {
   font-family: inherit;
+}
+
+button:enabled:hover {
+  cursor: pointer;
 }
