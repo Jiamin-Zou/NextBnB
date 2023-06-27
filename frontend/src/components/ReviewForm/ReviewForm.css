@@ -1,36 +1,108 @@
 .review-modal-bg {
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100vh;
-    z-index: 3;
-    overflow: auto;
-    display: flex;
-    position: fixed;
-    background-color: rgb(0, 0, 0);
-    background-color: rgba(0, 0, 0, 0.47);
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-  }
-  .review-modal-wrapper {
-    animation: slideup 0.3s ease-in;
-    width: 65%;
-    height: 90%;
-    box-sizing: border-box;
-    background-color: white;
-    border-radius: 15px;
-    padding: 25px;
-    padding-right: 13px;
-    box-shadow: rgba(0, 0, 0, 0.6) 0px 0px 15px;
-  }
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 3;
+  overflow: auto;
+  display: flex;
+  position: fixed;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.47);
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+.review-modal-wrapper {
+  animation: slideup 0.3s ease-in;
+  width: 65%;
+  height: 90%;
+  box-sizing: border-box;
+  background-color: white;
+  border-radius: 15px;
+  padding: 25px;
+  padding-right: 13px;
+  box-shadow: rgba(0, 0, 0, 0.6) 0px 0px 15px;
+}
 
-  .review-modal-head {
-    width: 100%;
-    align-content: left;
-    height: 7%;
-    margin-bottom: 5px;
-    border-bottom: 1px solid lightgray;
-    border-style: dashed;
-    box-sizing: border-box;
-  }
+.review-modal-head {
+  width: 100%;
+  height: 7%;
+  margin-bottom: 5px;
+  border-bottom: 1px solid lightgray;
+  /* border-style: dashed; */
+  box-sizing: border-box;
+  display: flex;
+  /* align-content: center; */
+  /* vertical-align: middle; */
+  align-items: center;
+  justify-content: space-between;
+}
+
+.review-reserve-info {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 49% 49%;
+  column-gap: 2%;
+  max-height: 230px;
+}
+
+.review-reserve-info > * {
+  height: 100%;
+}
+
+.review-reserve-info-right {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.review-reserve-info-right img {
+  width: 100%;
+  height: 100%;
+  max-height: 230px;
+  object-fit: cover;
+  border-radius: 10px;
+  /* overflow: hidden; */
+}
+
+.review-reserve-info-left {
+  /* display: grid;
+  grid-template-rows: 18% 42% 32%;
+  row-gap: 4%; */
+  display: flex;
+  flex-direction: column;
+  row-gap: 5%;
+}
+
+.review-reserve-info-left > * {
+  width: 100%;
+  overflow: hidden;
+}
+
+.review-trip-details, .review-reserve-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.review-listing-rating {
+  display: flex;
+  align-items: center;
+}
+.review-listing-rating svg {
+  margin-left: 5px;
+  margin-right: 2px;
+  height: 14px;
+  width: 14px;
+}
+
+.review-listing-title{
+  font-family: Cereal-bd;
+  /* overflow: hidden; */
+  /* white-space: nowrap; */
+  text-overflow: ellipsis;
+}
+
+.review-listing-location{
+  text-decoration: underline;
+}
