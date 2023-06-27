@@ -15,7 +15,7 @@ class Api::ReviewsController < ApplicationController
     if (reservation)
       @review = Review.new(review_params)
       @review.reviewer_id = current_user.id
-      if (reservation.save)
+      if (@review.save)
         render :show
       else
         render json: { errors: @review.errors.full_messages }, status: 422

@@ -5,6 +5,9 @@ import { convertToDate } from "../../util/util";
 import "./ReviewForm.css";
 import { ReactComponent as Star } from "../../assets/images/star.svg";
 import { useState } from "react";
+import StarRatingInput from "./StarRatingInput";
+import { createReview, updateReview } from "../../store/reviews";
+import { useEffect } from "react";
 
 const ReviewForm = () => {
   const dispatch = useDispatch();
@@ -19,15 +22,28 @@ const ReviewForm = () => {
     ? "Update Review"
     : "Write a new Review";
 
+  const buttonTxt = !!tripData.reviewData.id ? "Update Review" : "Post Review";
+
+  const reviewFunction = !!tripData.reviewData.id ? updateReview : createReview;
+
   const [rating, setRating] = useState({
-    accuracy: tripData.accuracy,
-    checkIn: tripData.checkIn,
-    cleanliness: tripData.cleanliness,
-    communication: tripData.communication,
-    location: tripData.location,
-    value: tripData.value,
+    accuracy: tripData.reviewData.accuracy,
+    checkIn: tripData.reviewData.checkIn,
+    cleanliness: tripData.reviewData.cleanliness,
+    communication: tripData.reviewData.communication,
+    location: tripData.reviewData.location,
+    value: tripData.reviewData.value,
   });
-  const [body, setBody] = useState(tripData.body);
+  const [body, setBody] = useState(tripData.reviewData.body);
+  const [message, setMessage] = useState(null);
+  const ratingFields = [
+    "accuracy",
+    "checkIn",
+    "cleanliness",
+    "communication",
+    "location",
+    "value",
+  ];
 
   const handleClose = (e) => {
     e.preventDefault();
@@ -37,10 +53,18 @@ const ReviewForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setToggleReviewModal(false);
+    const payload = { ...tripData.reviewData, ...rating, body: body };
+    dispatch(reviewFunction(payload)).then(
+      setMessage(<div>Saving Successful...</div>)
+    );
   };
 
-  console.log(tripData);
+  const handleChange = (field, i) => {
+    const newRating = { ...rating };
+    newRating[field] = i;
+    setRating(newRating);
+  };
+  useEffect(() => {}, [dispatch]);
 
   return (
     <div className="review-modal-bg">
@@ -52,32 +76,57 @@ const ReviewForm = () => {
           <h1 className="review-modal-title">{header}</h1>
           <div></div>
         </div>
-        <div className="review-reserve-info">
-          <div className="review-reserve-info-left">
-            <h2>Trip Details: </h2>
-            <div className="review-trip-details">
-              <span className="review-listing-title">
-                {tripData.listing.title}
-              </span>
-              <span className="review-listing-location">
-                {tripData.listing.city}, {tripData.listing.state}
-              </span>
-              <div className="review-listing-rating">Overall Rating: <Star />{tripData.listing.ratings.overallRating}</div>
-              <span className="review-listing-host">
-                Hosted by: {tripData.host.firstName} {tripData.host.lastName}
-              </span>
+        <div className="review-modal-content">
+          <div className="review-reserve-info">
+            <div className="review-reserve-info-left">
+              <h2>Trip Details: </h2>
+              <div className="review-trip-details">
+                <span className="review-listing-title">
+                  {tripData.listing.title}
+                </span>
+                <span className="review-listing-location">
+                  {tripData.listing.city}, {tripData.listing.state}
+                </span>
+                <div className="review-listing-rating">
+                  Overall Rating: <Star />
+                  {tripData.listing.ratings.overallRating}
+                </div>
+                <span className="review-listing-host">
+                  Hosted by: {tripData.host.firstName} {tripData.host.lastName}
+                </span>
+              </div>
+              <div className="review-reserve-details">
+                <span className="review-reservation-dates">{tripRange}</span>
+                <span>Guests: {tripData.reservation.numGuests}</span>
+              </div>
             </div>
-            <div className="review-reserve-details">
-              <span className="review-reservation-dates">{tripRange}</span>
-              <span>Guests: {tripData.reservation.numGuests}</span>
-
+            <div className="review-reserve-info-right">
+              <img src={tripData.listing.photoUrls[0]} alt="" />
             </div>
           </div>
-          <div className="review-reserve-info-right">
-            <img src={tripData.listing.photoUrls[0]} alt="" />
+          <div className="review-form-container">
+            <form className="review-form" onSubmit={handleSubmit}>
+              {ratingFields.map((field, i) => {
+                return (
+                  <StarRatingInput
+                    fieldRating={rating[field]}
+                    fieldTitle={field}
+                    key={i}
+                    handleChange={handleChange}
+                  />
+                );
+              })}
+              <textarea
+                className="review-form-body"
+                placeholder="Write your review here ..."
+                value={body}
+                onChange={(e) => setBody(e.target.value)}
+              />
+              <button type="submit">{buttonTxt}</button>
+            </form>
+            {message}
           </div>
         </div>
-        <div className="review-modal-container">ReviewForm</div>
       </div>
     </div>
   );

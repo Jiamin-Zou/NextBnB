@@ -1,0 +1,61 @@
+.star-field-review{
+  display: grid;
+  grid-template-columns: 30% 30% 30%;
+  column-gap: 3%;
+  width: 100%;
+  height: 35px;
+  align-items: center;
+  border-radius: 10px;
+  background-color: rgb(248, 248, 248);
+  padding: 2px 8px;
+  margin-bottom: 7px;
+  box-sizing: border-box;
+  box-shadow: 0 0 5px rgba(138, 138, 138, 0.377);
+  font-family: Cereal-bd;
+}
+
+.rating-input {
+    display: flex;
+}
+
+.rating-input >*{
+  margin-right: 2px
+}
+
+.filled svg, .empty svg {
+  height: 16px;
+  width: 16px;
+  cursor: pointer;
+} 
+
+.filled svg {
+  color: rgb(0, 0, 0);
+
+}
+
+.empty svg {
+  color: rgb(155, 155, 155);
+}
+
+.rating-field-title{
+  text-transform: capitalize;
+  cursor: default;
+}
+
+.num-input-field{
+  width: 40px;
+  height: 25px;
+  border-radius: 10px;
+  outline: none;
+  border: none;
+}
+
+.num-input-field:focus{
+  box-shadow: 0 0 5px rgba(128, 128, 128, 0.5);
+}
+
+.star-field-review:hover {
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  
+}
+
