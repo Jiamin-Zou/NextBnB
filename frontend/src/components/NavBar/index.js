@@ -28,6 +28,12 @@ const NavBar = () => {
           >
             <i className="fa-brands fa-square-github"></i>
           </Link>
+          <Link
+            to={{ pathname: "https://wellfound.com/u/jiamin-zou-1" }}
+            target="_blank"
+          >
+            <i className="fa-brands fa-angellist"></i>
+          </Link>
         </div>
         <div className="dropdown">
           <div

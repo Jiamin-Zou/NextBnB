@@ -9,36 +9,43 @@ const REMOVE_RESERVATION = "reservation/removeReservations";
 
 export const getTrips = (state) => {
   const currentUser = state.session.currentUser;
-  const reservations = Object.values(state.reservations).filter((res) => res.guestId === currentUser.id);
+  if (!currentUser) return {};
+  const reservations = Object.values(state.reservations).filter(
+    (res) => res.guestId === currentUser.id
+  );
 
   const trips = reservations.map((reservation) => {
     const listing = state.listings[reservation.listingId];
-    const host = state.hosts[listing.hostId]
+    const host = state.hosts[listing.hostId];
     return { reservation, listing, host };
   });
 
   // Sort trips by reservation end date most recent first
-  trips.sort((a, b) => new Date(a.reservation.endDate) - new Date(b.reservation.endDate));
+  trips.sort(
+    (a, b) => new Date(a.reservation.endDate) - new Date(b.reservation.endDate)
+  );
   return trips;
 };
 
 export const getReservedDates = (listingId) => (state) => {
-  const listingReservations = Object.values(state.reservations).filter((res) => res.listingId === listingId)
-  const reservedDates = []
-  listingReservations.forEach((res) =>{
-    const start = convertToDate(res.startDate)
-    const end = convertToDate(res.endDate)
+  const listingReservations = Object.values(state.reservations).filter(
+    (res) => res.listingId === listingId
+  );
+  const reservedDates = [];
+  listingReservations.forEach((res) => {
+    const start = convertToDate(res.startDate);
+    const end = convertToDate(res.endDate);
 
-    const currentDate = new Date(start)
+    const currentDate = new Date(start);
 
     while (currentDate <= end) {
       reservedDates.push(new Date(currentDate));
       currentDate.setDate(currentDate.getDate() + 1);
     }
-  })
+  });
 
-  return reservedDates
-}
+  return reservedDates;
+};
 
 export const receiveReservation = (reservation) => {
   return {
@@ -67,7 +74,7 @@ export const fetchTrips = () => async (dispatch) => {
     const data = await res.json();
     dispatch(setListings(data.listings));
     dispatch(receiveReservations(data.reservations));
-    dispatch(receiveHosts(data.hosts))
+    dispatch(receiveHosts(data.hosts));
   } else {
     throw res;
   }

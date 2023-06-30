@@ -21,6 +21,19 @@ const TripsIndex = () => {
   const [mousePositions, setMousePositions] = useState({
     search: { x: 0, y: 0 },
   });
+  useEffect(() => {
+    // if (!currentUser) {
+    //   return history.push("/");
+    // }
+    if (currentUser) {
+      dispatch(fetchTrips());
+    }
+  }, [dispatch, currentUser, history]);
+
+  if (!currentUser) {
+    history.push("/");
+    return null;
+  }
 
   const handleMouseMove = (event, element) => {
     const rect = event.target.getBoundingClientRect();
@@ -37,14 +50,7 @@ const TripsIndex = () => {
     history.push("/");
   };
 
-  useEffect(() => {
-    if (!currentUser) {
-      return history.push("/");
-    }
-    dispatch(fetchTrips());
-  }, [dispatch, currentUser, history]);
-
-  if (!currentUser || !trips) return <LoadingPage />;
+  if (!trips) return <LoadingPage />;
 
   const pastTrips = trips?.filter(
     (trip) => new Date(trip.reservation.endDate) < new Date()

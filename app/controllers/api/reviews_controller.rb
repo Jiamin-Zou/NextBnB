@@ -1,5 +1,5 @@
 class Api::ReviewsController < ApplicationController
-  before_action :require_logged_in, only: [:create, :index, :show, :update, :destroy]
+  before_action :require_logged_in, only: [:create, :show, :update, :destroy, :reservation_review]
   before_action :set_review, only: [:show, :update, :destroy]
 
   wrap_parameters include: Reservation.attribute_names
