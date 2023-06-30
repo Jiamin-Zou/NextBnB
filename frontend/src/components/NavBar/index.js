@@ -1,5 +1,5 @@
 import "./NavBar.css";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import ProfileButton from "./ProfileButton";
 import Logo from "../../assets/images/nextbnb_logo.png";
@@ -8,6 +8,20 @@ import { useHistory } from "react-router-dom";
 const NavBar = () => {
   const history = useHistory()
   const [dropdown, setDropdown] = useState(false);
+  const profileDropdownRef = useRef(null);
+
+  useEffect(() => {
+    document.addEventListener("click", handleClickOutside);
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, []);
+
+  const handleClickOutside = (event) => {
+    if (profileDropdownRef.current && !profileDropdownRef.current.contains(event.target)) {
+      setDropdown(false);
+    }
+  };
 
   return (
     <div className="nav-bar">
@@ -39,6 +53,7 @@ const NavBar = () => {
           <div
             className="profile-dropdown"
             onClick={() => setDropdown((prevState) => !prevState)}
+            ref={profileDropdownRef}
           >
             <i className="fa-solid fa-bars"></i>
             <i className="fa-solid fa-circle-user"></i>
