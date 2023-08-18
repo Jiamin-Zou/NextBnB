@@ -11,7 +11,7 @@ import PageNotFound from "./util/PageNotFound";
 import TripsIndex from "./components/Trips";
 
 import ReactGA from "react-ga";
-const MEASUREMENT_ID = "G-LH3YJS4CBY"; // YOUR_MEASUREMENT_ID
+const MEASUREMENT_ID = "G-9R1L195QZJ"; // YOUR_MEASUREMENT_ID
 ReactGA.initialize(MEASUREMENT_ID);
 
 function App() {
