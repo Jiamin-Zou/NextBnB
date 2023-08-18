@@ -10,11 +10,16 @@ import { useLocation } from "react-router-dom";
 import PageNotFound from "./util/PageNotFound";
 import TripsIndex from "./components/Trips";
 
+import ReactGA from 'react-ga';
+const TRACKING_ID = "UA-282100741-1"; // OUR_TRACKING_ID
+ReactGA.initialize(TRACKING_ID);
+
 function App() {
   const { toggleModal } = useModal();
   const location = useLocation();
 
   useEffect(() => {
+    ReactGA.pageview(window.location.pathname + window.location.search);
     window.scrollTo(0, 0);
   }, [location]);
 
