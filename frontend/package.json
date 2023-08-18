@@ -12,7 +12,7 @@
     "react": "^16.14.0",
     "react-date-range": "^1.4.0",
     "react-dom": "^16.14.0",
-    "react-ga": "^3.3.1",
+    "react-ga4": "^2.1.0",
     "react-redux": "^8.0.5",
     "react-responsive-carousel": "^3.2.23",
     "react-router-dom": "^5.3.4",

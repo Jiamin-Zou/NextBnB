@@ -11,6 +11,10 @@ import * as sessionActions from "./store/session";
 import * as listingActions from "./store/listings";
 import ModalProvider from "./context/ModalContext";
 import * as reservationActions from "./store/reservations";
+import ReactGA from "react-ga4"
+const MEASUREMENT_ID="G-9R1L195QZJ"
+
+ReactGA.initialize(MEASUREMENT_ID)
 
 const store = configureStore();
 

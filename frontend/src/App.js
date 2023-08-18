@@ -10,20 +10,12 @@ import { useLocation } from "react-router-dom";
 import PageNotFound from "./util/PageNotFound";
 import TripsIndex from "./components/Trips";
 
-import ReactGA from "react-ga";
-const MEASUREMENT_ID = "G-9R1L195QZJ"; // YOUR_MEASUREMENT_ID
-ReactGA.initialize(MEASUREMENT_ID);
-
 function App() {
   const { toggleModal } = useModal();
   const location = useLocation();
 
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, [location]);
-
-  useEffect(() => {
-    ReactGA.pageview(window.location.pathname + window.location.search);
   }, [location]);
 
   return (
