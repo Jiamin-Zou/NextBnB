@@ -11,8 +11,8 @@ import PageNotFound from "./util/PageNotFound";
 import TripsIndex from "./components/Trips";
 
 import ReactGA from "react-ga";
-const TRACKING_ID = "UA-282100741-1"; // OUR_TRACKING_ID
-ReactGA.initialize(TRACKING_ID);
+const MEASUREMENT_ID = "G-LH3YJS4CBY"; // YOUR_MEASUREMENT_ID
+ReactGA.initialize(MEASUREMENT_ID);
 
 function App() {
   const { toggleModal } = useModal();
