@@ -1,5 +1,6 @@
 import "./LoadingPage.css"
 
+
 const LoadingPage = () => {
   return (
     <div className="loading-page-container">

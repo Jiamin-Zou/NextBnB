@@ -21,6 +21,12 @@ const TripsIndex = () => {
   const [mousePositions, setMousePositions] = useState({
     search: { x: 0, y: 0 },
   });
+
+
+  useEffect(() => {
+    document.title = `NextBnB | User Trips`;
+  }, []);
+
   useEffect(() => {
     // if (!currentUser) {
     //   return history.push("/");
