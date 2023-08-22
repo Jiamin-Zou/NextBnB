@@ -1,7 +1,13 @@
 import notFound from "../assets/images/404_Airbnb.gif";
 import "./PageNotFound.css";
+import { useEffect } from "react";
 
 const PageNotFound = () => {
+
+  useEffect(() => {
+    document.title = `NextBnB | 404 - Not Found`;
+  }, []);
+
   return (
     <div className="error-page">
       <main className="error-container">
