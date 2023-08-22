@@ -49,6 +49,10 @@ const ListingShowPage = () => {
     });
   }, [listingId, dispatch]);
 
+  useEffect(() => {
+    document.title = `NextBnB | ${listing?.title}`;
+  }, [listing]);
+
   if (!listing && errors.length > 0) {
     return <PageNotFound />;
   } else if (!listing || !host || !blockedDates) {

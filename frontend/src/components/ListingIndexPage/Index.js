@@ -19,7 +19,12 @@ const ListingIndexPage = () => {
   const [loading, setLoading] = useState(true);
   const [toggleMap, setToggleMap] = useState(false);
 
+  useEffect(() => {
+    document.title = "NextBnB | Home";
+  }, []);
+
   const handleCategorySelect = (e) => {
+
     const categoryFilter = e.currentTarget.id;
     if (categoryFilter === "all") {
       return history.push("/");
@@ -34,12 +39,10 @@ const ListingIndexPage = () => {
 
   return (
     <div className="listing-index">
-      <ListingCategoryPicker
-        handleSelect={handleCategorySelect}
-      />
+      <ListingCategoryPicker handleSelect={handleCategorySelect} />
       {toggleMap ? (
         <div className="index-map-wrapper">
-          <Map listings={category ? categoryListing : listings}/>
+          <Map listings={category ? categoryListing : listings} />
         </div>
       ) : (
         <ListingList listings={category ? categoryListing : listings} />
